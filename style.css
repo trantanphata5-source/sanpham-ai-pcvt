@@ -815,11 +815,11 @@ section {
   margin-top: 3px;
 }
 
-/* Bảng cơ cấu giải thưởng & Tiêu chí chấm điểm */
+/* Bảng cơ cấu giải thưởng & Tiêu chí chấm điểm (3 Frames xếp chồng từ trên xuống dưới) */
 .prizes-scoring-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 .panel-container {
@@ -933,184 +933,162 @@ section {
   color: var(--color-amber);
 }
 
-/* Sub-section a: Giải TCT */
-.prize-sub-section {
-  margin-bottom: 22px;
+/* 3 Frames Full-width Styles */
+.panel-prize-frame {
+  padding: 28px 32px;
 }
 
-.prize-sub-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed var(--border-subtle);
-}
-
-.prize-sub-heading-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sub-heading-badge {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
+.panel-subtitle-tag {
   font-size: 0.82rem;
-  font-family: var(--font-display);
-  flex-shrink: 0;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-left: 6px;
 }
 
-.badge-tct {
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
-  border: 1px solid var(--border-highlight);
-}
-
-.badge-pcvt {
-  background: var(--color-amber-light);
-  color: var(--color-amber);
-  border: 1px solid var(--color-amber-border);
-}
-
-.sub-heading-text strong {
-  display: block;
-  font-size: 0.95rem;
-  color: var(--text-main);
-}
-
-.sub-heading-ref {
-  font-size: 0.78rem;
+.prize-desc-text {
+  font-size: 0.82rem;
   color: var(--text-dim);
 }
 
-.sub-badge-fund {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  background: var(--color-primary-light);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  white-space: nowrap;
+.prize-list-fullwidth {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Sub-section b: Khen thưởng bổ sung PC Vũng Tàu */
-.pcvt-bonus-box {
-  background: linear-gradient(135deg, rgba(0, 75, 141, 0.03) 0%, rgba(245, 158, 11, 0.06) 100%);
+.prize-list-fullwidth .prize-row {
+  padding: 14px 22px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+
+.prize-list-fullwidth .prize-row:hover {
+  background: #FFFFFF;
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-xs);
+  transform: translateY(-1px);
+}
+
+.prize-list-fullwidth .prize-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.prize-list-fullwidth .prize-amount {
+  font-size: 1.15rem;
+}
+
+/* Frame 2: Khen thưởng bổ sung PC Vũng Tàu */
+.panel-pcvt-bonus-frame {
+  background: linear-gradient(135deg, rgba(0, 75, 141, 0.02) 0%, rgba(245, 158, 11, 0.04) 100%);
   border: 1.5px solid rgba(217, 119, 6, 0.35);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  box-shadow: 0 4px 16px rgba(0, 75, 141, 0.04);
   position: relative;
   overflow: hidden;
 }
 
-.pcvt-bonus-box::before {
+.panel-pcvt-bonus-frame::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
+  width: 5px;
   height: 100%;
   background: linear-gradient(180deg, var(--color-amber), var(--color-evn-blue));
 }
 
-.pcvt-bonus-heading {
+.pcvt-header-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
-.pcvt-heading-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.pcvt-doc-badge {
+  font-size: 0.82rem;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  border: 1px solid var(--border-highlight);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
 }
 
-.pcvt-bonus-title {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-evn-blue);
-  margin: 0;
-}
-
-.pcvt-bonus-ref {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  display: block;
-}
-
-.pcvt-fund-tag {
+.pcvt-fund-tag-lg {
   background: linear-gradient(135deg, var(--color-evn-blue), var(--color-primary-dark));
   color: #FFFFFF;
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 6px 16px;
   border-radius: var(--radius-full);
   letter-spacing: 0.2px;
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0, 75, 141, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 75, 141, 0.22);
 }
 
-.pcvt-bonus-quote {
-  font-size: 0.85rem;
+.pcvt-bonus-quote-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
   color: var(--text-muted);
   font-style: italic;
   background: #FFFFFF;
-  border-left: 3px solid var(--color-amber);
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin: 0 0 14px 0;
-  line-height: 1.45;
+  border-left: 3.5px solid var(--color-amber);
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
   border-top: 1px solid var(--border-subtle);
   border-right: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
+  line-height: 1.5;
 }
 
-.pcvt-bonus-list {
+.pcvt-bonus-quote-box svg {
+  flex-shrink: 0;
+}
+
+.pcvt-bonus-full-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-.pcvt-bonus-row {
+.pcvt-bonus-full-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  padding: 14px 22px;
   border-radius: var(--radius-md);
   background: #FFFFFF;
   border: 1px solid var(--border-subtle);
   transition: all var(--transition-fast);
 }
 
-.pcvt-bonus-row:hover {
+.pcvt-bonus-full-row:hover {
   border-color: var(--color-amber-border);
-  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.12);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.12);
   transform: translateY(-1px);
 }
 
-.pcvt-bonus-rank {
+.pcvt-bonus-full-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
 .pcvt-rank-tag {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
   font-family: var(--font-display);
+  white-space: nowrap;
 }
 
 .tag-gold {
@@ -1137,57 +1115,77 @@ section {
   border: 1px solid #BFDBFE;
 }
 
-.pcvt-bonus-note {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-}
-
-.pcvt-bonus-calc {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: right;
-}
-
-.pcvt-bonus-val {
-  font-family: var(--font-display);
-  font-weight: 800;
+.pcvt-target-title {
+  font-weight: 600;
   font-size: 0.95rem;
-  color: var(--color-amber);
-  background: var(--color-amber-light);
-  padding: 2px 8px;
-  border-radius: 4px;
+  color: var(--text-main);
   white-space: nowrap;
 }
 
-.pcvt-total-val {
-  font-size: 0.8rem;
+.pcvt-bonus-full-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.pcvt-bonus-badge-val {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--color-amber);
+  background: var(--color-amber-light);
+  padding: 4px 14px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  border: 1px solid var(--color-amber-border);
+}
+
+.pcvt-total-highlight {
+  font-size: 0.88rem;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
-.pcvt-total-val strong {
+.pcvt-total-highlight strong {
   color: var(--color-eco-green);
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 0.92rem;
+  font-size: 1.05rem;
 }
 
-.pcvt-bonus-footer {
+.pcvt-bonus-footer-note {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
+  gap: 10px;
+  font-size: 0.84rem;
   color: var(--text-dim);
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 16px;
+  padding-top: 12px;
   border-top: 1px dashed rgba(0, 75, 141, 0.15);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-.pcvt-bonus-footer svg {
+.pcvt-bonus-footer-note svg {
   flex-shrink: 0;
-  color: var(--color-evn-blue);
+}
+
+/* Frame 3: Tiêu chí chấm điểm & Chỉ tiêu PCVT */
+.criteria-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.criteria-badge-bgk {
+  font-size: 0.82rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  background: var(--color-primary-light);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
 }
 
 .pcvt-progress-meta-card {
@@ -3828,22 +3826,25 @@ button.nav-link-highlight svg {
     gap: 12px;
     text-align: center;
   }
-  .pcvt-bonus-heading {
+  .pcvt-header-left {
     flex-direction: column;
     align-items: flex-start;
+    gap: 6px;
   }
-  .pcvt-bonus-row {
+  .pcvt-bonus-full-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
   }
-  .pcvt-bonus-calc {
+  .pcvt-target-title {
+    white-space: normal;
+  }
+  .pcvt-bonus-full-right {
     width: 100%;
     justify-content: space-between;
   }
-  .prize-sub-heading {
-    flex-direction: column;
-    align-items: flex-start;
+  .criteria-grid-2col {
+    grid-template-columns: 1fr;
   }
 }
 
