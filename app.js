@@ -13,9 +13,10 @@
 const GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1u2rEZ2IECYFk-YQK2TXW_DAqvhjh7BWR?usp=sharing";
 const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ/edit?usp=sharing";
 
-// URL Web App Google Apps Script nhận bài thi (Mặc định hoặc cấu hình qua localStorage)
-const DEFAULT_GAS_URL = '';
-let GAS_WEBAPP_URL = localStorage.getItem('EVN_GAS_WEBAPP_URL') || DEFAULT_GAS_URL;
+// URL Web App Google Apps Script nhận bài thi chính thức (Đã triển khai)
+const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbzYG9McP9lCjqwJYDM6viL9mSWy5FASm6E7bkVLRDn1_5bK14FTly217TCy8AQTt1PZ/exec';
+const savedGasUrl = localStorage.getItem('EVN_GAS_WEBAPP_URL');
+let GAS_WEBAPP_URL = (savedGasUrl && savedGasUrl.startsWith('https://script.google.com/')) ? savedGasUrl : DEFAULT_GAS_URL;
 
 // Tự động nhận URL API cấu hình ẩn cho Ban Tổ chức qua tham số: ?set_api=https://script.google.com/...
 (function checkAdminApiParam() {

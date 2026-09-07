@@ -171,7 +171,9 @@ function doPost(e) {
         var tpBytes = Utilities.base64Decode(data.fileTacPham.base64);
         var tpBlob = Utilities.newBlob(tpBytes, data.fileTacPham.type || 'application/octet-stream', data.fileTacPham.name || ('TacPham_' + submissionId));
         var tpFile = submissionFolder.createFile(tpBlob);
-        tpFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        try {
+          tpFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        } catch (shareErr) {}
         tacPhamUrl = tpFile.getUrl();
       } catch (fErr) {
         tacPhamUrl = 'Lỗi lưu file: ' + fErr.toString();
@@ -184,7 +186,9 @@ function doPost(e) {
         var tmBytes = Utilities.base64Decode(data.fileThuyetMinh.base64);
         var tmBlob = Utilities.newBlob(tmBytes, data.fileThuyetMinh.type || 'application/octet-stream', data.fileThuyetMinh.name || ('ThuyetMinh_' + submissionId));
         var tmFile = submissionFolder.createFile(tmBlob);
-        tmFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        try {
+          tmFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        } catch (shareErr2) {}
         thuyetMinhUrl = tmFile.getUrl();
       } catch (fErr2) {
         thuyetMinhUrl = 'Lỗi lưu file: ' + fErr2.toString();
