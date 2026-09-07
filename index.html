@@ -1295,6 +1295,37 @@
     </div>
   </div>
 
+  <!-- ========================================================================
+       7C. MODAL POPUP DANH SÁCH TÁC PHẨM CỦA MỘT PHÒNG/ĐỘI
+       ======================================================================== -->
+  <div class="modal-overlay" id="dept-entries-modal">
+    <div class="modal-box modal-dept-entries-box">
+      <button type="button" class="modal-close-icon-btn" onclick="closeDeptEntriesModal()" aria-label="Đóng">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="dept-modal-header">
+        <div class="dept-modal-icon">🏢</div>
+        <div class="dept-modal-title-group">
+          <h3 class="dept-modal-title" id="dept-modal-name">Tên Phòng / Đội</h3>
+          <div class="dept-modal-subtitle" id="dept-modal-stats">Chỉ tiêu: 00 tác phẩm • Đã gửi: 00 tác phẩm</div>
+        </div>
+      </div>
+
+      <div class="dept-modal-body" id="dept-modal-entries-list">
+        <!-- Danh sách tác phẩm được JS render động -->
+      </div>
+
+      <div class="dept-modal-footer">
+        <button type="button" class="btn-dept-modal-close" onclick="closeDeptEntriesModal()">Đóng</button>
+        <button type="button" class="btn-dept-modal-submit" id="btn-dept-modal-submit" onclick="openSubmissionForDept()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Nộp thêm bài thi cho phòng này</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Message Container -->
   <div class="toast-container" id="toast-container"></div>
 

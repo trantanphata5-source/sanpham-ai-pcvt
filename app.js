@@ -1056,11 +1056,11 @@ function renderDepartmentProgress() {
         : `<span class="status-badge none" style="background:#F1F5F9; color:var(--text-muted); border:1px solid var(--border-subtle);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> Chưa có bài thi</span>`;
 
     return `
-      <tr class="${isCompleted ? 'row-completed' : ''}">
+      <tr class="${isCompleted ? 'row-completed' : ''} dept-row-clickable" onclick="showDepartmentEntries('${dept.name}')" title="Bấm để xem danh sách tác phẩm của ${dept.name}">
         <td style="text-align: center; font-weight: 700; color: var(--text-dim);">${index + 1}</td>
         <td class="dept-name-cell">
           <div style="font-weight: 700; color: var(--text-main);">${dept.name}</div>
-          <button type="button" class="btn-filter-dept-action" onclick="filterGalleryByDepartment('${dept.name}')" title="Xem các bài nộp của ${dept.name}">
+          <button type="button" class="btn-filter-dept-action" onclick="event.stopPropagation(); showDepartmentEntries('${dept.name}')" title="Xem danh sách tác phẩm của ${dept.name}">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
             <span>Xem tác phẩm (${submittedCount})</span>
           </button>
@@ -1125,6 +1125,105 @@ function initProgressSubtabs() {
     });
   });
 }
+
+/**
+ * Mở modal danh sách các tác phẩm dự thi của một Phòng/Đội khi click vào phòng
+ */
+window.showDepartmentEntries = function(deptName) {
+  const dept = PCVT_DEPARTMENTS.find(d => d.name === deptName) || { name: deptName, target: 1 };
+  const allEntries = getAllSubmittedEntries();
+  const deptEntries = allEntries.filter(e => e.department === deptName || (e.department && e.department.includes(deptName)));
+
+  window.currentSelectedDept = dept.name;
+
+  const modal = document.getElementById('dept-entries-modal');
+  const modalName = document.getElementById('dept-modal-name');
+  const modalStats = document.getElementById('dept-modal-stats');
+  const listContainer = document.getElementById('dept-modal-entries-list');
+  const btnSubmit = document.getElementById('btn-dept-modal-submit');
+
+  if (modalName) modalName.textContent = dept.name;
+  if (modalStats) {
+    const rate = Math.min(Math.round((deptEntries.length / dept.target) * 100), 100);
+    modalStats.textContent = `Chỉ tiêu: ${String(dept.target).padStart(2, '0')} tác phẩm • Đã nộp: ${String(deptEntries.length).padStart(2, '0')} tác phẩm (${rate}% tiến độ)`;
+  }
+  if (btnSubmit) {
+    btnSubmit.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      <span>Nộp bài thi cho ${dept.name}</span>
+    `;
+  }
+
+  if (listContainer) {
+    if (deptEntries.length === 0) {
+      listContainer.innerHTML = `
+        <div class="dept-modal-empty">
+          <div class="empty-icon-sm">📁</div>
+          <h4>Chưa có tác phẩm dự thi nào</h4>
+          <p>Đơn vị <strong>${dept.name}</strong> hiện chưa gửi bài dự thi nào vào hệ thống. Hãy là người đầu tiên nộp tác phẩm cho đơn vị!</p>
+          <button type="button" class="btn-view-detail" style="margin: 0 auto; display: inline-flex;" onclick="openSubmissionForDept('${dept.name}')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            <span>Nộp tác phẩm ngay</span>
+          </button>
+        </div>
+      `;
+    } else {
+      listContainer.innerHTML = deptEntries.map((entry) => {
+        const visualUrl = resolveArtworkUrl(entry);
+        const isVideo = entry.category === 'Video';
+        const thumbHtml = visualUrl
+          ? `<img src="${visualUrl}" alt="${entry.title}" class="dept-thumb-img">`
+          : `<div class="dept-thumb-icon">${isVideo ? '🎬' : '🖼️'}</div>`;
+
+        return `
+          <div class="dept-entry-item-card" onclick="openEntryFromDeptList('${entry.id}')" title="Bấm để xem chi tiết tác phẩm: ${entry.title}">
+            <div class="dept-entry-thumb">
+              ${thumbHtml}
+            </div>
+            <div class="dept-entry-info">
+              <div class="dept-entry-top-row">
+                <span class="badge-tag-type">${entry.category}</span>
+                <span class="badge-tag-code">${entry.id}</span>
+                <span class="dept-entry-date">📅 ${entry.date || '07/09/2026'}</span>
+              </div>
+              <h4 class="dept-entry-card-title">${entry.title}</h4>
+              <div class="dept-entry-author">👤 Tác giả: <strong>${entry.author}</strong> ${entry.msnv ? `(MSNV: ${entry.msnv})` : ''}</div>
+              <div class="dept-entry-ai-tools">${(entry.aiTools || []).map(t => `<span class="ai-chip-mini">${t}</span>`).join('')}</div>
+            </div>
+            <div class="dept-entry-action">
+              <button type="button" class="btn-open-detail-arrow" onclick="event.stopPropagation(); openEntryFromDeptList('${entry.id}')">
+                <span>Xem tác phẩm</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  if (modal) modal.classList.add('open');
+};
+
+window.closeDeptEntriesModal = function() {
+  const modal = document.getElementById('dept-entries-modal');
+  if (modal) modal.classList.remove('open');
+};
+
+window.openEntryFromDeptList = function(entryId) {
+  closeDeptEntriesModal();
+  openEntryDetailModal(entryId);
+};
+
+window.openSubmissionForDept = function(deptName) {
+  closeDeptEntriesModal();
+  openSubmissionModal();
+  const target = deptName || window.currentSelectedDept;
+  if (target) {
+    const sel = document.getElementById('field-donvi');
+    if (sel) sel.value = target;
+  }
+};
 
 /**
  * Khi click xem tác phẩm của 1 phòng từ bảng thống kê, tự động switch sang subtab Triển lãm và filter
@@ -1452,7 +1551,7 @@ function renderArtworkStage(entry) {
              alt="${entry.title}" 
              class="artwork-image-view" 
              onclick="window.open('${directViewUrl}')">
-        <div class="artwork-click-hint">🔍 Nhấp chuột vào ảnh để mở xem toàn màn hình (Tệp gốc Cột N Google Drive)</div>
+        <div class="artwork-click-hint">🔍 Nhấp chuột vào ảnh để mở xem toàn màn hình</div>
       </div>
     `;
 
@@ -1696,6 +1795,10 @@ function setupGlobalModalEvents() {
     if (e.target === successModal) {
       closeSuccessModal();
     }
+    const deptModal = document.getElementById('dept-entries-modal');
+    if (e.target === deptModal) {
+      closeDeptEntriesModal();
+    }
   });
 
   window.addEventListener('keydown', (e) => {
@@ -1703,6 +1806,7 @@ function setupGlobalModalEvents() {
       closeSubmissionModal();
       closeEntryDetailModal();
       closeSuccessModal();
+      closeDeptEntriesModal();
     }
   });
 }
