@@ -1202,6 +1202,66 @@
       </div>
 
       <div class="entry-detail-body">
+        <!-- 1. KHU VỰC TRÌNH CHIẾU TRỰC QUAN TÁC PHẨM DỰ THI -->
+        <div class="detail-section-block detail-artwork-section">
+          <div class="detail-artwork-header">
+            <h4 class="detail-heading">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              Tác phẩm dự thi chính thức
+            </h4>
+            <span class="detail-artwork-tag" id="detail-artwork-tag">🖼️ Ảnh nghệ thuật</span>
+          </div>
+
+          <!-- Khung hiển thị trực quan tác phẩm (Ảnh / Video / Infographic) -->
+          <div class="detail-artwork-stage" id="detail-artwork-stage">
+            <!-- Nội dung động do JS render -->
+          </div>
+
+          <!-- Nút thao tác tệp tác phẩm -->
+          <div class="detail-artwork-actions" id="detail-artwork-actions" style="display: none;">
+            <a href="#" target="_blank" rel="noopener" class="btn-artwork-action btn-artwork-primary" id="btn-view-full-artwork">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Xem tệp kích thước gốc</span>
+            </a>
+            <a href="#" download="tac_pham" class="btn-artwork-action btn-artwork-secondary" id="btn-download-artwork" style="display: none;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Tải về máy</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. KHU VỰC BẢN THUYẾT MINH Ý TƯỞNG ĐÍNH KÈM -->
+        <div class="detail-section-block detail-thuyetminh-section" id="detail-thuyetminh-section" style="display: none;">
+          <h4 class="detail-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Bản thuyết minh ý tưởng dự thi (KHLT 53)
+          </h4>
+          <div class="thuyetminh-file-card">
+            <div class="thuyetminh-file-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
+            <div class="thuyetminh-file-info">
+              <div class="thuyetminh-file-name" id="detail-thuyetminh-name">Ban_thuyet_minh_KHLT53.docx</div>
+              <div class="thuyetminh-file-meta" id="detail-thuyetminh-meta">Văn bản thuyết minh ý tưởng chính thức kèm bài thi</div>
+            </div>
+            <a href="#" target="_blank" rel="noopener" class="btn-thuyetminh-download" id="btn-view-thuyetminh">
+              <span>Xem văn bản</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Ý TƯỞNG & THÔNG ĐIỆP TUYÊN TRUYỀN -->
         <div class="detail-section-block">
           <h4 class="detail-heading">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -1210,6 +1270,7 @@
           <p id="detail-desc" class="detail-text-content">...</p>
         </div>
 
+        <!-- 4. ỨNG DỤNG AI -->
         <div class="detail-section-block">
           <h4 class="detail-heading">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>

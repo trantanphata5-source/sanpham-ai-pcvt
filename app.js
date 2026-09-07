@@ -697,7 +697,22 @@ function initSubmissionForm() {
           aiTools: selectedTools,
           aiPromptDescription: thuyetMinhAI,
           date: new Date().toLocaleDateString('vi-VN'),
-          timestamp: Date.now()
+          timestamp: Date.now(),
+          fileName: uploadedFileTacPham ? uploadedFileTacPham.name : '',
+          fileType: uploadedFileTacPham ? uploadedFileTacPham.type : '',
+          fileSize: uploadedFileTacPham ? uploadedFileTacPham.size : 0,
+          fileDataUrl: (uploadedFileTacPham && uploadedFileTacPham.base64 && uploadedFileTacPham.size < 4.5 * 1024 * 1024)
+            ? `data:${uploadedFileTacPham.type || 'image/png'};base64,${uploadedFileTacPham.base64}`
+            : '',
+          fileThuyetMinhName: uploadedFileThuyetMinh ? uploadedFileThuyetMinh.name : '',
+          fileThuyetMinhType: uploadedFileThuyetMinh ? uploadedFileThuyetMinh.type : '',
+          thuyetMinhDataUrl: (uploadedFileThuyetMinh && uploadedFileThuyetMinh.base64 && uploadedFileThuyetMinh.size < 2.5 * 1024 * 1024)
+            ? `data:${uploadedFileThuyetMinh.type || 'application/pdf'};base64,${uploadedFileThuyetMinh.base64}`
+            : '',
+          tacPhamDriveUrl: resultData.tacPhamUrl || '',
+          thuyetMinhDriveUrl: resultData.thuyetMinhUrl || '',
+          linkDriveDuPhong: linkDriveDuPhong || '',
+          folderUrl: resultData.folderUrl || ''
         };
         saveUserEntry(newEntry);
         renderDepartmentProgress();
@@ -872,6 +887,39 @@ function initDepartmentProgressAndGallery() {
   initProgressSubtabs();
   initGalleryFilters();
   renderGalleryEntries(getAllSubmittedEntries());
+  syncSubmittedEntriesFromCloud();
+}
+
+/**
+ * Đồng bộ các bài dự thi đã lưu trên Google Sheet về Thư viện triển lãm
+ */
+async function syncSubmittedEntriesFromCloud() {
+  if (!GAS_WEBAPP_URL || !GAS_WEBAPP_URL.startsWith('http')) return;
+  try {
+    const response = await fetch(`${GAS_WEBAPP_URL}?action=getEntries`);
+    const data = await response.json();
+    if (data && data.status === 'success' && Array.isArray(data.entries)) {
+      const localEntries = getAllSubmittedEntries();
+      const localMap = new Map(localEntries.map(e => [e.id, e]));
+
+      data.entries.forEach(cloudEntry => {
+        if (localMap.has(cloudEntry.id)) {
+          const local = localMap.get(cloudEntry.id);
+          local.tacPhamDriveUrl = cloudEntry.tacPhamDriveUrl || local.tacPhamDriveUrl;
+          local.thuyetMinhDriveUrl = cloudEntry.thuyetMinhDriveUrl || local.thuyetMinhDriveUrl;
+          local.folderUrl = cloudEntry.folderUrl || local.folderUrl;
+        } else {
+          localEntries.push(cloudEntry);
+        }
+      });
+
+      localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(localEntries));
+      renderDepartmentProgress();
+      applyGalleryFilters();
+    }
+  } catch (err) {
+    console.log('Syncing cloud entries skipped:', err);
+  }
 }
 
 /**
@@ -1050,14 +1098,22 @@ function renderGalleryEntries(entries) {
       bannerIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`;
     }
 
+    let bannerContent = `
+      <div class="banner-visual-icon">
+        ${bannerIcon}
+      </div>
+    `;
+
+    if (entry.fileDataUrl && (entry.fileType?.startsWith('image/') || entry.category === 'Ảnh' || entry.category === 'Infographic')) {
+      bannerContent = `<img src="${entry.fileDataUrl}" alt="${entry.title}" style="width: 100%; height: 100%; object-fit: cover;">`;
+    }
+
     const aiBadges = (entry.aiTools || []).slice(0, 3).map(tool => `<span class="ai-chip-mini">${tool}</span>`).join('');
 
     return `
       <div class="gallery-card" data-id="${entry.id}">
         <div class="gallery-card-banner ${bannerClass}">
-          <div class="banner-visual-icon">
-            ${bannerIcon}
-          </div>
+          ${bannerContent}
         </div>
 
         <div class="gallery-card-body">
@@ -1210,12 +1266,185 @@ window.openEntryDetailModal = function(entryId) {
     aiDescEl.textContent = entry.aiPromptDescription || 'Tác phẩm ứng dụng công nghệ trí tuệ nhân tạo (AI) trong sáng tạo kịch bản, hình ảnh và video.';
   }
 
+  const artworkTagEl = document.getElementById('detail-artwork-tag');
+  if (artworkTagEl) {
+    artworkTagEl.textContent = `${entry.category === 'Video' ? '🎬' : entry.category === 'Ảnh' ? '🖼️' : '📊'} ${entry.category}`;
+  }
+
+  // Render trực quan tác phẩm dự thi trong cửa sổ chi tiết
+  renderArtworkStage(entry);
+
+  // Render bản thuyết minh ý tưởng kèm theo
+  renderThuyetMinhBlock(entry);
+
   modal.classList.add('open');
 };
 
+/**
+ * Hiển thị trực quan Tác phẩm dự thi (Hình ảnh / Video clip / Đồ họa) trong modal
+ */
+function renderArtworkStage(entry) {
+  const stage = document.getElementById('detail-artwork-stage');
+  const actionsBar = document.getElementById('detail-artwork-actions');
+  const btnViewFull = document.getElementById('btn-view-full-artwork');
+  const btnDownload = document.getElementById('btn-download-artwork');
+  if (!stage) return;
+
+  const isVideo = entry.category === 'Video' || (entry.fileType && entry.fileType.startsWith('video/'));
+  const isImage = entry.category === 'Ảnh' || (entry.fileType && entry.fileType.startsWith('image/'));
+  const isInfographic = entry.category === 'Infographic';
+
+  // Trích xuất Drive file ID nếu có
+  const rawUrl = entry.tacPhamDriveUrl || entry.linkDriveDuPhong || '';
+  let driveFileId = null;
+  if (rawUrl) {
+    const m1 = rawUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    const m2 = rawUrl.match(/id=([a-zA-Z0-9_-]+)/);
+    if (m1) driveFileId = m1[1];
+    else if (m2) driveFileId = m2[1];
+  }
+
+  // 1. Trường hợp có Data URL trực tiếp từ máy (Xem ngay lập tức)
+  if (entry.fileDataUrl) {
+    if (isVideo) {
+      stage.innerHTML = `
+        <div class="artwork-video-box">
+          <video controls autoplay muted playsinline class="artwork-player" src="${entry.fileDataUrl}">
+            Trình duyệt không hỗ trợ phát trực tiếp video.
+          </video>
+        </div>
+      `;
+    } else {
+      stage.innerHTML = `
+        <div class="artwork-image-box">
+          <img src="${entry.fileDataUrl}" alt="${entry.title}" class="artwork-image-view" onclick="window.open('${entry.fileDataUrl}')">
+          <div class="artwork-click-hint">🔍 Nhấp vào ảnh để xem kích thước đầy đủ</div>
+        </div>
+      `;
+    }
+
+    if (actionsBar && btnViewFull) {
+      actionsBar.style.display = 'flex';
+      btnViewFull.href = entry.fileDataUrl;
+      btnViewFull.target = '_blank';
+      if (btnDownload) {
+        btnDownload.style.display = 'inline-flex';
+        btnDownload.href = entry.fileDataUrl;
+        btnDownload.download = entry.fileName || `${entry.id}_tac_pham`;
+      }
+    }
+    return;
+  }
+
+  // 2. Trường hợp có Drive File ID
+  if (driveFileId) {
+    if (isVideo) {
+      stage.innerHTML = `
+        <div class="artwork-video-box">
+          <iframe src="https://drive.google.com/file/d/${driveFileId}/preview" class="artwork-drive-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      `;
+    } else {
+      const driveImgUrl = `https://lh3.googleusercontent.com/d/${driveFileId}`;
+      stage.innerHTML = `
+        <div class="artwork-image-box">
+          <img src="${driveImgUrl}" onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=${driveFileId}&sz=w1200';" alt="${entry.title}" class="artwork-image-view" onclick="window.open('${rawUrl}')">
+          <div class="artwork-click-hint">🔍 Nhấp vào ảnh để xem kích thước đầy đủ</div>
+        </div>
+      `;
+    }
+
+    if (actionsBar && btnViewFull) {
+      actionsBar.style.display = 'flex';
+      btnViewFull.href = rawUrl;
+      btnViewFull.target = '_blank';
+      if (btnDownload) btnDownload.style.display = 'none';
+    }
+    return;
+  }
+
+  // 3. Trường hợp có đường link liên kết ngoài hoặc link thư mục
+  if (rawUrl) {
+    stage.innerHTML = `
+      <div class="artwork-link-showcase">
+        <div class="showcase-icon">${isVideo ? '🎬' : isInfographic ? '📊' : '🖼️'}</div>
+        <div class="showcase-content">
+          <h5>${entry.fileName || entry.title}</h5>
+          <p>Tác phẩm được lưu trữ trên bộ nhớ đám mây trực tuyến.</p>
+        </div>
+        <a href="${rawUrl}" target="_blank" rel="noopener" class="btn-artwork-action btn-artwork-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span>Mở xem tác phẩm</span>
+        </a>
+      </div>
+    `;
+    if (actionsBar) actionsBar.style.display = 'none';
+    return;
+  }
+
+  // 4. Poster Showcase nghệ thuật nếu chưa có file đính kèm
+  const bannerTheme = isVideo ? 'poster-video' : isInfographic ? 'poster-infographic' : 'poster-image';
+  const bannerSymbol = isVideo ? '🎬' : isInfographic ? '📊' : '🖼️';
+  stage.innerHTML = `
+    <div class="artwork-showcase-poster ${bannerTheme}">
+      <div class="poster-watermark">EVNHCMC AI 2026</div>
+      <div class="poster-icon-badge">${bannerSymbol}</div>
+      <div class="poster-badge-category">${entry.category}</div>
+      <h3 class="poster-title">${entry.title}</h3>
+      <div class="poster-author">Đơn vị: ${entry.department} • Tác giả: ${entry.author}</div>
+      <div class="poster-tools">${(entry.aiTools || []).map(t => `<span class="poster-tool-tag">✨ ${t}</span>`).join('')}</div>
+      ${entry.folderUrl ? `
+        <a href="${entry.folderUrl}" target="_blank" rel="noopener" class="btn-poster-view">
+          <span>Xem tệp hồ sơ đính kèm</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      ` : ''}
+    </div>
+  `;
+  if (actionsBar) actionsBar.style.display = 'none';
+}
+
+/**
+ * Hiển thị khối Bản thuyết minh ý tưởng trong modal chi tiết
+ */
+function renderThuyetMinhBlock(entry) {
+  const tmSection = document.getElementById('detail-thuyetminh-section');
+  const tmName = document.getElementById('detail-thuyetminh-name');
+  const tmMeta = document.getElementById('detail-thuyetminh-meta');
+  const btnViewTm = document.getElementById('btn-view-thuyetminh');
+  if (!tmSection) return;
+
+  const hasTm = entry.thuyetMinhDriveUrl || entry.thuyetMinhDataUrl || entry.fileThuyetMinhName;
+  if (!hasTm) {
+    tmSection.style.display = 'none';
+    return;
+  }
+
+  tmSection.style.display = 'block';
+  if (tmName) tmName.textContent = entry.fileThuyetMinhName || 'Ban_thuyet_minh_KHLT53.docx';
+  if (tmMeta) tmMeta.textContent = `Bản thuyết minh ý tưởng & mô tả AI (Mã hồ sơ: ${entry.id})`;
+
+  if (btnViewTm) {
+    const targetUrl = entry.thuyetMinhDataUrl || entry.thuyetMinhDriveUrl || '#';
+    btnViewTm.href = targetUrl;
+    if (targetUrl !== '#') {
+      btnViewTm.style.display = 'inline-flex';
+    } else {
+      btnViewTm.style.display = 'none';
+    }
+  }
+}
+
 window.closeEntryDetailModal = function() {
   const modal = document.getElementById('entry-detail-modal');
-  if (modal) modal.classList.remove('open');
+  if (modal) {
+    modal.classList.remove('open');
+    // Dừng phát video nếu đang xem
+    const video = modal.querySelector('video');
+    if (video) video.pause();
+    const iframe = modal.querySelector('iframe');
+    if (iframe) iframe.src = '';
+  }
 };
 
 // ============================================================================

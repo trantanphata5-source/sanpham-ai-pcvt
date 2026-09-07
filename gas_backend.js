@@ -114,6 +114,41 @@ function doGet(e) {
         status: 'success',
         totalSubmissions: total
       };
+    } else if (action === 'getEntries') {
+      var ss2 = SpreadsheetApp.openById(SPREADSHEET_ID);
+      var sheet2 = ss2.getSheetByName(SHEET_NAME);
+      var entriesList = [];
+      if (sheet2 && sheet2.getLastRow() > 1) {
+        var numRows = sheet2.getLastRow() - 1;
+        var dataValues = sheet2.getRange(2, 1, numRows, HEADERS.length).getValues();
+        for (var i = 0; i < dataValues.length; i++) {
+          var r = dataValues[i];
+          if (!r[0]) continue;
+          entriesList.push({
+            id: String(r[0]),
+            date: r[1] ? String(r[1]).substring(0, 10) : '',
+            title: r[2] || '',
+            category: r[3] || 'Ảnh',
+            author: r[4] || '',
+            msnv: r[5] || '',
+            department: r[6] || '',
+            teamMembers: r[9] || '',
+            description: r[10] || '',
+            aiPromptDescription: r[11] || '',
+            aiTools: r[12] ? String(r[12]).split(',').map(function(s){return s.trim();}) : [],
+            tacPhamDriveUrl: r[13] || '',
+            thuyetMinhDriveUrl: r[14] || '',
+            linkDriveDuPhong: r[15] || '',
+            folderUrl: r[16] || '',
+            status: r[17] || 'Đã tiếp nhận'
+          });
+        }
+      }
+      result = {
+        status: 'success',
+        entries: entriesList,
+        total: entriesList.length
+      };
     } else {
       result = { status: 'unknown_action', action: action };
     }
