@@ -30,14 +30,14 @@
         </a>
 
         <div class="nav-top-actions">
-          <a href="#submit" class="btn-nav-cta">
+          <button type="button" class="btn-nav-cta" onclick="openSubmissionModal()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
               <line x1="12" y1="3" x2="12" y2="15"></line>
             </svg>
             <span>Nộp tác phẩm</span>
-          </a>
+          </button>
           <button class="btn-mobile-toggle" id="mobile-menu-toggle" aria-label="Mở menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -55,40 +55,40 @@
         <nav class="toolbar-nav">
           <ul class="nav-menu">
             <li>
-              <a href="#hero" class="nav-link active">
+              <button type="button" class="nav-link nav-tab-btn active" data-tab="home" onclick="switchMainTab('home')">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 <span>Trang chủ</span>
-              </a>
+              </button>
             </li>
             <li>
-              <a href="#rules" class="nav-link">
+              <button type="button" class="nav-link nav-tab-btn" data-tab="progress" onclick="switchMainTab('progress')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+                <span>Tiến độ & Tác phẩm</span>
+              </button>
+            </li>
+            <li>
+              <a href="#rules" class="nav-link" onclick="goToSection('rules')">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                 <span>Thể lệ & Giải thưởng</span>
               </a>
             </li>
             <li>
-              <a href="#department-progress" class="nav-link">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
-                <span>Tiến độ & Tác phẩm</span>
-              </a>
-            </li>
-            <li>
-              <a href="#ai-guide" class="nav-link">
+              <a href="#ai-guide" class="nav-link" onclick="goToSection('ai-guide')">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
                 <span>Cẩm nang AI Agent</span>
               </a>
             </li>
             <li>
-              <a href="#prompts" class="nav-link">
+              <a href="#prompts" class="nav-link" onclick="goToSection('prompts')">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 <span>Kho Prompt mẫu</span>
               </a>
             </li>
             <li>
-              <a href="#submit" class="nav-link nav-link-highlight">
+              <button type="button" class="nav-link nav-link-highlight" onclick="openSubmissionModal()">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                <span>Nộp bài trực tuyến</span>
-              </a>
+                <span>Nộp tác phẩm</span>
+              </button>
             </li>
           </ul>
         </nav>
@@ -97,44 +97,48 @@
   </header>
 
   <!-- ========================================================================
-       2. HERO SECTION
+       MAIN APP CONTENT (MULTI-TAB VIEW)
        ======================================================================== -->
-  <section class="hero-section" id="hero">
-    <div class="container hero-grid">
-      <div class="hero-content-left">
-        <div class="hero-badge-capsule">
-          <span class="pulse-dot"></span>
-          <span>KHLT SỐ 53 • CÔNG ĐOÀN & ĐOÀN THANH NIÊN EVNHCMC</span>
-        </div>
+  <main id="main-app-content">
 
-        <h1 class="hero-title">
-          Cuộc thi Sáng tạo<br>
-          <span class="title-gradient-ai">Ứng dụng Trí tuệ Nhân tạo</span>
-          <span class="title-subtext-clean">Tuyên truyền An toàn & Tiết kiệm điện</span>
-        </h1>
+    <!-- ======================================================================
+         TAB 1: TRANG CHỦ & CẨM NANG CUỘC THI (HERO, THỂ LỆ, AI GUIDE, PROMPTS)
+         ====================================================================== -->
+    <div id="view-home" class="main-tab-view active">
+      <!-- 2. HERO SECTION -->
+      <section class="hero-section" id="hero">
+        <div class="container hero-grid">
+          <div class="hero-content-left">
+            <div class="hero-badge-capsule">
+              <span class="pulse-dot"></span>
+              <span>KHLT SỐ 53 • CÔNG ĐOÀN & ĐOÀN THANH NIÊN EVNHCMC</span>
+            </div>
 
-        <p class="hero-description">
-          Phát huy tinh thần đổi mới sáng tạo và kỹ năng công nghệ số của cán bộ, công nhân viên và đoàn viên thanh niên EVNHCMC. Sử dụng các công cụ AI (ChatGPT, Gemini, NotebookLM, Kling, Canva...) tạo nên những ấn phẩm truyền thông ấn tượng, lan tỏa sâu rộng trong cộng đồng.
-        </p>
+            <h1 class="hero-title">
+              Cuộc thi Sáng tạo<br>
+              <span class="title-gradient-ai">Ứng dụng Trí tuệ Nhân tạo</span>
+              <span class="title-subtext-clean">Tuyên truyền An toàn & Tiết kiệm điện</span>
+            </h1>
 
-        <div class="hero-cta-group">
-          <a href="#submit" class="btn-hero-primary">
-            <span>Nộp tác phẩm ngay</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-          <a href="#prompts" class="btn-hero-secondary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
-            <span>Khám phá Prompt mẫu</span>
-          </a>
-        </div>
+            <p class="hero-description">
+              Phát huy tinh thần đổi mới sáng tạo và kỹ năng công nghệ số của cán bộ, công nhân viên và đoàn viên thanh niên EVNHCMC. Sử dụng các công cụ AI (ChatGPT, Gemini, NotebookLM, Kling, Canva...) tạo nên những ấn phẩm truyền thông ấn tượng, lan tỏa sâu rộng trong cộng đồng.
+            </p>
+
+            <div class="hero-cta-group">
+              <button type="button" class="btn-hero-primary" onclick="openSubmissionModal()">
+                <span>Nộp tác phẩm ngay</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="btn-hero-secondary" onclick="switchMainTab('progress')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path>
+                </svg>
+                <span>Tiến độ 13 Phòng / Đội</span>
+              </button>
+            </div>
 
         <div class="hero-meta-stats">
           <div class="stat-item">
@@ -219,8 +223,8 @@
               </svg>
             </div>
             <div class="quick-info-text">
-              <strong>Đầu mối tiếp nhận PC Vũng Tàu:</strong>
-              <span>Đ/c Vũ Thị Linh Chi - ĐTN (0818.993.811) • Hạn nộp nội bộ: 10/10/2026</span>
+              <strong>Liên hệ BTC PC Vũng Tàu:</strong>
+              <span>Đ/c Vũ Thị Linh Chi (0818.993.811) • Đ/c Lê Hoài Nam</span>
             </div>
           </div>
         </div>
@@ -459,173 +463,6 @@
   </section>
 
   <!-- ========================================================================
-       3B. SECTION: TIẾN ĐỘ CHỈ TIÊU 13 PHÒNG/ĐỘI PCVT & XEM LẠI TÁC PHẨM DỰ THI
-       ======================================================================== -->
-  <section id="department-progress" class="department-progress-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">PC VŨNG TÀU • CHỈ TIÊU KHLT SỐ 53</span>
-        <h2 class="section-title">Tiến Độ Chỉ Tiêu & Triển Lãm Tác Phẩm Dự Thi</h2>
-        <p class="section-subtitle">
-          Theo dõi tiến độ thực hiện chỉ tiêu phân bổ tối thiểu 20 sản phẩm cho 13 Phòng/Đội thuộc Công ty Điện lực Vũng Tàu theo Kế hoạch liên tịch giữa Công đoàn và Đoàn Thanh niên PCVT (Hạn nộp nội bộ: 17h00 ngày 10/10/2026).
-        </p>
-      </div>
-
-      <!-- 4 THẺ TỔNG QUAN KPI TIẾN ĐỘ TOÀN CÔNG TY -->
-      <div class="kpi-overview-grid">
-        <div class="kpi-card">
-          <div class="kpi-icon-wrapper icon-blue">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
-          </div>
-          <div class="kpi-info">
-            <span class="kpi-number" id="kpi-target-total">20</span>
-            <span class="kpi-label">Chỉ tiêu tối thiểu toàn PCVT</span>
-          </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-icon-wrapper icon-green">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-          <div class="kpi-info">
-            <span class="kpi-number" id="kpi-submitted-total">0</span>
-            <span class="kpi-label">Tác phẩm đã nộp thành công</span>
-          </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-icon-wrapper icon-amber">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 14 14"></polyline>
-            </svg>
-          </div>
-          <div class="kpi-info">
-            <span class="kpi-number" id="kpi-rate-total">0%</span>
-            <span class="kpi-label">Tiến độ hoàn thành chỉ tiêu</span>
-          </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-icon-wrapper icon-purple">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </div>
-          <div class="kpi-info">
-            <span class="kpi-number" id="kpi-units-completed">0 / 13</span>
-            <span class="kpi-label">Đơn vị đã đạt chỉ tiêu</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- THANH CHUYỂN SUB-TAB: TIẾN ĐỘ 13 ĐƠN VỊ <-> TRIỂN LÃM TÁC PHẨM -->
-      <div class="progress-subtabs-nav">
-        <button class="progress-tab-btn active" data-subtab="view-progress-table">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path>
-          </svg>
-          <span>Bảng Thống kê Tiến độ 13 Phòng / Đội</span>
-        </button>
-        <button class="progress-tab-btn" data-subtab="view-gallery">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
-          <span>Xem lại Tác phẩm Dự thi (<span id="gallery-count-badge">0</span>)</span>
-        </button>
-      </div>
-
-      <!-- SUB-TAB 1: BẢNG THỐNG KÊ TIẾN ĐỘ 13 PHÒNG / ĐỘI -->
-      <div class="subtab-content-panel active" id="view-progress-table">
-        <div class="table-responsive-wrapper">
-          <table class="pcvt-progress-table">
-            <thead>
-              <tr>
-                <th style="width: 50px; text-align: center;">STT</th>
-                <th>Phòng / Đội trực thuộc PC Vũng Tàu</th>
-                <th style="text-align: center; width: 140px;">Chỉ tiêu tối thiểu</th>
-                <th style="text-align: center; width: 110px;">Đã gửi</th>
-                <th style="width: 220px;">Tiến độ đạt</th>
-                <th style="text-align: center; width: 150px;">Trạng thái</th>
-                <th>Định hướng đề tài & Hành động</th>
-              </tr>
-            </thead>
-            <tbody id="pcvt-progress-tbody">
-              <!-- Rendered dynamically by app.js -->
-            </tbody>
-          </table>
-        </div>
-        <div class="table-legend-footer">
-          <div class="legend-note">
-            <span>📌 <em>Ghi chú:</em> Theo KHLT giữa Công đoàn và Đoàn Thanh niên Công ty Điện lực Vũng Tàu, các Đơn vị nộp bài trực tuyến hoặc gửi qua email Đ/c Vũ Thị Linh Chi (0818.993.811) trước 17h00 ngày 10/10/2026 để tổng hợp dự thi cấp Tổng công ty trước ngày 15/10/2026.</span>
-          </div>
-          <a href="#submit" class="btn-table-cta">
-            <span>Nộp bài cho đơn vị của bạn</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- SUB-TAB 2: TRIỂN LÃM & XEM LẠI TÁC PHẨM DỰ THI -->
-      <div class="subtab-content-panel" id="view-gallery">
-        <!-- Gallery Filter & Search Toolbar -->
-        <div class="gallery-filter-toolbar">
-          <div class="gallery-type-chips">
-            <button class="gallery-type-btn active" data-type="all">Tất cả thể loại</button>
-            <button class="gallery-type-btn" data-type="Video">🎬 Video Clip</button>
-            <button class="gallery-type-btn" data-type="Ảnh">🖼️ Ảnh nghệ thuật</button>
-            <button class="gallery-type-btn" data-type="Infographic">📊 Infographic</button>
-          </div>
-
-          <div class="gallery-filter-right">
-            <select id="gallery-dept-filter" class="gallery-dept-select">
-              <option value="all">Tất cả 13 Phòng / Đội</option>
-              <option value="Văn phòng Công ty">Văn phòng Công ty</option>
-              <option value="Phòng Tổ chức và Nhân sự">Phòng Tổ chức và Nhân sự</option>
-              <option value="Phòng Kế hoạch và Vật tư">Phòng Kế hoạch và Vật tư</option>
-              <option value="Phòng Quản lý đầu tư">Phòng Quản lý đầu tư</option>
-              <option value="Phòng Kỹ thuật và An toàn">Phòng Kỹ thuật và An toàn</option>
-              <option value="Phòng Kinh doanh">Phòng Kinh doanh</option>
-              <option value="Phòng Tài chính Kế toán">Phòng Tài chính Kế toán</option>
-              <option value="Đội Vận hành lưới điện">Đội Vận hành lưới điện</option>
-              <option value="Đội Quản lý lưới điện">Đội Quản lý lưới điện</option>
-              <option value="Đội Dịch vụ khách hàng">Đội Dịch vụ khách hàng</option>
-              <option value="Đội Quản lý thu ghi">Đội Quản lý thu ghi</option>
-              <option value="Đội Quản lý hệ thống đo đếm">Đội Quản lý hệ thống đo đếm</option>
-              <option value="Điện lực Đặc khu Côn Đảo">Điện lực Đặc khu Côn Đảo</option>
-            </select>
-
-            <div class="gallery-search-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              <input type="text" id="gallery-search-input" placeholder="Tìm tác phẩm, tác giả...">
-            </div>
-          </div>
-        </div>
-
-        <!-- Gallery Cards Grid -->
-        <div class="gallery-cards-grid" id="gallery-cards-container">
-          <!-- Rendered dynamically by app.js -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
        4. SECTION: CẨM NANG HƯỚNG DẪN SỬ DỤNG AI AGENT (AI MASTER HUB)
        ======================================================================== -->
   <section id="ai-guide">
@@ -826,7 +663,7 @@
         <div class="agent-pro-tips">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
+<line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           <div class="tips-content">
@@ -841,7 +678,7 @@
   <!-- ========================================================================
        5. SECTION: THƯ VIỆN PROMPT MẪU (PROMPT LIBRARY VỚI 1-CLICK COPY)
        ======================================================================== -->
-  <section id="prompts">
+  <section id="prompts" class="prompts-section">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">KHO PROMPT THỰC CHIẾN</span>
@@ -877,21 +714,197 @@
       </div>
     </div>
   </section>
+</div><!-- /#view-home -->
 
-  <!-- ========================================================================
-       6. SECTION: FORM NỘP TÁC PHẨM TRỰC TUYẾN (SUBMISSION PORTAL)
-       ======================================================================== -->
-  <section id="submit">
+<!-- ======================================================================
+     TAB 2: TIẾN ĐỘ CHỈ TIÊU 13 PHÒNG/ĐỘI PCVT & TRIỂN LÃM TÁC PHẨM DỰ THI
+     ====================================================================== -->
+<div id="view-progress" class="main-tab-view">
+  <section id="department-progress" class="department-progress-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">CỔNG TIẾP NHẬN HỒ SƠ</span>
-        <h2 class="section-title">Nộp Tác phẩm Dự thi Trực tuyến</h2>
+        <span class="section-tag">PC VŨNG TÀU • CHỈ TIÊU KHLT SỐ 53</span>
+        <h2 class="section-title">Tiến Độ Chỉ Tiêu & Triển Lãm Tác Phẩm Dự Thi</h2>
         <p class="section-subtitle">
-          Tất cả thông tin và file tác phẩm sẽ được lưu tự động vào Google Sheets và Google Drive của Ban Tổ chức. Hồ sơ được cấp Mã dự thi duy nhất để theo dõi kết quả.
+          Theo dõi tiến độ thực hiện chỉ tiêu phân bổ tối thiểu 20 sản phẩm cho 13 Phòng/Đội thuộc Công ty Điện lực Vũng Tàu theo Kế hoạch liên tịch giữa Công đoàn và Đoàn Thanh niên PCVT.
         </p>
       </div>
 
-      <div class="submission-wrapper">
+      <!-- 4 THẺ TỔNG QUAN KPI TIẾN ĐỘ TOÀN CÔNG TY -->
+      <div class="kpi-overview-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-target-total">20</span>
+            <span class="kpi-label">Chỉ tiêu tối thiểu toàn PCVT</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-submitted-total">0</span>
+            <span class="kpi-label">Tác phẩm đã nộp thành công</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-rate-total">0%</span>
+            <span class="kpi-label">Tiến độ hoàn thành chỉ tiêu</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-units-completed">0 / 13</span>
+            <span class="kpi-label">Đơn vị đã đạt chỉ tiêu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- THANH CHUYỂN SUB-TAB: TIẾN ĐỘ 13 ĐƠN VỊ <-> TRIỂN LÃM TÁC PHẨM -->
+      <div class="progress-subtabs-nav">
+        <button class="progress-tab-btn active" data-subtab="view-progress-table">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path>
+          </svg>
+          <span>Bảng Thống kê Tiến độ 13 Phòng / Đội</span>
+        </button>
+        <button class="progress-tab-btn" data-subtab="view-gallery">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>Xem lại Tác phẩm Dự thi (<span id="gallery-count-badge">0</span>)</span>
+        </button>
+      </div>
+
+      <!-- SUB-TAB 1: BẢNG THỐNG KÊ TIẾN ĐỘ 13 PHỐNG / ĐỘI -->
+      <div class="subtab-content-panel active" id="view-progress-table">
+        <div class="table-responsive-wrapper">
+          <table class="pcvt-progress-table">
+            <thead>
+              <tr>
+                <th style="width: 50px; text-align: center;">STT</th>
+                <th>Phòng / Đội trực thuộc PC Vũng Tàu</th>
+                <th style="text-align: center; width: 140px;">Chỉ tiêu tối thiểu</th>
+                <th style="text-align: center; width: 110px;">Đã gửi</th>
+                <th style="width: 220px;">Tiến độ đạt</th>
+                <th style="text-align: center; width: 150px;">Trạng thái</th>
+                <th>Định hướng đề tài & Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="pcvt-progress-tbody">
+              <!-- Rendered dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+        <div class="table-legend-footer">
+          <div class="legend-note">
+            <span>📌 <em>Ghi chú:</em> Các Đơn vị nộp bài trực tuyến để hệ thống tự động tổng hợp dự thi cấp Tổng công ty trước ngày 15/10/2026.</span>
+          </div>
+          <button type="button" class="btn-table-cta" onclick="openSubmissionModal()">
+            <span>Nộp bài cho đơn vị của bạn</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: TRIỂN LÃM & XEM LẠI TÁC PHẨM DỰ THI -->
+      <div class="subtab-content-panel" id="view-gallery">
+        <!-- Gallery Filter & Search Toolbar -->
+        <div class="gallery-filter-toolbar">
+          <div class="gallery-type-chips">
+            <button class="gallery-type-btn active" data-type="all">Tất cả thể loại</button>
+            <button class="gallery-type-btn" data-type="Video">🎬 Video Clip</button>
+            <button class="gallery-type-btn" data-type="Ảnh">🖼️ Ảnh nghệ thuật</button>
+            <button class="gallery-type-btn" data-type="Infographic">📊 Infographic</button>
+          </div>
+
+          <div class="gallery-filter-right">
+            <select id="gallery-dept-filter" class="gallery-dept-select">
+              <option value="all">Tất cả 13 Phòng / Đội</option>
+              <option value="Văn phòng Công ty">Văn phòng Công ty</option>
+              <option value="Phòng Tổ chức và Nhân sự">Phòng Tổ chức và Nhân sự</option>
+              <option value="Phòng Kế hoạch và Vật tư">Phòng Kế hoạch và Vật tư</option>
+              <option value="Phòng Quản lý đầu tư">Phòng Quản lý đầu tư</option>
+              <option value="Phòng Kỹ thuật và An toàn">Phòng Kỹ thuật và An toàn</option>
+              <option value="Phòng Kinh doanh">Phòng Kinh doanh</option>
+              <option value="Phòng Tài chính Kế toán">Phòng Tài chính Kế toán</option>
+              <option value="Đội Vận hành lưới điện">Đội Vận hành lưới điện</option>
+              <option value="Đội Quản lý lưới điện">Đội Quản lý lưới điện</option>
+              <option value="Đội Dịch vụ khách hàng">Đội Dịch vụ khách hàng</option>
+              <option value="Đội Quản lý thu ghi">Đội Quản lý thu ghi</option>
+              <option value="Đội Quản lý hệ thống đo đếm">Đội Quản lý hệ thống đo đếm</option>
+              <option value="Điện lực Đặc khu Côn Đảo">Điện lực Đặc khu Côn Đảo</option>
+            </select>
+
+            <div class="gallery-search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="gallery-search-input" placeholder="Tìm tác phẩm, tác giả...">
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery Cards Grid -->
+        <div class="gallery-cards-grid" id="gallery-cards-container">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /#view-progress -->
+
+</main><!-- /#main-app-content -->
+
+  <!-- ========================================================================
+       MODAL POPUP NỘP TÁC PHẨM DỰ THI TRỰC TUYẾN
+       ======================================================================== -->
+  <div class="modal-overlay" id="submission-modal">
+    <div class="modal-box modal-submission-box">
+      <button type="button" class="modal-close-icon-btn" onclick="closeSubmissionModal()" aria-label="Đóng popup">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-submission-header">
+        <span class="section-tag">CỔNG TIẾP NHẬN HỒ SƠ TRỰC TUYẾN</span>
+        <h3 class="modal-submission-title">Nộp Tác Phẩm Dự Thi</h3>
+        <p class="modal-submission-subtitle">
+          Điền thông tin và đính kèm sản phẩm dự thi (Video / Ảnh / Infographic). Hồ sơ được tự động lưu trữ bảo mật và cấp Mã dự thi duy nhất để theo dõi.
+        </p>
+      </div>
+
+      <div class="submission-wrapper modal-submission-inner">
         <!-- Form Step Indicators -->
         <div class="form-step-indicators">
           <div class="step-item completed">
@@ -953,22 +966,22 @@
               </div>
             </div>
 
-            <div class="form-grid-2">
+            <div class="form-grid-3">
               <div class="form-group">
-                <label class="form-label" for="field-sdt">Số điện thoại liên hệ <span class="required">*</span></label>
-                <input type="tel" id="field-sdt" class="form-input" placeholder="Ví dụ: 0909xxxxxx" required>
+                <label class="form-label" for="field-sdt">Số điện thoại liên hệ (Zalo) <span class="required">*</span></label>
+                <input type="tel" id="field-sdt" class="form-input" placeholder="Ví dụ: 0901234567" required>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="field-email">Email liên hệ <span class="required">*</span></label>
-                <input type="email" id="field-email" class="form-input" placeholder="Ví dụ: nva@evnhcmc.vn" required>
+                <label class="form-label" for="field-email">Email công vụ / cá nhân <span class="required">*</span></label>
+                <input type="email" id="field-email" class="form-input" placeholder="Ví dụ: anhnv@hcmpc.com.vn" required>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="form-label" for="field-thanhvien">Thành viên nhóm (nếu là nhóm dự thi, tối đa 05 người)</label>
-              <input type="text" id="field-thanhvien" class="form-input" placeholder="Ghi rõ Họ tên - MSNV các thành viên khác trong nhóm (ngăn cách bằng dấu phẩy)">
-              <span class="form-hint">Lưu ý: Cá nhân hoặc nhóm không quá 05 thành viên đang công tác tại Tổng công ty.</span>
+              <div class="form-group">
+                <label class="form-label" for="field-thanhvien">Thành viên nhóm cùng tham gia (nếu có)</label>
+                <input type="text" id="field-thanhvien" class="form-input" placeholder="Ví dụ: Trần B (MSNV), Lê C (MSNV) - Tối đa 5 người">
+                <span class="form-hint">Nếu thi theo nhóm, ghi rõ Họ tên và MSNV các thành viên còn lại.</span>
+              </div>
             </div>
           </div>
 
@@ -976,117 +989,114 @@
           <div class="form-section-group">
             <h3 class="form-section-title">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-              2. Chi tiết Tác phẩm & Ứng dụng AI
+              2. Thông tin Tác phẩm & Mô tả Ứng dụng AI
             </h3>
+
+            <div class="form-group">
+              <label class="form-label" for="field-tentacpham">Tên tác phẩm dự thi <span class="required">*</span></label>
+              <input type="text" id="field-tentacpham" class="form-input" placeholder="Ví dụ: Video 45s: 3 Nguyên tắc an toàn điện khi nhà bị ngập mùa mưa bão" required>
+            </div>
 
             <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="field-tentacpham">Tên sản phẩm dự thi <span class="required">*</span></label>
-                <input type="text" id="field-tentacpham" class="form-input" placeholder="Ví dụ: Giữ trọn an toàn - Sống trọn niềm vui" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Loại hình tác phẩm <span class="required">*</span></label>
+                <label class="form-label">Thể loại dự thi <span class="required">*</span></label>
                 <div class="radio-chip-group">
                   <label class="radio-chip-label selected">
                     <input type="radio" name="theLoai" value="Ảnh" checked>
-                    <span>🖼️ Ảnh nghệ thuật / Poster</span>
+                    <span>🖼️ Ảnh nghệ thuật</span>
                   </label>
                   <label class="radio-chip-label">
                     <input type="radio" name="theLoai" value="Video">
-                    <span>🎬 Video Clip (15s - 120s)</span>
+                    <span>🎬 Video clip</span>
                   </label>
                   <label class="radio-chip-label">
                     <input type="radio" name="theLoai" value="Infographic">
-                    <span>📊 Infographic trực quan</span>
+                    <span>📊 Infographic</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Công cụ AI đã sử dụng <span class="required">*</span></label>
+                <div class="checkbox-chip-group">
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="ChatGPT"> ChatGPT
+                  </label>
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="Gemini"> Gemini
+                  </label>
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="NotebookLM"> NotebookLM
+                  </label>
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="Midjourney"> Midjourney
+                  </label>
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="Kling AI"> Kling AI
+                  </label>
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="Canva AI"> Canva AI
+                  </label>
+                  <label class="checkbox-chip-label">
+                    <input type="checkbox" value="Runway / HeyGen"> Runway / HeyGen
                   </label>
                 </div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="field-tomtatynghia">Tóm tắt ý tưởng chính & Thông điệp cốt lõi <span class="required">*</span></label>
-              <textarea id="field-tomtatynghia" class="form-textarea" placeholder="Mô tả ngắn gọn thông điệp an toàn điện hoặc tiết kiệm điện mà tác phẩm muốn truyền tải đến khách hàng và người dân..." required></textarea>
+              <label class="form-label" for="field-tomtatynghia">Tóm tắt ý tưởng & Thông điệp tuyên truyền <span class="required">*</span></label>
+              <textarea id="field-tomtatynghia" class="form-textarea" placeholder="Tóm tắt ngắn gọn (3-5 câu) về ý nghĩa tác phẩm, thông điệp an toàn hoặc tiết kiệm điện muốn lan tỏa đến người dân..." required></textarea>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Các công cụ / Nền tảng AI đã ứng dụng (chọn các mục áp dụng)</label>
-              <div class="checkbox-chip-group">
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="ChatGPT"> ChatGPT
-                </label>
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="Google Gemini"> Gemini
-                </label>
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="NotebookLM"> NotebookLM
-                </label>
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="Midjourney"> Midjourney
-                </label>
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="Canva AI"> Canva AI
-                </label>
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="Kling / Runway"> Kling / Runway
-                </label>
-                <label class="checkbox-chip-label">
-                  <input type="checkbox" value="ElevenLabs / Giọng đọc AI"> ElevenLabs / Vbee
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="field-thuyetminhai">Mô tả chi tiết việc ứng dụng AI trong tác phẩm <span class="required">*</span></label>
-              <textarea id="field-thuyetminhai" class="form-textarea" placeholder="Nêu rõ công cụ AI nào đã được sử dụng ở từng khâu: Ví dụ: Dùng ChatGPT viết kịch bản, dùng Midjourney tạo hình ảnh nhân vật thợ điện, dùng Kling AI tạo chuyển động, v.v..." required></textarea>
-              <span class="form-hint">Yêu cầu bắt buộc của Ban Giám khảo để chấm 40 điểm tiêu chí AI.</span>
+              <label class="form-label" for="field-thuyetminhai">Mô tả cách ứng dụng AI & Câu lệnh Prompt tiêu biểu <span class="required">*</span></label>
+              <textarea id="field-thuyetminhai" class="form-textarea" placeholder="Nêu rõ công cụ AI đã dùng ở từng khâu (viết kịch bản, vẽ hình, tạo chuyển động, lồng tiếng) và trích dẫn câu lệnh Prompt quan trọng nhất bạn đã nhập..." required></textarea>
+              <span class="form-hint">Ban Giám khảo chấm 30% điểm dựa trên mức độ ứng dụng AI sáng tạo và hiệu quả.</span>
             </div>
           </div>
 
-          <!-- PHẦN 3: TẢI LÊN FILE & ĐƯỜNG LINK LƯU TRỮ -->
-          <div class="form-section-group" style="border-bottom: none;">
+          <!-- PHẦN 3: TẢI LÊN FILE TÁC PHẨM & BẢN THUYẾT MINH -->
+          <div class="form-section-group">
             <h3 class="form-section-title">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" y1="3" x2="12" y2="15"></line>
               </svg>
-              3. Tệp Tác phẩm & Bản Thuyết minh
+              3. Tải lên Tác phẩm dự thi & Bản thuyết minh
             </h3>
 
             <div class="form-grid-2">
-              <!-- Dropzone 1: Tác phẩm -->
+              <!-- Upload File Tác Phẩm -->
               <div class="form-group">
-                <label class="form-label">Tải file Tác phẩm trực tiếp (Tối đa 25MB)</label>
+                <label class="form-label">File Tác phẩm (Ảnh / Video / Infographic) <span class="required">*</span></label>
                 <div class="dropzone-container" id="dropzone-tacpham">
-                  <input type="file" id="file-tacpham-input" accept="image/*,video/mp4" style="display: none;">
                   <div class="dropzone-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                      <polyline points="21 15 16 10 5 21"></polyline>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
                     </svg>
                   </div>
-                  <div class="dropzone-title">Nhấn để chọn hoặc kéo thả file vào đây</div>
-                  <div class="dropzone-subtitle">Hỗ trợ ảnh JPG/PNG hoặc video MP4 (&lt; 25MB)</div>
+                  <div class="dropzone-title">Kéo thả file tác phẩm vào đây hoặc Click để chọn file</div>
+                  <div class="dropzone-subtitle">Hỗ trợ JPG, PNG, MP4, MOV, PDF (Tối đa 25MB trực tiếp)</div>
+                  <input type="file" id="file-tacpham-input" accept="image/*,video/*,application/pdf" style="display: none;">
                 </div>
                 <div class="file-chosen-preview" id="preview-tacpham">
-                  <span id="tacpham-filename">Tên file</span>
-                  <button type="button" class="btn-remove-file" id="btn-remove-tacpham">Gỡ bỏ</button>
+                  <span>📄 <strong id="tacpham-filename">file_name.mp4</strong></span>
+                  <button type="button" class="btn-remove-file" id="btn-remove-tacpham">Xóa</button>
                 </div>
               </div>
 
-              <!-- Dropzone 2: Thuyết minh -->
+              <!-- Upload File Bản Thuyết Minh -->
               <div class="form-group">
-                <label class="form-label">Tải file Bản thuyết minh ý tưởng (nếu có)</label>
+                <label class="form-label">File Bản thuyết minh ý tưởng dự thi (Tùy chọn)</label>
                 <div class="dropzone-container" id="dropzone-thuyetminh">
-                  <input type="file" id="file-thuyetminh-input" accept=".doc,.docx,.pdf" style="display: none;">
                   <div class="dropzone-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                       <polyline points="14 2 14 8 20 8"></polyline>
                     </svg>
@@ -1242,12 +1252,12 @@
         <div>
           <h4 class="footer-heading">Liên kết Cuộc thi</h4>
           <ul class="footer-links-list">
-            <li><a href="#rules">📜 Toàn văn Thể lệ & Giải thưởng</a></li>
-            <li><a href="#department-progress">📊 Tiến độ chỉ tiêu 13 Phòng/Đội PCVT</a></li>
-            <li><a href="#department-progress">🎨 Triển lãm & Xem lại tác phẩm</a></li>
-            <li><a href="#ai-guide">🤖 Cẩm nang AI Agent thực chiến</a></li>
-            <li><a href="#prompts">💡 Thư viện Prompt AI mẫu</a></li>
-            <li><a href="#submit">✍️ Cổng nộp bài dự thi trực tuyến</a></li>
+            <li><a href="#rules" onclick="goToSection('rules')">📜 Toàn văn Thể lệ & Giải thưởng</a></li>
+            <li><a href="#progress" onclick="switchMainTab('progress')">📊 Tiến độ chỉ tiêu 13 Phòng/Đội PCVT</a></li>
+            <li><a href="#progress" onclick="switchMainTab('progress')">🎨 Triển lãm & Xem lại tác phẩm</a></li>
+            <li><a href="#ai-guide" onclick="goToSection('ai-guide')">🤖 Cẩm nang AI Agent thực chiến</a></li>
+            <li><a href="#prompts" onclick="goToSection('prompts')">💡 Thư viện Prompt AI mẫu</a></li>
+            <li><a href="javascript:void(0)" onclick="openSubmissionModal()">✍️ Cổng nộp bài dự thi trực tuyến</a></li>
           </ul>
         </div>
 
@@ -1255,12 +1265,10 @@
           <h4 class="footer-heading">BTC PC Vũng Tàu (Đầu mối)</h4>
           <ul class="footer-links-list">
             <li><span>📍 <strong>Công ty Điện lực Vũng Tàu</strong></span></li>
-            <li><span>👤 <strong>Đ/c Vũ Thị Linh Chi</strong> - Tiếp nhận tác phẩm</span></li>
+            <li><span>👤 <strong>Đ/c Vũ Thị Linh Chi</strong></span></li>
             <li><span>📞 Hotline: <strong>0818.993.811</strong></span></li>
             <li><span>✉️ Email: <strong>ChiVTL@hcmpc.com.vn</strong></span></li>
-            <li><span>⏰ Hạn nộp nội bộ: <strong>Trước 17h00 ngày 10/10/2026</strong></span></li>
             <li><span>👤 Đ/c Lê Hoài Nam - Bí thư Đoàn PCVT</span></li>
-            <li><span>👤 Đ/c Trần Thanh Hải - Chủ tịch CĐ PCVT</span></li>
           </ul>
         </div>
 

@@ -181,121 +181,8 @@ const PCVT_DEPARTMENTS = [
   { id: "condao", name: "Điện lực Đặc khu Côn Đảo", target: 1, orientation: "Tiết kiệm điện hải đảo, phát triển năng lượng xanh bền vững" }
 ];
 
-// CÁC TÁC PHẨM DỰ THI TIÊU BIỂU CỦA ĐƠN VỊ ĐÃ GỬI LÊN HỆ THỐNG
-const SAMPLE_ENTRIES = [
-  {
-    id: "EVN-PCVT-001",
-    title: "Video 45s: 3 Nguyên tắc vàng phòng chống điện giật khi ngập nước mùa mưa bão",
-    author: "Nguyễn Văn Hùng",
-    msnv: "045821",
-    department: "Phòng Kỹ thuật và An toàn",
-    category: "Video",
-    teamMembers: "Lê Minh Tuấn, Hoàng Thị Mai",
-    description: "Video ngắn ứng dụng kỹ thuật Hook 3s đầu tiên cảnh báo nguy cơ rò điện khi nước ngập vào nhà, hướng dẫn ngắt Aptomat tổng và gọi Tổng đài EVNHCMC 1900.54.54.54.",
-    aiTools: ["ChatGPT", "Kling AI", "CapCut AI", "ElevenLabs"],
-    aiPromptDescription: "Sử dụng ChatGPT viết kịch bản phân cảnh chi tiết; tạo chuỗi khung hình minh họa thợ điện bằng Midjourney; tạo chuyển động video nước ngập với Kling AI v1.5; lồng tiếng MC truyền cảm qua ElevenLabs.",
-    date: "02/10/2026",
-    timestamp: 1727856000000
-  },
-  {
-    id: "EVN-PCVT-002",
-    title: "Bộ Infographic: Bảng tra cứu khoảng cách phóng điện an toàn lưới cao thế 22kV - 110kV",
-    author: "Trần Anh Quân",
-    msnv: "038290",
-    department: "Phòng Kỹ thuật và An toàn",
-    category: "Infographic",
-    teamMembers: "Nhóm An toàn PCVT",
-    description: "Ấn phẩm Infographic dạng dọc trực quan phân định rõ khoảng cách an toàn tĩnh và an toàn khi thi công gần hành lang bảo vệ lưới điện cao áp theo Nghị định 14/2014/NĐ-CP.",
-    aiTools: ["Canva AI", "ChatGPT", "Gemini"],
-    aiPromptDescription: "Prompt Gemini phân tích thông số khoảng cách phóng điện an toàn từ KHLT 53; dùng Canva Magic Design tạo bố cục màu tương phản (cam bảo hộ và xanh navy EVN).",
-    date: "03/10/2026",
-    timestamp: 1727942400000
-  },
-  {
-    id: "EVN-PCVT-003",
-    title: "Ảnh nghệ thuật AI: Người thợ điện Vũng Tàu trực bão bảo vệ dòng điện thành phố biển",
-    author: "Đoàn Thanh niên",
-    msnv: "052109",
-    department: "Đội Quản lý lưới điện",
-    category: "Ảnh",
-    teamMembers: "Trần Quốc Bảo (Đại diện)",
-    description: "Tác phẩm ảnh siêu thực 8K khắc họa hình tượng người công nhân điện lực Vũng Tàu vững vàng trên cột điện trong cơn mưa gió, phía xa là ngọn hải đăng và ánh đèn thành phố bừng sáng.",
-    aiTools: ["Midjourney", "Adobe Firefly"],
-    aiPromptDescription: "Prompt Midjourney v6.1: Cinematic photorealistic portrait of an EVN lineman in orange safety uniform working on power pole during coastal storm in Vung Tau city, lighthouse in background, dramatic lighting, 8k resolution --ar 16:9.",
-    date: "04/10/2026",
-    timestamp: 1728028800000
-  },
-  {
-    id: "EVN-PCVT-004",
-    title: "Video 60s: Hướng dẫn cài App CSKH EVNHCMC theo dõi lượng điện tiêu thụ hàng ngày",
-    author: "Vũ Thị Hương",
-    msnv: "049382",
-    department: "Phòng Kinh doanh",
-    category: "Video",
-    teamMembers: "Nguyễn Thu Thảo",
-    description: "Video hoạt hình hướng dẫn khách hàng cách xem biểu đồ công tơ điện tử đo xa trên App CSKH EVNHCMC, phát hiện bất thường và chủ động bật/tắt thiết bị tiết kiệm chi phí.",
-    aiTools: ["ChatGPT", "Runway Gen-3", "HeyGen"],
-    aiPromptDescription: "Tạo avatar MC ảo bằng HeyGen, dùng ChatGPT viết lời thoại ngắn gọn, tạo hoạt họa màn hình điện thoại hướng dẫn 3 bước tra cứu sản lượng điện ngày.",
-    date: "05/10/2026",
-    timestamp: 1728115200000
-  },
-  {
-    id: "EVN-PCVT-005",
-    title: "Infographic: Mẹo dùng điều hòa không khí giảm 30% tiền điện trong mùa nắng nóng",
-    author: "Phạm Hải Đăng",
-    msnv: "041284",
-    department: "Phòng Kinh doanh",
-    category: "Infographic",
-    teamMembers: "Tổ Tuyên truyền Tiết kiệm điện",
-    description: "Cẩm nang đồ họa tổng hợp 5 thói quen vàng: cài đặt 26-28°C kết hợp quạt, đóng kín cửa, vệ sinh tấm lọc 3 tháng/lần, ngắt aptomat máy lạnh khi vắng nhà dài ngày.",
-    aiTools: ["Canva AI", "Gemini"],
-    aiPromptDescription: "Gemini tóm tắt nội dung Chỉ thị 20/CT-TTg thành các gạch đầu dòng dễ hiểu; Canva Magic Resize dàn trang tỷ lệ 9:16 phù hợp đăng tải trên Zalo OA và Story.",
-    date: "05/10/2026",
-    timestamp: 1728115200000
-  },
-  {
-    id: "EVN-PCVT-006",
-    title: "Audio Podcast & Video: Tiết kiệm điện và sử dụng năng lượng xanh tại Côn Đảo",
-    author: "Lê Hoàng Phúc",
-    msnv: "060193",
-    department: "Điện lực Đặc khu Côn Đảo",
-    category: "Video",
-    teamMembers: "Tập thể CBCNV Điện lực Côn Đảo",
-    description: "Sản phẩm truyền thông đặc sắc về bài toán cung cấp điện nơi hải đảo xa xôi, kêu gọi quân dân Côn Đảo chung tay tiết kiệm điện diesel và phát huy nguồn điện mặt trời mái nhà.",
-    aiTools: ["NotebookLM", "ChatGPT", "CapCut AI"],
-    aiPromptDescription: "Sử dụng Google NotebookLM nạp tài liệu báo cáo hiện trạng cấp điện Côn Đảo, tự động sinh Podcast đối thoại Audio Overview, sau đó dùng CapCut AI ghép cảnh quay Côn Đảo thực tế.",
-    date: "06/10/2026",
-    timestamp: 1728201600000
-  },
-  {
-    id: "EVN-PCVT-007",
-    title: "Bộ tranh cổ động AI: 4 Không để bảo vệ tính mạng trước hiểm họa tai nạn điện cao thế",
-    author: "Đặng Tiến Dũng",
-    msnv: "037812",
-    department: "Văn phòng Công ty",
-    category: "Ảnh",
-    teamMembers: "Ban Biên tập Nội bộ",
-    description: "Bộ 4 bức tranh minh họa nghệ thuật phong cách đồ họa hiện đại: Không thả diều, Không câu cá dưới dây điện, Không xây nhà lấn chiếm hành lang, Không tự ý trèo cột điện.",
-    aiTools: ["Midjourney", "ChatGPT"],
-    aiPromptDescription: "Midjourney prompts tạo 4 poster phong cách vector graphic flat illustration với tone màu EVN đặc trưng, truyền tải thông điệp nhân văn: An toàn điện cho nụ cười trẻ thơ.",
-    date: "06/10/2026",
-    timestamp: 1728201600000
-  },
-  {
-    id: "EVN-PCVT-008",
-    title: "Infographic: Quy trình 5 bước kiểm tra an toàn điện văn phòng trước khi ra về",
-    author: "Ngô Mỹ Linh",
-    msnv: "048215",
-    department: "Văn phòng Công ty",
-    category: "Infographic",
-    teamMembers: "",
-    description: "Hướng dẫn thực hiện văn hóa sử dụng điện an toàn, tiết kiệm tại trụ sở làm việc PC Vũng Tàu: tắt máy tính, rút sạc laptop, tắt máy lạnh phòng họp, ngắt điện bình đun siêu tốc.",
-    aiTools: ["Canva AI", "Claude"],
-    aiPromptDescription: "Soạn thảo nội dung quy chuẩn văn phòng xanh với Claude 3.5 Sonnet, chuyển giao vào template Canva AI để in ấn đặt tại các cửa ra vào công ty.",
-    date: "07/10/2026",
-    timestamp: 1728288000000
-  }
-];
+// Danh sách bài dự thi mẫu (Đã loại bỏ theo yêu cầu người dùng, chỉ hiển thị tác phẩm thực tế nộp qua Cổng trực tuyến)
+const SAMPLE_ENTRIES = [];
 
 // ============================================================================
 // 2. KHỞI TẠO VÀ XỬ LÝ SỰ KIỆN KHI TRANG TẢI XONG
@@ -310,6 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   loadSavedGasUrl();
   initDepartmentProgressAndGallery();
+  handleInitialRoute();
+  setupGlobalModalEvents();
 });
 
 // ============================================================================
@@ -749,6 +638,7 @@ function initSubmissionForm() {
         renderDepartmentProgress();
         applyGalleryFilters();
 
+        closeSubmissionModal();
         showSuccessModal(resultData);
         form.reset();
         uploadedFileTacPham = null;
@@ -781,6 +671,7 @@ function initSubmissionForm() {
       renderDepartmentProgress();
       applyGalleryFilters();
 
+      closeSubmissionModal();
       showSuccessModal({
         success: true,
         submissionId: backupId,
@@ -804,6 +695,25 @@ function initSubmissionForm() {
     }
   });
 }
+
+// ============================================================================
+// 7B. QUẢN LÝ POPUP MODAL NỘP BÀI DỰ THI
+// ============================================================================
+window.openSubmissionModal = function() {
+  const modal = document.getElementById('submission-modal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+window.closeSubmissionModal = function() {
+  const modal = document.getElementById('submission-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+};
 
 // ============================================================================
 // 8. POPUP XÁC NHẬN NỘP THÀNH CÔNG & TOAST
@@ -885,7 +795,7 @@ function initMobileMenu() {
 // ============================================================================
 
 /**
- * Lấy toàn bộ danh sách bài dự thi (gộp dữ liệu mẫu và các bài mới nộp)
+ * Lấy toàn bộ danh sách bài dự thi (chỉ lấy tác phẩm thực tế nộp qua Cổng trực tuyến)
  */
 function getAllSubmittedEntries() {
   const localSaved = localStorage.getItem('PCVT_AI_SUBMISSIONS');
@@ -893,11 +803,13 @@ function getAllSubmittedEntries() {
   if (localSaved) {
     try {
       userEntries = JSON.parse(localSaved);
+      // Loại bỏ các bài mẫu demo cũ nếu có lưu trước đây trong localStorage
+      userEntries = userEntries.filter(e => e.id && !e.id.startsWith('EVN-PCVT-00'));
     } catch (e) {
       console.error('Error parsing PCVT_AI_SUBMISSIONS', e);
     }
   }
-  return [...userEntries, ...SAMPLE_ENTRIES];
+  return userEntries;
 }
 
 /**
@@ -953,7 +865,9 @@ function renderDepartmentProgress() {
 
     const statusBadge = isCompleted
       ? `<span class="status-badge completed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Đạt chỉ tiêu</span>`
-      : `<span class="status-badge progress"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg> Đang thực hiện (${submittedCount}/${target})</span>`;
+      : submittedCount > 0
+        ? `<span class="status-badge progress"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg> Đang thực hiện (${submittedCount}/${target})</span>`
+        : `<span class="status-badge none" style="background:#F1F5F9; color:var(--text-muted); border:1px solid var(--border-subtle);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> Chưa có bài thi</span>`;
 
     return `
       <tr class="${isCompleted ? 'row-completed' : ''}">
@@ -1053,13 +967,37 @@ function renderGalleryEntries(entries) {
   const container = document.getElementById('gallery-cards-container');
   if (!container) return;
 
+  const allSubmitted = getAllSubmittedEntries();
+
   if (entries.length === 0) {
-    container.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: #F8FAFC; border-radius: var(--radius-md); border: 1.5px dashed var(--border-medium);">
-        <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 12px;">Không tìm thấy tác phẩm dự thi nào phù hợp với bộ lọc hiện tại.</p>
-        <button class="btn-view-detail" onclick="resetGalleryFilters()">Đặt lại bộ lọc</button>
-      </div>
-    `;
+    if (allSubmitted.length === 0) {
+      container.innerHTML = `
+        <div class="gallery-empty-state">
+          <div class="empty-icon-circle">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">Chưa có tác phẩm dự thi nào được nộp</h3>
+          <p style="font-size: 0.92rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 20px auto; line-height: 1.6;">
+            Các tác phẩm do CBCNV thuộc 13 Phòng/Đội PC Vũng Tàu gửi qua Cổng trực tuyến sẽ xuất hiện tại đây. Hãy là người đầu tiên nộp bài dự thi cho đơn vị của bạn!
+          </p>
+          <button type="button" class="btn-submit-main" style="max-width: 260px; padding: 12px 24px; font-size: 0.95rem; margin: 0 auto;" onclick="openSubmissionModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            <span>Nộp tác phẩm ngay</span>
+          </button>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: #F8FAFC; border-radius: var(--radius-md); border: 1.5px dashed var(--border-medium);">
+          <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 12px;">Không tìm thấy tác phẩm dự thi nào phù hợp với bộ lọc hiện tại.</p>
+          <button class="btn-view-detail" onclick="resetGalleryFilters()">Đặt lại bộ lọc</button>
+        </div>
+      `;
+    }
     return;
   }
 
@@ -1242,3 +1180,97 @@ window.closeEntryDetailModal = function() {
   const modal = document.getElementById('entry-detail-modal');
   if (modal) modal.classList.remove('open');
 };
+
+// ============================================================================
+// 11. ĐIỀU HƯỚNG TABS CHÍNH & SỰ KIỆN TOÀN CỤC (MAIN TAB ROUTING & GLOBAL EVENTS)
+// ============================================================================
+window.switchMainTab = function(tabName) {
+  const homeView = document.getElementById('view-home');
+  const progressView = document.getElementById('view-progress');
+  const navTabBtns = document.querySelectorAll('.nav-tab-btn');
+
+  navTabBtns.forEach(btn => {
+    if (btn.getAttribute('data-tab') === tabName) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  if (tabName === 'progress') {
+    if (homeView) homeView.classList.remove('active');
+    if (progressView) {
+      progressView.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    history.replaceState(null, '', '#progress');
+  } else {
+    if (progressView) progressView.classList.remove('active');
+    if (homeView) {
+      homeView.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    history.replaceState(null, '', '#home');
+  }
+};
+
+window.goToSection = function(sectionId) {
+  const progressView = document.getElementById('view-progress');
+  const homeView = document.getElementById('view-home');
+
+  if (progressView && progressView.classList.contains('active')) {
+    progressView.classList.remove('active');
+    if (homeView) homeView.classList.add('active');
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      if (btn.getAttribute('data-tab') === 'home') btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
+
+  setTimeout(() => {
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 60);
+};
+
+function handleInitialRoute() {
+  const hash = window.location.hash;
+  if (hash === '#progress' || hash === '#department-progress') {
+    switchMainTab('progress');
+  } else if (hash === '#rules' || hash === '#ai-guide' || hash === '#prompts') {
+    switchMainTab('home');
+    setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  } else if (hash === '#submit') {
+    openSubmissionModal();
+  }
+}
+
+function setupGlobalModalEvents() {
+  window.addEventListener('click', (e) => {
+    const subModal = document.getElementById('submission-modal');
+    if (e.target === subModal) {
+      closeSubmissionModal();
+    }
+    const detailModal = document.getElementById('entry-detail-modal');
+    if (e.target === detailModal) {
+      closeEntryDetailModal();
+    }
+    const successModal = document.getElementById('success-modal');
+    if (e.target === successModal) {
+      closeSuccessModal();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeSubmissionModal();
+      closeEntryDetailModal();
+      closeSuccessModal();
+    }
+  });
+}
