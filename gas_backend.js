@@ -133,7 +133,7 @@ function doPost(e) {
   var responseData = {};
   
   try {
-    var rawContents = e.postData.contents;
+    var rawContents = (e && e.postData && e.postData.contents) ? e.postData.contents : '{}';
     var data = JSON.parse(rawContents);
     
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);

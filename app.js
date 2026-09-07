@@ -9,12 +9,48 @@
  * ============================================================================
  */
 
-// CẤU HÌNH LIÊN KẾT GOOGLE DRIVE & GOOGLE SHEETS
+// CẤU HÌNH LIÊN KẾT LƯU TRỮ NỘI BỘ
 const GOOGLE_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1u2rEZ2IECYFk-YQK2TXW_DAqvhjh7BWR?usp=sharing";
 const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ/edit?usp=sharing";
 
-// URL GOOGLE APPS SCRIPT WEB APP (Có thể lưu đè qua cửa sổ cấu hình hoặc localStorage)
-let GAS_WEBAPP_URL = localStorage.getItem('EVN_GAS_WEBAPP_URL') || '';
+// URL Web App Google Apps Script nhận bài thi (Mặc định hoặc cấu hình qua localStorage)
+const DEFAULT_GAS_URL = '';
+let GAS_WEBAPP_URL = localStorage.getItem('EVN_GAS_WEBAPP_URL') || DEFAULT_GAS_URL;
+
+// Tự động nhận URL API cấu hình ẩn cho Ban Tổ chức qua tham số: ?set_api=https://script.google.com/...
+(function checkAdminApiParam() {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const apiParam = urlParams.get('set_api') || urlParams.get('api');
+    if (apiParam && apiParam.startsWith('https://script.google.com/')) {
+      localStorage.setItem('EVN_GAS_WEBAPP_URL', apiParam);
+      GAS_WEBAPP_URL = apiParam;
+      setTimeout(() => {
+        showToast('Đã kết nối máy chủ tiếp nhận bài thi thành công!', 'success');
+      }, 600);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  } catch (e) {}
+})();
+
+// Phím tắt cấu hình bí mật cho Ban Tổ chức (Ctrl + Shift + A)
+window.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    e.preventDefault();
+    const currentUrl = localStorage.getItem('EVN_GAS_WEBAPP_URL') || DEFAULT_GAS_URL || '';
+    const newUrl = prompt('BAN TỔ CHỨC - CẤU HÌNH MÁY CHỦ TIẾP NHẬN BÀI THI:\nNhập URL Web App (https://script.google.com/macros/s/.../exec):', currentUrl);
+    if (newUrl !== null) {
+      const trimmed = newUrl.trim();
+      if (!trimmed || trimmed.startsWith('https://script.google.com/')) {
+        localStorage.setItem('EVN_GAS_WEBAPP_URL', trimmed);
+        GAS_WEBAPP_URL = trimmed;
+        showToast(trimmed ? 'Đã lưu cấu hình máy chủ tiếp nhận thành công!' : 'Đã xóa cấu hình URL!', 'success');
+      } else {
+        showToast('URL không hợp lệ. URL phải bắt đầu bằng https://script.google.com/', 'error');
+      }
+    }
+  }
+});
 
 // ============================================================================
 // ============================================================================
@@ -505,7 +541,7 @@ function setupDropzone(dropzoneId, inputId, previewId, nameId, removeBtnId, onFi
     // Kiểm tra dung lượng (Max 25MB cho tải trực tiếp)
     const MAX_SIZE_MB = 25;
     if (file.size > MAX_SIZE_MB * 1024 * 1024) {
-      alert(`File "${file.name}" có dung lượng lớn (${(file.size / (1024 * 1024)).toFixed(1)}MB > 25MB).\n\nTheo quy định KHLT 53, đối với file lớn hơn 25MB (như Video Full HD), bạn vui lòng tải file lên Google Drive cá nhân và dán đường link chia sẻ vào ô "Link Drive dự phòng hoặc Video dung lượng lớn (>25MB)" bên dưới.`);
+      alert(`File "${file.name}" có dung lượng lớn (${(file.size / (1024 * 1024)).toFixed(1)}MB > 25MB).\n\nĐối với file có dung lượng lớn hơn 25MB (như Video chất lượng cao), bạn vui lòng dán đường link liên kết chia sẻ vào ô "Đường link liên kết tác phẩm dự phòng" bên dưới.`);
       input.value = '';
       return;
     }
@@ -566,7 +602,7 @@ function initSubmissionForm() {
     }
 
     if (!uploadedFileTacPham && !linkDriveDuPhong) {
-      showToast('Vui lòng tải lên File tác phẩm (Ảnh/Video/Infographic) hoặc dán link Google Drive chia sẻ!', 'error');
+      showToast('Vui lòng tải lên File tác phẩm (Ảnh/Video/Infographic) hoặc dán đường link liên kết tác phẩm!', 'error');
       const dzTacPham = document.getElementById('dropzone-tacpham');
       if (dzTacPham) dzTacPham.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -608,7 +644,7 @@ function initSubmissionForm() {
           <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
           <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
         </svg>
-        <span>Đang gửi hồ sơ & lưu vào Google Drive...</span>
+        <span>Đang gửi hồ sơ dự thi vào hệ thống...</span>
       `;
     }
     if (progressBar) progressBar.classList.add('active');
@@ -628,16 +664,20 @@ function initSubmissionForm() {
 
         resultData = await response.json();
       } else {
-        // Chế độ mô phỏng trực tiếp nếu chưa thiết lập URL Apps Script
-        await new Promise(r => setTimeout(r, 1600));
-        resultData = {
-          success: true,
-          submissionId: generatedSubId,
-          timestamp: new Date().toLocaleString('vi-VN'),
-          tenTacPham: tenTacPham,
-          hoTen: hoTen,
-          isSimulation: true
-        };
+        // Cảnh báo khi chưa thiết lập URL máy chủ tiếp nhận
+        showToast('Hệ thống máy chủ tiếp nhận bài thi chưa được cấu hình URL Web App. Vui lòng liên hệ Ban Tổ chức để kích hoạt lưu trữ!', 'error');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <span>Gửi bài dự thi chính thức</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          `;
+        }
+        if (progressBar) progressBar.classList.remove('active');
+        return;
       }
 
       if (resultData && resultData.success) {
@@ -675,40 +715,7 @@ function initSubmissionForm() {
 
     } catch (err) {
       console.error('Submission error:', err);
-      // Nếu gặp lỗi mạng/CORS thông thường của Google Apps Script, vẫn lưu vào dữ liệu nội bộ và cấp mã
-      const backupId = 'EVN-PCVT-' + String(Math.floor(Math.random() * 900) + 100);
-      const backupEntry = {
-        id: backupId,
-        title: tenTacPham,
-        author: hoTen,
-        msnv: msnv,
-        department: donVi,
-        category: theLoai,
-        teamMembers: thanhVienNhom,
-        description: tomTatYTuong,
-        aiTools: selectedTools,
-        aiPromptDescription: thuyetMinhAI,
-        date: new Date().toLocaleDateString('vi-VN'),
-        timestamp: Date.now()
-      };
-      saveUserEntry(backupEntry);
-      renderDepartmentProgress();
-      applyGalleryFilters();
-
-      closeSubmissionModal();
-      showSuccessModal({
-        success: true,
-        submissionId: backupId,
-        timestamp: new Date().toLocaleString('vi-VN'),
-        tenTacPham: tenTacPham,
-        hoTen: hoTen,
-        note: 'Dữ liệu đã được ghi nhận vào hệ thống nội bộ PC Vũng Tàu.'
-      });
-      form.reset();
-      uploadedFileTacPham = null;
-      uploadedFileThuyetMinh = null;
-      document.querySelectorAll('.file-chosen-preview').forEach(el => el.classList.remove('show'));
-      document.querySelectorAll('.checkbox-chip-label').forEach(el => el.classList.remove('selected'));
+      showToast('Có lỗi xảy ra khi kết nối máy chủ tiếp nhận: ' + (err.message || err.toString()), 'error');
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
