@@ -897,6 +897,33 @@ function getAllSubmittedEntries() {
     }
   }
 
+  // Nếu trình duyệt mới chưa có bài dự thi, tự động nạp tác phẩm dự thi chính thức của đơn vị
+  if (userEntries.length === 0) {
+    userEntries = [
+      {
+        id: 'EVN-PCVT-01',
+        title: 'Thành phố xanh – Sử dụng điện an toàn, tiết kiệm hôm nay, kiến tạo tương lai',
+        author: 'Trần Tấn Phát',
+        msnv: 'PCVT-0142',
+        department: 'Phòng Kỹ thuật và An toàn',
+        category: 'Ảnh',
+        teamMembers: '',
+        description: 'Tác phẩm "Thành phố xanh – Sử dụng điện an toàn, tiết kiệm hôm nay, kiến tạo tương lai" khắc họa hình ảnh một đô thị hiện đại, xanh và thông minh, lấy cảm hứng từ Thành phố Hồ Chí Minh. Thông qua hệ thống điện mặt trời, lưới điện thông minh, phương tiện giao thông điện và không gian xanh, tác phẩm truyền tải thông điệp về vai trò của điện năng trong xây dựng cuộc sống văn minh, bền vững.',
+        aiTools: ['ChatGPT'],
+        aiPromptDescription: 'Ứng dụng mô hình AI tạo sinh để kết xuất không gian đô thị năng lượng thông minh 2026',
+        date: '07/09/2026',
+        fileName: 'thanh_pho_xanh.jpg',
+        fileType: 'image/jpeg',
+        fileDataUrl: 'thanh_pho_xanh.jpg',
+        fileThuyetMinhName: 'Ban_thuyet_minh_KHLT53.docx',
+        thuyetMinhDataUrl: ''
+      }
+    ];
+    try {
+      localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(userEntries));
+    } catch (e) {}
+  }
+
   // Tự động gán và phục hồi ảnh tác phẩm cho các bài thi trong bộ nhớ nếu thiếu
   let hasUpdated = false;
   userEntries.forEach(entry => {
