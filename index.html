@@ -61,12 +61,6 @@
               </button>
             </li>
             <li>
-              <button type="button" class="nav-link nav-tab-btn" data-tab="progress" onclick="switchMainTab('progress')">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
-                <span>Tiến độ & Tác phẩm</span>
-              </button>
-            </li>
-            <li>
               <a href="#rules" class="nav-link" onclick="goToSection('rules')">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                 <span>Thể lệ & Giải thưởng</span>
@@ -83,6 +77,12 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 <span>Kho Prompt mẫu</span>
               </a>
+            </li>
+            <li>
+              <button type="button" class="nav-link nav-tab-btn" data-tab="progress" onclick="switchMainTab('progress')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+                <span>Tiến độ & Tác phẩm</span>
+              </button>
             </li>
             <li>
               <button type="button" class="nav-link nav-link-highlight" onclick="openSubmissionModal()">
@@ -932,7 +932,7 @@
               1. Thông tin Tác giả / Nhóm tác giả (Theo KHLT 53)
             </h3>
 
-            <div class="form-grid-3">
+            <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="field-hoten">Họ và tên Tác giả / Trưởng nhóm <span class="required">*</span></label>
                 <input type="text" id="field-hoten" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" required>
@@ -942,9 +942,11 @@
                 <label class="form-label" for="field-msnv">Mã số nhân viên (MSNV) <span class="required">*</span></label>
                 <input type="text" id="field-msnv" class="form-input" placeholder="Ví dụ: 012345" required>
               </div>
+            </div>
 
+            <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="field-donvi">Phòng / Đội công tác (thuộc PC Vũng Tàu) <span class="required">*</span></label>
+                <label class="form-label" for="field-donvi">Phòng / Đội công tác (thuộc&nbsp;PC&nbsp;Vũng&nbsp;Tàu) <span class="required">*</span></label>
                 <select id="field-donvi" class="form-select" required>
                   <option value="">-- Chọn Phòng / Đội thuộc PC Vũng Tàu --</option>
                   <option value="Văn phòng Công ty">1. Văn phòng Công ty (Chỉ tiêu: 02)</option>
@@ -964,21 +966,21 @@
                 </select>
                 <span class="form-hint">Chọn đúng Phòng/Đội để hệ thống tự động tính điểm thi đua và cộng vào chỉ tiêu KHLT 53 của Đơn vị.</span>
               </div>
-            </div>
 
-            <div class="form-grid-3">
               <div class="form-group">
                 <label class="form-label" for="field-sdt">Số điện thoại liên hệ (Zalo) <span class="required">*</span></label>
                 <input type="tel" id="field-sdt" class="form-input" placeholder="Ví dụ: 0901234567" required>
               </div>
+            </div>
 
+            <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="field-email">Email công vụ / cá nhân <span class="required">*</span></label>
                 <input type="email" id="field-email" class="form-input" placeholder="Ví dụ: anhnv@hcmpc.com.vn" required>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="field-thanhvien">Thành viên nhóm cùng tham gia (nếu có)</label>
+                <label class="form-label" for="field-thanhvien">Thành viên nhóm cùng tham gia (nếu&nbsp;có)</label>
                 <input type="text" id="field-thanhvien" class="form-input" placeholder="Ví dụ: Trần B (MSNV), Lê C (MSNV) - Tối đa 5 người">
                 <span class="form-hint">Nếu thi theo nhóm, ghi rõ Họ tên và MSNV các thành viên còn lại.</span>
               </div>
@@ -1142,7 +1144,7 @@
         </form>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ========================================================================
        7. POPUP MODAL XÁC NHẬN NỘP BÀI THÀNH CÔNG
@@ -1253,10 +1255,10 @@
           <h4 class="footer-heading">Liên kết Cuộc thi</h4>
           <ul class="footer-links-list">
             <li><a href="#rules" onclick="goToSection('rules')">📜 Toàn văn Thể lệ & Giải thưởng</a></li>
-            <li><a href="#progress" onclick="switchMainTab('progress')">📊 Tiến độ chỉ tiêu 13 Phòng/Đội PCVT</a></li>
-            <li><a href="#progress" onclick="switchMainTab('progress')">🎨 Triển lãm & Xem lại tác phẩm</a></li>
             <li><a href="#ai-guide" onclick="goToSection('ai-guide')">🤖 Cẩm nang AI Agent thực chiến</a></li>
             <li><a href="#prompts" onclick="goToSection('prompts')">💡 Thư viện Prompt AI mẫu</a></li>
+            <li><a href="#progress" onclick="switchMainTab('progress')">📊 Tiến độ chỉ tiêu 13 Phòng/Đội PCVT</a></li>
+            <li><a href="#progress" onclick="switchMainTab('progress')">🎨 Triển lãm & Xem lại tác phẩm</a></li>
             <li><a href="javascript:void(0)" onclick="openSubmissionModal()">✍️ Cổng nộp bài dự thi trực tuyến</a></li>
           </ul>
         </div>

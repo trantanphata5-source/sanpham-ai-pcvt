@@ -1534,16 +1534,19 @@ section {
 }
 
 .form-label {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-main);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  white-space: normal;
 }
 
 .form-label .required {
   color: var(--color-danger);
+  margin-left: 3px;
+  font-weight: 800;
 }
 
 .form-input, .form-select, .form-textarea {
@@ -1754,13 +1757,20 @@ section {
 .modal-overlay {
   display: none;
   position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.65);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(8px);
-  z-index: 2000;
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px 16px;
+  overflow-y: auto;
 }
 
 .modal-overlay.open {
@@ -2792,14 +2802,17 @@ button.nav-link-highlight svg {
 
 /* Modal Popup Nộp Tác Phẩm */
 .modal-submission-box {
-  max-width: 940px;
-  width: 96%;
+  max-width: 960px;
+  width: 100%;
+  margin: auto;
   max-height: 90vh;
   overflow-y: auto;
   padding: 32px 36px;
   text-align: left;
   border-radius: var(--radius-lg);
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.35);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.45);
+  background: #FFFFFF;
+  position: relative;
 }
 
 .modal-submission-header {
