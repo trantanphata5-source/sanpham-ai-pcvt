@@ -848,35 +848,46 @@ function initMobileMenu() {
 
 /**
  * Phân giải đường dẫn hình ảnh / tác phẩm dự thi trực quan
+ * Ưu tiên tuyệt đối: Link Tác phẩm (Google Drive) tại Cột N trong Google Sheet
  */
 function resolveArtworkUrl(entry) {
   if (!entry) return null;
-  // 1. Tệp trực tiếp đã lưu (Base64 data URL, Blob URL hoặc relative/absolute URL)
-  if (entry.fileDataUrl && typeof entry.fileDataUrl === 'string' && entry.fileDataUrl.length > 5) {
-    return entry.fileDataUrl;
-  }
-  // 2. Drive file URL nếu có ID
+
+  // 1. Ưu tiên số 1: Trích xuất trực tiếp từ Cột N Google Drive (Link Tác phẩm) hoặc Link dự phòng
   const rawUrl = entry.tacPhamDriveUrl || entry.linkDriveDuPhong || '';
   if (rawUrl) {
     const m1 = rawUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
     const m2 = rawUrl.match(/id=([a-zA-Z0-9_-]+)/);
     const fileId = m1 ? m1[1] : (m2 ? m2[1] : null);
-    if (fileId && (entry.category === 'Ảnh' || entry.category === 'Infographic' || (entry.fileType && entry.fileType.startsWith('image/')))) {
+    if (fileId && (entry.category === 'Ảnh' || entry.category === 'Infographic' || !entry.category || (entry.fileType && entry.fileType.startsWith('image/')))) {
+      // Tệp tác phẩm chính thức đã nộp từ link Drive của Đ/c Trần Tấn Phát
+      if (fileId === '1SywO04tn0jVVEDh0mID1CqkcHlnDPYmR') {
+        return 'tac_pham_chinh_thuc.png';
+      }
       return `https://lh3.googleusercontent.com/d/${fileId}`;
     }
   }
-  // 3. Khớp ngữ cảnh tác phẩm thực tế đã nộp trong giai đoạn triển khai
+
+  // 2. Tệp trực tiếp đã lưu (Base64 data URL hoặc tệp hình ảnh chính thức)
+  if (entry.fileDataUrl && typeof entry.fileDataUrl === 'string' && entry.fileDataUrl.length > 5) {
+    if (entry.fileDataUrl === 'thanh_pho_xanh.jpg') {
+      return 'tac_pham_chinh_thuc.png';
+    }
+    return entry.fileDataUrl;
+  }
+
+  // 3. Nhận diện tác phẩm chính thức theo thông tin bài thi đã gửi
   const title = (entry.title || '').toLowerCase();
   const desc = (entry.description || '').toLowerCase();
   if (title.includes('thành phố') || title.includes('xanh') || title.includes('tiết kiệm') || desc.includes('thành phố') || desc.includes('kiến tạo tương lai')) {
-    return 'thanh_pho_xanh.jpg';
+    return 'tac_pham_chinh_thuc.png';
   }
   if (title.includes('an toàn') || title.includes('thợ điện') || title.includes('đường dây') || title.includes('lưới điện') || desc.includes('an toàn')) {
     return 'an_toan_dien.jpg';
   }
-  // Mặc định đối với thể loại Ảnh hoặc Infographic nếu chưa có file
+
   if (entry.category === 'Ảnh' || entry.category === 'Infographic') {
-    return 'thanh_pho_xanh.jpg';
+    return 'tac_pham_chinh_thuc.png';
   }
   return null;
 }
@@ -912,9 +923,10 @@ function getAllSubmittedEntries() {
         aiTools: ['ChatGPT'],
         aiPromptDescription: 'Ứng dụng mô hình AI tạo sinh để kết xuất không gian đô thị năng lượng thông minh 2026',
         date: '07/09/2026',
-        fileName: 'thanh_pho_xanh.jpg',
-        fileType: 'image/jpeg',
-        fileDataUrl: 'thanh_pho_xanh.jpg',
+        fileName: 'Thành phố xanh – Sử dụng điện an toàn, tiết kiệm hôm nay, kiến tạo tương lai.png',
+        fileType: 'image/png',
+        fileDataUrl: 'tac_pham_chinh_thuc.png',
+        tacPhamDriveUrl: 'https://drive.google.com/file/d/1SywO04tn0jVVEDh0mID1CqkcHlnDPYmR/view?usp=drivesdk',
         fileThuyetMinhName: 'Ban_thuyet_minh_KHLT53.docx',
         thuyetMinhDataUrl: ''
       }
@@ -924,10 +936,19 @@ function getAllSubmittedEntries() {
     } catch (e) {}
   }
 
-  // Tự động gán và phục hồi ảnh tác phẩm cho các bài thi trong bộ nhớ nếu thiếu
+  // Cập nhật và liên kết đúng Link Tác phẩm Cột N Drive + Tệp hình ảnh chính thức
   let hasUpdated = false;
   userEntries.forEach(entry => {
-    if (!entry.fileDataUrl) {
+    if (entry.title && entry.title.includes('Thành phố xanh')) {
+      if (!entry.tacPhamDriveUrl || entry.tacPhamDriveUrl.length < 5) {
+        entry.tacPhamDriveUrl = 'https://drive.google.com/file/d/1SywO04tn0jVVEDh0mID1CqkcHlnDPYmR/view?usp=drivesdk';
+        hasUpdated = true;
+      }
+      if (!entry.fileDataUrl || entry.fileDataUrl === 'thanh_pho_xanh.jpg') {
+        entry.fileDataUrl = 'tac_pham_chinh_thuc.png';
+        hasUpdated = true;
+      }
+    } else if (!entry.fileDataUrl) {
       const fallbackUrl = resolveArtworkUrl(entry);
       if (fallbackUrl) {
         entry.fileDataUrl = fallbackUrl;
@@ -1423,14 +1444,15 @@ function renderArtworkStage(entry) {
 
   // 2. Trường hợp là Ảnh hoặc Infographic hoặc có hình ảnh xác định được
   if (artworkImgUrl) {
+    const directViewUrl = entry.tacPhamDriveUrl || artworkImgUrl;
     stage.innerHTML = `
       <div class="artwork-image-box">
         <img src="${artworkImgUrl}" 
-             onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='true';this.src='thanh_pho_xanh.jpg';}" 
+             onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='true';this.src='tac_pham_chinh_thuc.png';}" 
              alt="${entry.title}" 
              class="artwork-image-view" 
-             onclick="window.open('${artworkImgUrl}')">
-        <div class="artwork-click-hint">🔍 Nhấp chuột vào ảnh để phóng to xem kích thước đầy đủ</div>
+             onclick="window.open('${directViewUrl}')">
+        <div class="artwork-click-hint">🔍 Nhấp chuột vào ảnh để mở xem toàn màn hình (Tệp gốc Cột N Google Drive)</div>
       </div>
     `;
 
@@ -1438,13 +1460,13 @@ function renderArtworkStage(entry) {
       actionsBar.style.display = 'flex';
       if (btnViewFull) {
         btnViewFull.style.display = 'inline-flex';
-        btnViewFull.href = artworkImgUrl;
+        btnViewFull.href = directViewUrl;
         btnViewFull.target = '_blank';
       }
       if (btnDownload) {
         btnDownload.style.display = 'inline-flex';
         btnDownload.href = artworkImgUrl;
-        btnDownload.download = entry.fileName || `${entry.id}_tac_pham.jpg`;
+        btnDownload.download = entry.fileName || `${entry.id}_tac_pham.png`;
       }
       if (btnChangeArtwork) {
         btnChangeArtwork.style.display = 'inline-flex';
