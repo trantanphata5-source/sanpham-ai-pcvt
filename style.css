@@ -3067,10 +3067,19 @@ section {
 }
 
 /* Footer 4 Cột */
+.footer .container {
+  max-width: 1320px;
+}
+
 .footer-grid-4col {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1.1fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1.05fr 0.9fr 1.25fr 1.35fr;
+  gap: 24px;
+}
+
+.footer-links-contact li span {
+  white-space: nowrap;
+  font-size: 0.88rem;
 }
 
 /* ==========================================================================
