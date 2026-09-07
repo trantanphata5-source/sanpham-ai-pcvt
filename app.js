@@ -17,148 +17,164 @@ const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85
 let GAS_WEBAPP_URL = localStorage.getItem('EVN_GAS_WEBAPP_URL') || '';
 
 // ============================================================================
-// 1. KHO DỮ LIỆU PROMPT MẪU CHUYÊN SÂU CHO NGÀNH ĐIỆN & AI (PROMPT LIBRARY)
+// ============================================================================
+// 1. KHO DỮ LIỆU PROMPT MẪU CHUYÊN SÂU: VIDEO (GEMINI), ẢNH (CHATGPT & GEMINI), INFOGRAPHIC (NOTEBOOKLM)
 // ============================================================================
 const PROMPTS_DATABASE = [
+  // --------------------------------------------------------------------------
+  // NHÓM 1: TẠO VIDEO CHỦ YẾU BẰNG GOOGLE GEMINI (GOOGLE VEO & SCRIPT)
+  // --------------------------------------------------------------------------
   {
     id: "p1",
-    title: "Kịch bản Video ngắn 45s: An toàn điện mùa mưa bão & ngập úng",
+    title: "Gemini Video (Veo): Người thợ điện EVN tận tâm phục hồi dòng điện trên phố (Chuẩn Policy)",
     category: "video",
-    tool: "ChatGPT / Gemini",
-    toolType: "script",
-    description: "Tạo kịch bản video dọc (9:16) chuẩn TikTok/Reels với cấu trúc 3s Hook giữ chân, 3 nguyên tắc an toàn khi ngập nước và lời kêu gọi hành động.",
-    content: `Đóng vai một chuyên gia truyền thông an toàn điện lực của EVNHCMC và đạo diễn video ngắn TikTok/Reels chuyên nghiệp. 
-Hãy viết một kịch bản video dọc (tỷ lệ 9:16, thời lượng 45 - 60 giây) với chủ đề: "3 Quy tắc sống còn về an toàn điện khi nhà bị ngập nước mùa mưa bão".
-
-Cấu trúc kịch bản yêu cầu:
-1. [0-3s] Hook giật gân, hình ảnh nước ngập mấp mé ổ cắm kèm âm thanh cảnh báo còi hú: "Dừng lại ngay nếu nhà bạn đang ngập nước!".
-2. [4-15s] Nguyên tắc 1: Ngắt ngay Aptomat / Cầu dao tổng trước khi lội vào vùng ngập (minh họa thao tác dứt khoát bằng gậy khô hoặc tay mang găng cách điện).
-3. [16-30s] Nguyên tắc 2: Tuyệt đối không chạm vào cột điện, trạm biến áp, dây điện đứt rơi xuống vũng nước trên đường đi.
-4. [31-40s] Nguyên tắc 3: Sau khi nước rút, gọi thợ kiểm tra sấy khô thiết bị trước khi đóng điện lại.
-5. [41-45s] Call to Action: Số điện thoại Tổng đài Chăm sóc khách hàng EVNHCMC 1900.54.54.54 luôn túc trực 24/7.
-
-Định dạng bảng kịch bản 4 cột:
-- Thời gian (Giây)
-- Hình ảnh / Phân cảnh (Mô tả chi tiết để đưa vào công cụ sinh video AI như Kling hoặc Runway)
-- Âm thanh / Hiệu ứng SFX
-- Lời thoại MC / Giọng đọc AI (ngắn gọn, nhấn mạnh từ khóa an toàn)`
+    tool: "Google Gemini (Veo)",
+    toolType: "video",
+    description: "Câu lệnh sinh video cinematic trên Gemini (Google Veo), tuân thủ 100% chính sách Google, không dùng từ cấm (drone, cao thế) để tránh lỗi từ chối.",
+    content: `Cinematic 4K slow-motion video of a friendly Vietnamese electrical power technician wearing standard bright orange safety protective uniform with reflective stripes and hard hat. He is smiling warmly while carefully securing a safe electrical street connection on an urban street pole in Ho Chi Minh City on a bright sunny morning. Cinematic camera slowly pans around him, lush green tropical trees and modern city buildings in the soft-focus background. Beautiful natural warm morning sunlight, vibrant colors, photorealistic, uplifting atmosphere, smooth 30fps motion.`
   },
   {
     id: "p2",
-    title: "Kịch bản Video 30s: Mẹo dùng máy lạnh tiết kiệm 30% tiền điện mùa nắng nóng",
+    title: "Gemini Video (Veo): Gia đình cùng tắt bớt đèn và bật quạt tiết kiệm điện",
     category: "video",
-    tool: "ChatGPT / Claude",
-    toolType: "script",
-    description: "Kịch bản hài hước, gần gũi chỉ ra sai lầm bật điều hòa 16 độ và giải pháp thông minh tiết kiệm điện năng cho hộ gia đình.",
-    content: `Hãy viết kịch bản video ngắn 30 giây tuyên truyền tiết kiệm điện gia đình với phong cách vui tươi, dí dỏm:
-Chủ đề: "Bật điều hòa 16 độ không làm mát nhanh hơn mà chỉ làm bạn 'cháy túi'!".
-
-Nhân vật: 
-- Bạn trẻ A: Vừa đi nắng về bật ngay 16 độ rồi nằm co ro vì lạnh buốt.
-- Trợ lý ảo AI EVN (hoặc Người thợ điện EVN): Xuất hiện chỉ ra mẹo chuẩn.
-
-Nội dung chính:
-- Thói quen sai lầm: Cài nhiệt độ 16 độ C khiến máy nén chạy hết công suất liên tục, tiêu tốn gấp 2-3 lần điện.
-- Công thức vàng tiết kiệm điện của EVNHCMC:
-  + Cài đặt nhiệt độ từ 26 đến 28 độ C.
-  + Kết hợp bật quạt gió thoang thoảng giúp luồng khí lạnh tỏa đều, cảm giác mát sâu và tiết kiệm tới 25 - 30% điện năng tiêu thụ.
-  + Vệ sinh lưới lọc bụi định kỳ mỗi 2-3 tháng.
-- Kết thúc: "Tiết kiệm điện là tiết kiệm tiền cho chính bạn và bảo vệ hành tinh xanh! Đồng hành cùng EVNHCMC."`
+    tool: "Google Gemini (Veo)",
+    toolType: "video",
+    description: "Câu lệnh sinh video chuyển động gia đình Việt Nam vui vẻ thực hiện thói quen tiết kiệm điện, an toàn chính sách tuyệt đối.",
+    content: `Cinematic eye-level shot of a happy Vietnamese father and his 7-year-old daughter in their bright modern living room. The little girl happily reaches up and turns off an unnecessary decorative wall lamp, while gentle breeze from an energy-saving ceiling fan circulates the air. Natural sunlight fills the room through large clean windows. Camera smoothly dollies forward, warm and cozy family atmosphere, vivid natural colors, photorealistic, 4K quality, smooth fluid motion.`
   },
   {
     id: "p3",
-    title: "Prompt tạo ảnh: Người thợ điện EVN kiên cường khắc phục sự cố trong giông bão",
-    category: "image",
-    tool: "Midjourney / Gemini Imagen 3",
-    toolType: "image",
-    description: "Câu lệnh tạo hình ảnh siêu thực (Photorealistic 8K) tôn vinh vẻ đẹp người công nhân điện lực với trang phục cam đặc trưng của EVN.",
-    content: `Cinematic photorealistic portrait of a heroic Vietnamese electrical power lineman (EVN worker), wearing standard bright safety orange protective uniform, helmet with safety headlamp, reflective safety stripes, and insulated gloves. He is working with determination on a high-voltage utility power pole during an evening rainstorm in Ho Chi Minh City. Cinematic lighting, rain drops glistening on helmet, dramatic electric blue sparks in the distant background, detailed wet facial expression showing bravery and dedication to restore electricity for the city. Ultra-detailed 8K resolution, shot on 85mm f/1.4 lens, cinematic color grading, hyperrealistic, award-winning photography --ar 16:9 --style raw --v 6.1`
+    title: "Gemini Script: Kịch bản Video 45s & Bộ Video Prompts từng phân cảnh (Không dính Policy)",
+    category: "video",
+    tool: "Google Gemini",
+    toolType: "script",
+    description: "Yêu cầu Gemini viết kịch bản 3 màn và tự động tạo sẵn từng câu lệnh Video Prompt an toàn chính sách để dán vào Gemini sinh video.",
+    content: `Đóng vai đạo diễn truyền thông chuyên nghiệp của EVNHCMC. Hãy viết một kịch bản video ngắn 45 giây với chủ đề: "3 Thói quen nhỏ - Tiết kiệm điện to cho gia đình mùa nắng nóng".
+
+Yêu cầu xuất ra định dạng bảng 4 cột:
+1. Thời gian ([0-3s] Hook, [4-15s] Vấn đề, [16-35s] Giải pháp, [36-45s] Kêu gọi hành động).
+2. Lời thoại MC / Thuyết minh tiếng Việt (vui tươi, dễ nhớ, nhấn mạnh thông điệp EVNHCMC).
+3. Mô tả hình ảnh & Chuyển động góc máy camera.
+4. [GEMINI VIDEO PROMPT] Viết câu lệnh tiếng Anh chuẩn cho từng phân cảnh để tôi dán trực tiếp vào tính năng tạo video của Gemini (Google Veo). Lưu ý: Tuân thủ nghiêm ngặt chính sách của Google, TUYỆT ĐỐI KHÔNG dùng các từ nhạy cảm như "drone", "flycam", "high-voltage", "thermal HUD", "danger", "hazard" để tránh bị lỗi từ chối video!`
   },
+
+  // --------------------------------------------------------------------------
+  // NHÓM 2: TẠO HÌNH ẢNH BẰNG CHATGPT VÀ GOOGLE GEMINI
+  // --------------------------------------------------------------------------
   {
     id: "p4",
-    title: "Prompt tạo ảnh: Gia đình Việt Nam thông minh sống xanh với năng lượng mặt trời",
+    title: "Gemini Imagen 3: Chân dung Người thợ điện EVNHCMC kiên cường vì dòng điện sáng",
     category: "image",
-    tool: "Midjourney / DALL-E 3",
+    tool: "Google Gemini (Imagen 3)",
     toolType: "image",
-    description: "Hình ảnh gia đình 3 thế hệ đầm ấm trong ngôi nhà hiện đại, mái nhà gắn tấm pin năng lượng mặt trời, không gian xanh mát tiết kiệm điện.",
-    content: `Warm and inspiring modern Vietnamese family (grandparents, parents, and two smiling children) in their eco-friendly smart home living room in Vietnam. Sunlight streaming through large clean windows, lush green indoor plants. On the rooftop visible outside are sleek modern solar panels. The mother is smilingly adjusting the home energy monitoring app on her tablet showing low electricity consumption and green eco-leaf badges. Cozy ambient lighting, modern minimalist Vietnamese architecture, bright warm tones, clean energy lifestyle, cinematic photorealistic, 8k resolution, National Geographic photography style --ar 16:9`
+    description: "Câu lệnh tạo ảnh siêu thực (Photorealistic 8K) chân dung công nhân điện lực với áo cam đặc trưng của EVNHCMC trên Gemini.",
+    content: `Tạo một bức ảnh chụp chân dung siêu thực (Photorealistic 8K) của một người thợ điện Việt Nam (EVNHCMC), mặc trang phục bảo hộ lao động màu cam đặc trưng, mũ bảo hộ có logo ngành điện, đeo kính và găng tay cách điện an toàn. Gương mặt toát lên vẻ tận tụy, tự tin và kiên cường. Bối cảnh phía sau là bầu trời thành phố lúc hoàng hôn với ánh đèn đô thị bắt đầu bừng sáng lung linh. Ánh sáng cinematic ấm áp, độ chi tiết cao, góc chụp chân thực như ảnh đoạt giải báo chí National Geographic --tỷ lệ 16:9`
   },
   {
     id: "p5",
-    title: "Dàn ý Infographic: 10 Quy tắc vàng An toàn hành lang lưới điện cao áp",
-    category: "infographic",
-    tool: "ChatGPT + Canva AI",
-    toolType: "infographic",
-    description: "Tạo cấu trúc nội dung đồ họa thông tin trực quan, chia nhóm biển báo cấm, khoảng cách an toàn và số hotline khẩn cấp.",
-    content: `Hãy lập dàn ý nội dung chi tiết để thiết kế một ấn phẩm Infographic kích thước 1920x1080 (hoặc 1080x1920) với chủ đề: "10 Quy tắc vàng bảo vệ An toàn hành lang lưới điện cao áp & Phòng chống tai nạn điện ngoài trời".
-
-Yêu cầu phân chia thành 4 khu vực thông tin trực quan:
-1. HEADER: Tiêu đề lớn ấn tượng, logo EVNHCMC và slogan: "An toàn điện - Hạnh phúc cho mọi nhà".
-2. KHU VỰC CẤNH BÁO NGUY HIỂM (Đỏ/Vàng): 
-   - Không thả diều, câu cá, bắn pháo hoa gần đường dây điện cao áp.
-   - Không leo trèo cột điện, trộm cắp thiết bị phụ kiện lưới điện.
-   - Không xây cất công trình, dựng biển quảng cáo xâm phạm hành lang bảo vệ.
-3. KHU VỰC KHOẢNG CÁCH AN TOÀN (Xanh dương / Minh họa đồ họa):
-   - Bảng khoảng cách phóng điện an toàn theo từng cấp điện áp (22kV, 110kV, 220kV).
-   - Quy định chặt tỉa cây xanh trước mùa mưa bão có sự phối hợp của ngành điện.
-4. KHU VỰC HÀNH ĐỘNG KHI CÓ SỰ CỐ (Xanh lá / Đỏ):
-   - Thấy dây điện rơi đứt chạm đất: Giữ khoảng cách tối thiểu 10 mét, hô hoán cảnh báo người xung quanh.
-   - Gọi ngay Tổng đài EVNHCMC 1900.54.54.54 hoặc cơ quan chức năng.
-Gợi ý bảng màu (Color Palette): Xanh navy EVN (#003366), Cam bảo hộ (#FF6B00), Xanh lá an toàn (#10B981) và Trắng.`
+    title: "ChatGPT (DALL-E 3): Poster 3D Isometric Thành phố Thông minh Tiết kiệm điện",
+    category: "image",
+    tool: "ChatGPT (DALL-E 3)",
+    toolType: "image",
+    description: "Tạo hình ảnh đồ họa 3D Isometric hiện đại tôn vinh lối sống xanh, năng lượng mặt trời và chuyển đổi số EVNHCMC.",
+    content: `Create a modern 3D isometric illustration of a smart, green eco-city inspired by Ho Chi Minh City, promoting electrical safety and energy saving. The scene features modern buildings with rooftop solar panels, smart power grids with glowing clean energy lines, electric vehicles charging, lush green parks, and happy Vietnamese citizens using a smart mobile app to monitor electricity usage. Vibrant color palette: EVN navy blue (#004B8D), energetic orange (#FF6B00), clean eco-green, and bright white. High-end 3D rendering style like Blender/Pixar, clean minimalist composition, soft ambient lighting, ultra-detailed 4K resolution.`
   },
   {
     id: "p6",
-    title: "Thiết lập NotebookLM: Tạo kịch bản Audio Podcast đối thoại chuyên sâu về Tiết kiệm điện",
-    category: "podcast",
-    tool: "NotebookLM (Google)",
-    toolType: "audio",
-    description: "Hướng dẫn và prompt nạp tài liệu Kế hoạch 53 + Chỉ thị tiết kiệm điện để NotebookLM tự động sinh Podcast Audio Overview cuốn hút.",
-    content: `[HƯỚNG DẪN THỰC HIỆN TRÊN NOTEBOOKLM]:
-Bước 1: Truy cập https://notebooklm.google.com và tạo một Notebook mới mang tên "EVNHCMC - AI Tuyên truyền An toàn & Tiết kiệm điện".
-Bước 2: Nạp các tài liệu nguồn sau vào Notebook:
-- File PDF Kế hoạch liên tịch số 53 (văn bản cuộc thi).
-- Chỉ thị số 20/CT-TTg của Thủ tướng Chính phủ về tăng cường tiết kiệm điện.
-- Cẩm nang hướng dẫn sử dụng điện an toàn, tiết kiệm mùa khô của EVNHCMC.
-
-Bước 3: Nhập Prompt chỉ dẫn cho NotebookLM để định hướng nội dung tạo podcast hoặc tóm tắt:
-"Hãy phân tích các nguồn tài liệu đã cung cấp và xây dựng bản thảo cho một buổi tọa đàm radio / podcast dài 5 phút giữa hai chuyên gia truyền thông:
-- Người dẫn chương trình (Host): Nêu lên những lo lắng thực tế của người dân về tiền điện mùa nắng nóng và các nguy cơ tai nạn điện khi mưa bão ngập lụt.
-- Khách mời (Chuyên gia kỹ thuật EVN): Giải thích dễ hiểu cơ chế tính điện bậc thang, các giải pháp công nghệ như cảm biến thông minh, mẹo dùng máy giặt/máy lạnh, và đặc biệt là cách người trẻ có thể dùng AI (tạo ảnh, video) để lan tỏa thông điệp này đến cộng đồng.
-Ngôn ngữ: Tiếng Việt văn phong truyền cảm, lôi cuốn, gần gũi với giới trẻ."
-
-Bước 4: Nhấn nút "Generate Audio Overview" trên NotebookLM để hệ thống tự động tổng hợp âm thanh giọng nói podcast 2 nhân vật sinh động!`
+    title: "ChatGPT / Gemini: Gia đình 3 thế hệ sống xanh, mái nhà gắn pin năng lượng mặt trời",
+    category: "image",
+    tool: "ChatGPT & Gemini",
+    toolType: "image",
+    description: "Hình ảnh ấm cúng gia đình Việt Nam trong ngôi nhà hiện đại sử dụng điện tiết kiệm và an toàn.",
+    content: `Cinematic photorealistic portrait of a modern Vietnamese family (grandparents, parents, and two smiling children) in their eco-friendly smart home living room in Vietnam. Sunlight streaming through large clean windows, lush green indoor plants. On the rooftop visible outside are sleek modern solar panels. The mother is smilingly adjusting the home energy monitoring app on her tablet showing low electricity consumption and green eco-leaf badges. Cozy ambient lighting, modern minimalist architecture, bright warm tones, clean energy lifestyle, cinematic 8k resolution --ar 16:9`
   },
+
+  // --------------------------------------------------------------------------
+  // NHÓM 3: TẠO INFOGRAPHIC BẰNG NOTEBOOKLM (TRÍCH XUẤT DỮ LIỆU & CẤU TRÚC ĐỒ HỌA)
+  // --------------------------------------------------------------------------
   {
     id: "p7",
-    title: "Prompt Kling AI / Runway: Tạo video AI hoạt hình Người thợ điện bay Flycam kiểm tra đường dây",
-    category: "video",
-    tool: "Kling AI / Runway Gen-3",
-    toolType: "video",
-    description: "Câu lệnh tạo video clip chuyển động AI 3D công nghệ cao về chuyển đổi số và ứng dụng Flycam kiểm tra lưới điện của EVN.",
-    content: `High quality cinematic 3D animation of an EVN Vietnamese electric utility engineer operating a modern high-tech thermal drone/flycam to inspect electrical transformers and high-voltage transmission lines on a bright sunny day. Smooth drone aerial rotation shot, dynamic camera movement following the drone gliding along the power cables. High tech holographic HUD overlay displaying temperature diagnostics and safety data. Photorealistic 4k, futuristic digital transformation in electricity sector, vivid colors, smooth 60fps motion.`
+    title: "NotebookLM Infographic: Trích xuất Dàn ý & Dữ liệu 10 Quy tắc Vàng An toàn Điện",
+    category: "infographic",
+    tool: "NotebookLM (Google)",
+    toolType: "infographic",
+    description: "Nạp file KHLT 53 và tài liệu an toàn vào NotebookLM để trích xuất cấu trúc Infographic phân cấp trực quan, số liệu và bảng khoảng cách an toàn.",
+    content: `[HƯỚNG DẪN DÙNG NOTEBOOKLM TẠO INFOGRAPHIC]:
+Bước 1: Truy cập https://notebooklm.google.com và tạo Notebook "Infographic An Toàn Điện EVN".
+Bước 2: Nạp tài liệu nguồn: File PDF Kế hoạch liên tịch 53, Quy định an toàn hành lang lưới điện.
+Bước 3: Gõ Prompt sau vào khung chat NotebookLM:
+
+"Bạn là Chuyên gia Thiết kế Thông tin (Information Architect). Dựa vào các tài liệu nguồn đã cung cấp, hãy xây dựng BẢN DÀN Ý THIẾT KẾ INFOGRAPHIC chi tiết với chủ đề: '10 Quy tắc vàng bảo vệ an toàn hành lang lưới điện và phòng chống tai nạn điện':
+1. TIÊU ĐỀ LỚN & SLOGAN: Đề xuất slogan ngắn gọn dưới 10 từ.
+2. 4 PHÂN KHU THÔNG TIN ĐỒ HỌA:
+   - Khu 1: Các hành vi cấm tuyệt đối (thả diều, câu cá gần đường điện, xây cất công trình vi phạm).
+   - Khu 2: Bảng tra cứu khoảng cách phóng điện an toàn theo từng cấp điện áp (22kV, 110kV, 220kV).
+   - Khu 3: Xử lý tình huống khẩn cấp (dây điện rơi xuống đất, sơ cứu người bị điện giật).
+   - Khu 4: Thông tin liên hệ khẩn cấp (Tổng đài CSKH EVNHCMC 1900.54.54.54).
+3. ĐỀ XUẤT THIẾT KẾ: Gợi ý bảng màu (Mã màu EVN: #004B8D, Cam: #FF6B00, Xanh lá: #10B981) và ký hiệu icon trực quan cho từng mục để đưa vào Canva thiết kế ấn phẩm hoàn chỉnh."`
   },
   {
     id: "p8",
-    title: "Prompt viết Bản thuyết minh ý tưởng dự thi chuẩn quy định Điều 5 KHLT 53",
+    title: "NotebookLM Infographic: Phân tích Số liệu So sánh Tiết kiệm điện Gia đình (Trước & Sau)",
+    category: "infographic",
+    tool: "NotebookLM (Google)",
+    toolType: "infographic",
+    description: "Yêu cầu NotebookLM tính toán đối sánh kWh và tiền điện tiết kiệm của các thiết bị để đưa vào biểu đồ Infographic trực quan.",
+    content: `[PROMPT NẠP VÀO NOTEBOOKLM ĐỂ TẠO DỮ LIỆU ĐỒ HỌA]:
+"Từ tài liệu cẩm nang sử dụng điện của EVNHCMC đã tải lên, hãy trích xuất dữ liệu để thiết kế một Infographic so sánh dạng bảng trực quan: 'Thói quen dùng điện cũ vs. Thói quen thông minh':
+
+Yêu cầu xuất ra cấu trúc bảng dữ liệu:
+1. Thiết bị (Máy lạnh, Tủ lạnh, Bình nước nóng, Bếp từ, Đèn chiếu sáng).
+2. Sai lầm phổ biến (Gây lãng phí điện năng).
+3. Giải pháp công nghệ & thói quen chuẩn EVN.
+4. Ước tính lượng điện tiết kiệm (% và kWh/tháng).
+5. Ước tính số tiền tiết kiệm hàng tháng của hộ gia đình (VNĐ).
+6. 1 Biểu đồ gợi ý (Ví dụ: Biểu đồ thanh so sánh hóa đơn tiền điện trước và sau khi áp dụng).
+
+-> Sao chép kết quả này đưa trực tiếp vào Canva hoặc PowerPoint để xuất ra file ảnh Infographic dự thi!"`
+  },
+  {
+    id: "p9",
+    title: "NotebookLM Audio: Tạo kịch bản Audio Podcast đối thoại chuyên sâu về Tiết kiệm điện",
+    category: "infographic",
+    tool: "NotebookLM (Google)",
+    toolType: "audio",
+    description: "Nạp tài liệu vào NotebookLM để sinh kịch bản Audio Overview 2 nhân vật bàn luận về tiết kiệm điện, kết hợp vào Infographic / Video.",
+    content: `[HƯỚNG DẪN THỰC HIỆN TRÊN NOTEBOOKLM]:
+Bước 1: Truy cập https://notebooklm.google.com và nạp KHLT 53 + Chỉ thị tiết kiệm điện.
+Bước 2: Nhập Prompt chỉ dẫn cho NotebookLM:
+"Hãy phân tích các nguồn tài liệu đã cung cấp và xây dựng bản thảo cho một buổi tọa đàm radio / podcast dài 5 phút giữa hai chuyên gia truyền thông:
+- Người dẫn chương trình (Host): Nêu lên những lo lắng thực tế của người dân về tiền điện mùa nắng nóng và các nguy cơ tai nạn điện khi mưa bão ngập lụt.
+- Khách mời (Chuyên gia kỹ thuật EVN): Giải thích dễ hiểu cơ chế tính điện bậc thang, các mẹo dùng máy lạnh/máy giặt, và cách người trẻ ứng dụng AI (Gemini, ChatGPT) để lan tỏa thông điệp này đến cộng đồng.
+Ngôn ngữ: Tiếng Việt văn phong truyền cảm, lôi cuốn, gần gũi với giới trẻ."
+Bước 3: Nhấn nút 'Generate Audio Overview' để NotebookLM tự động tổng hợp âm thanh giọng nói podcast 2 nhân vật sinh động!`
+  },
+
+  // --------------------------------------------------------------------------
+  // NHÓM 4: BẢN THUYẾT MINH Ý TƯỞNG THEO ĐIỀU 5 KHLT 53
+  // --------------------------------------------------------------------------
+  {
+    id: "p10",
+    title: "ChatGPT / Gemini: Viết Bản Thuyết minh Ý tưởng Dự thi chuẩn 6 Tiêu chuẩn KHLT 53",
     category: "thuyetminh",
-    tool: "ChatGPT / Gemini",
+    tool: "ChatGPT & Gemini",
     toolType: "doc",
-    description: "Câu lệnh toàn diện hỗ trợ tác giả soạn thảo bản thuyết minh dự thi đầy đủ 6 nội dung theo biểu mẫu bắt buộc của Ban Tổ chức.",
+    description: "Soạn thảo bản thuyết minh dự thi đầy đủ 6 nội dung theo biểu mẫu bắt buộc của Ban Tổ chức Cuộc thi AI EVNHCMC.",
     content: `Tôi đang tham gia Cuộc thi "Ứng dụng trí tuệ nhân tạo (AI) trong công tác tuyên truyền an toàn điện và tiết kiệm điện" do Công đoàn và Đoàn Thanh niên Tổng công ty Điện lực TP.HCM (EVNHCMC) tổ chức theo Kế hoạch liên tịch số 53.
 
 Thông tin cơ bản về tác phẩm của tôi:
-- Tên tác phẩm: [Nhập tên tác phẩm của bạn, ví dụ: "Bảo bối gia đình - Mẹo vàng tiết kiệm điện thông minh"]
-- Thể loại: [Ảnh / Video / Infographic]
-- Công cụ AI đã ứng dụng: [Ví dụ: Dùng ChatGPT viết kịch bản, dùng Midjourney tạo hình nhân vật, dùng Kling AI tạo chuyển động, ElevenLabs lồng tiếng]
-- Thông điệp chính: [Nhập thông điệp, ví dụ: Sử dụng điện tiết kiệm là văn hóa sống xanh của thanh niên thế hệ số]
+- Tên tác phẩm: [Nhập tên tác phẩm, ví dụ: "Vì một Thành phố Xanh - Thói quen nhỏ, Ý nghĩa lớn"]
+- Thể loại: [Video tạo bằng Gemini / Ảnh tạo bằng ChatGPT & Gemini / Infographic tạo bằng NotebookLM]
+- Công cụ AI đã ứng dụng: [Nêu rõ quy trình: Gemini sinh video, ChatGPT vẽ ảnh, NotebookLM phân tích số liệu infographic]
+- Thông điệp chính: [Nhập thông điệp cốt lõi]
 
-Hãy giúp tôi viết một BẢN THUYẾT MINH Ý TƯỞNG DỰ THI hoàn chỉnh, chuẩn mực theo đúng quy định tại Điều 5 Thể lệ cuộc thi KHLT 53, bao gồm đầy đủ 6 phần:
-1. Thông tin tác giả / nhóm tác giả.
+Hãy giúp tôi viết BẢN THUYẾT MINH Ý TƯỞNG DỰ THI chuẩn mực theo đúng quy định tại Điều 5 KHLT 53, bao gồm 6 phần:
+1. Thông tin tác giả / nhóm tác giả (thuộc Công ty Điện lực Vũng Tàu).
 2. Tên tác phẩm dự thi và loại hình sản phẩm.
-3. Tóm tắt ý tưởng chính và thông điệp cốt lõi muốn truyền tải.
-4. Mô tả chi tiết việc ứng dụng công nghệ AI: Nêu rõ từng công cụ/nền tảng AI đã sử dụng ở từng khâu (Lên ý tưởng, viết kịch bản, vẽ tranh/nhân vật, sinh video, tạo giọng nói...) kèm câu lệnh prompt tiêu biểu.
-5. Nêu bật tính sáng tạo, độc đáo của sản phẩm và khả năng lan tỏa trên các kênh truyền thông của EVNHCMC (Fanpage, Zalo OA, màn hình giao dịch khách hàng...).
-6. Đánh giá tính ứng dụng thực tiễn, nguồn lực và thời gian thực hiện.`
+3. Tóm tắt ý tưởng và thông điệp tuyên truyền.
+4. Mô tả chi tiết quy trình ứng dụng AI (kèm các câu lệnh prompt tiêu biểu đã dùng trên Gemini, ChatGPT, NotebookLM).
+5. Tính sáng tạo, độc đáo và khả năng lan tỏa trên các kênh truyền thông ngành điện.
+6. Đánh giá tính ứng dụng thực tiễn và hiệu quả tuyên truyền.`
   }
 ];
 
@@ -296,10 +312,9 @@ function renderPromptLibrary(prompts) {
 
 function getCategoryName(cat) {
   switch (cat) {
-    case 'video': return '🎬 Video & Kịch bản';
-    case 'image': return '🎨 Ảnh & Nhân vật AI';
-    case 'infographic': return '📊 Infographic';
-    case 'podcast': return '🎙️ NotebookLM Podcast';
+    case 'video': return '🎬 Video (Gemini)';
+    case 'image': return '🎨 Hình ảnh (ChatGPT & Gemini)';
+    case 'infographic': return '📊 Infographic (NotebookLM)';
     case 'thuyetminh': return '📝 Thuyết minh KHLT 53';
     default: return '💡 Sáng tạo AI';
   }

@@ -477,74 +477,28 @@
 
       <!-- Tabs Navigation -->
       <div class="ai-tools-tabs">
-        <button class="ai-tab-btn active" data-target="guide-chatgpt">
-          <span>🤖 ChatGPT</span>
+        <button class="ai-tab-btn active" data-target="guide-gemini">
+          <span>✨ Google Gemini (Tạo Video & Ảnh)</span>
         </button>
-        <button class="ai-tab-btn" data-target="guide-gemini">
-          <span>✨ Google Gemini</span>
+        <button class="ai-tab-btn" data-target="guide-chatgpt">
+          <span>🤖 ChatGPT (Tạo Ảnh & Kịch bản)</span>
         </button>
         <button class="ai-tab-btn" data-target="guide-notebooklm">
-          <span>🎙️ NotebookLM</span>
+          <span>🎙️ NotebookLM (Tạo Infographic)</span>
         </button>
         <button class="ai-tab-btn" data-target="guide-multimedia">
-          <span>🎬 AI Video & Thiết kế</span>
+          <span>🎨 Canva & Hoàn thiện Tác phẩm</span>
         </button>
       </div>
 
-      <!-- Tab 1: ChatGPT -->
-      <div class="ai-agent-detail-card active" id="guide-chatgpt">
-        <div class="agent-card-header">
-          <div class="agent-identity">
-            <div class="agent-logo-badge logo-chatgpt">GPT</div>
-            <div class="agent-name-role">
-              <h3>ChatGPT (OpenAI)</h3>
-              <p>Chuyên gia Lên Ý tưởng, Viết Kịch bản phân cảnh 3 màn & Sáng tạo Slogan</p>
-            </div>
-          </div>
-          <a href="https://chatgpt.com" target="_blank" rel="noopener" class="agent-link-btn">
-            Mở ChatGPT ↗
-          </a>
-        </div>
-
-        <div class="agent-steps-grid">
-          <div class="agent-step-item">
-            <span class="step-num-badge">1</span>
-            <h4>Định hình vai trò (Persona)</h4>
-            <p>Yêu cầu ChatGPT đóng vai: "Chuyên gia truyền thông an toàn điện lực của EVNHCMC" để câu trả lời bám sát thực tế ngành điện.</p>
-          </div>
-          <div class="agent-step-item">
-            <span class="step-num-badge">2</span>
-            <h4>Phân cảnh kịch bản chi tiết</h4>
-            <p>Chia video thành các phân đoạn 0-3s (Hook), 4-15s (Vấn đề), 16-35s (Giải pháp tiết kiệm điện) và 36-45s (Kêu gọi hành động).</p>
-          </div>
-          <div class="agent-step-item">
-            <span class="step-num-badge">3</span>
-            <h4>Tạo Prompt phụ trợ</h4>
-            <p>Nhờ ChatGPT viết luôn các câu lệnh mô tả hình ảnh bằng tiếng Anh chi tiết để bạn nạp vào Midjourney hoặc Kling AI.</p>
-          </div>
-        </div>
-
-        <div class="agent-pro-tips">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <div class="tips-content">
-            <strong>Mẹo đạt điểm cao tiêu chí AI (15 điểm Kịch bản):</strong>
-            <p>Hãy lưu lại toàn bộ chuỗi hội thoại (prompt + kết quả) với ChatGPT và đưa vào mục thuyết minh: bạn đã tinh chỉnh câu lệnh mấy lần, AI đã giúp tối ưu thông điệp an toàn ra sao.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 2: Gemini -->
-      <div class="ai-agent-detail-card" id="guide-gemini">
+      <!-- Tab 1: Google Gemini (Tạo Video & Tạo Ảnh) -->
+      <div class="ai-agent-detail-card active" id="guide-gemini">
         <div class="agent-card-header">
           <div class="agent-identity">
             <div class="agent-logo-badge logo-gemini">GEM</div>
             <div class="agent-name-role">
               <h3>Google Gemini (Google)</h3>
-              <p>Tra cứu Chính sách EVN, Tạo Ảnh Imagen 3 chân thực & Viết Thuyết minh KHLT 53</p>
+              <p>Chủ lực Sinh Video Chuyển động (Veo), Tạo Ảnh Chân thực (Imagen 3) & Viết Kịch bản</p>
             </div>
           </div>
           <a href="https://gemini.google.com" target="_blank" rel="noopener" class="agent-link-btn">
@@ -555,18 +509,68 @@
         <div class="agent-steps-grid">
           <div class="agent-step-item">
             <span class="step-num-badge">1</span>
-            <h4>Tra cứu thông tin chính xác</h4>
-            <p>Gemini kết nối Google Search trực tiếp, giúp bạn cập nhật các thông tư mới nhất về an toàn hành lang điện và chỉ thị tiết kiệm điện quốc gia.</p>
+            <h4>Tạo Video Chuyển động (Veo)</h4>
+            <p>Gemini hỗ trợ tạo video clip trực tiếp từ câu lệnh văn bản. Hãy miêu tả góc quay điện ảnh (camera slow pan, dolly), ánh sáng tự nhiên và hành động của nhân vật.</p>
           </div>
           <div class="agent-step-item">
             <span class="step-num-badge">2</span>
-            <h4>Sinh ảnh với Imagen 3</h4>
-            <p>Gemini hỗ trợ tạo ảnh trực tiếp ngay trong khung chat với độ phân giải cao, hiểu rõ ngữ cảnh văn hóa Việt Nam và nhận diện áo cam thợ điện.</p>
+            <h4>Sinh Ảnh Siêu nét (Imagen 3)</h4>
+            <p>Gemini tạo ảnh độ phân giải cao 8K, hiểu sâu sắc văn hóa Việt Nam, nhận diện chính xác áo cam thợ điện EVN và không gian đô thị TP.HCM.</p>
           </div>
           <div class="agent-step-item">
             <span class="step-num-badge">3</span>
-            <h4>Biên tập bản thuyết minh</h4>
-            <p>Dán dữ liệu thô vào Gemini và yêu cầu biên tập lại thành bản thuyết minh ý tưởng chuẩn theo đúng 6 tiêu mục của Điều 5 KHLT 53.</p>
+            <h4>Soạn Kịch bản & Thuyết minh</h4>
+            <p>Yêu cầu Gemini viết kịch bản phân cảnh 3 màn kèm câu lệnh video prompt cho từng cảnh, và biên tập bản thuyết minh theo đúng Điều 5 KHLT 53.</p>
+          </div>
+        </div>
+
+        <div class="agent-pro-tips" style="background: #FFFBEB; border-color: #FDE68A;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <div class="tips-content">
+            <strong style="color: #92400E;">⚠️ Bí quyết viết Prompt Video trên Gemini không bị từ chối chính sách (Tránh lỗi "I can't generate that video"):</strong>
+            <p style="color: #78350F; margin-top: 4px;">
+              Google Veo có bộ lọc an toàn rất khắt khe đối với hạ tầng điện và thiết bị giám sát. Khi viết prompt video:
+              <br>• <strong>TUYỆT ĐỐI TRÁNH</strong> các từ khóa: <em>drone, flycam, high-voltage (cao thế), transformers (máy biến áp), thermal HUD, danger, fire, electrocution</em>.
+              <br>• <strong>NÊN DÙNG</strong> các từ: <em>Vietnamese electrical power technician in bright orange uniform, smiling warmly, securing safe connection on city street pole, bright sunny morning, family turning off unnecessary lights, smooth camera pan, cinematic 4k</em>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: ChatGPT (Tạo Ảnh DALL-E 3 & Kịch bản) -->
+      <div class="ai-agent-detail-card" id="guide-chatgpt">
+        <div class="agent-card-header">
+          <div class="agent-identity">
+            <div class="agent-logo-badge logo-chatgpt">GPT</div>
+            <div class="agent-name-role">
+              <h3>ChatGPT (OpenAI)</h3>
+              <p>Chuyên gia Tạo Ảnh DALL-E 3, Viết Kịch bản Phân cảnh 3 Màn & Sáng tạo Slogan</p>
+            </div>
+          </div>
+          <a href="https://chatgpt.com" target="_blank" rel="noopener" class="agent-link-btn">
+            Mở ChatGPT ↗
+          </a>
+        </div>
+
+        <div class="agent-steps-grid">
+          <div class="agent-step-item">
+            <span class="step-num-badge">1</span>
+            <h4>Tạo Hình ảnh Đồ họa (DALL-E 3)</h4>
+            <p>Yêu cầu ChatGPT vẽ tranh minh họa 3D Isometric hiện đại, poster cổ động sống xanh, gia đình thông minh tiết kiệm điện với tông màu chuẩn nhận diện EVNHCMC.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">2</span>
+            <h4>Phân cảnh Kịch bản Video 3 Màn</h4>
+            <p>Chia video thành các phân đoạn 0-3s (Hook), 4-15s (Vấn đề), 16-35s (Giải pháp tiết kiệm điện) và 36-45s (Kêu gọi hành động) chuẩn TikTok/Reels.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">3</span>
+            <h4>Sáng tạo Slogan & Tên Tác phẩm</h4>
+            <p>Yêu cầu ChatGPT đề xuất các tiêu đề tác phẩm cuốn hút và khẩu hiệu tuyên truyền ngắn gọn, giàu cảm xúc lan tỏa mạnh mẽ trong cộng đồng.</p>
           </div>
         </div>
 
@@ -577,20 +581,20 @@
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           <div class="tips-content">
-            <strong>Mẹo tạo ảnh thợ điện EVN trên Gemini:</strong>
-            <p>Ghi rõ trong prompt: "Công nhân điện lực Việt Nam, trang phục bảo hộ màu cam đặc trưng, găng tay cách điện, mũ bảo hộ có logo, đang làm việc khẩn trương an toàn".</p>
+            <strong>Mẹo tạo ảnh 3D đẹp mắt trên ChatGPT:</strong>
+            <p>Ghi rõ phong cách: "3D Isometric illustration, vibrant colors (EVN blue #004B8D, energetic orange #FF6B00, eco-green), clean lighting, Pixar/Blender 3D style, 4K resolution" để ảnh có chiều sâu và bố cục xuất sắc.</p>
           </div>
         </div>
       </div>
 
-      <!-- Tab 3: NotebookLM -->
+      <!-- Tab 3: NotebookLM (Tạo Infographic & Audio Podcast) -->
       <div class="ai-agent-detail-card" id="guide-notebooklm">
         <div class="agent-card-header">
           <div class="agent-identity">
             <div class="agent-logo-badge logo-notebooklm">NLM</div>
             <div class="agent-name-role">
               <h3>NotebookLM (Google)</h3>
-              <p>Nạp Tài liệu Ngành Điện Không Ảo Giác & Tự động tạo Audio Podcast Đối thoại 2 MC</p>
+              <p>Chuyên gia Trích xuất Dữ liệu & Xây dựng Dàn ý Infographic Trực quan, Tạo Podcast</p>
             </div>
           </div>
           <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="agent-link-btn">
@@ -601,18 +605,18 @@
         <div class="agent-steps-grid">
           <div class="agent-step-item">
             <span class="step-num-badge">1</span>
-            <h4>Nạp tài liệu nguồn (Grounding)</h4>
-            <p>Tải lên file KHLT 53, Sổ tay An toàn điện và Cẩm nang Tiết kiệm điện EVNHCMC. NotebookLM sẽ chỉ trả lời dựa trên tài liệu này, chuẩn xác 100%.</p>
+            <h4>Nạp Tài liệu Nguồn KHLT 53</h4>
+            <p>Tải lên file PDF KHLT 53, Quy chuẩn an toàn và Cẩm nang Tiết kiệm điện. NotebookLM chỉ phân tích dựa trên tài liệu này, đảm bảo dữ liệu chuẩn xác 100% không ảo giác.</p>
           </div>
           <div class="agent-step-item">
             <span class="step-num-badge">2</span>
-            <h4>Tạo Audio Overview (Podcast)</h4>
-            <p>Nhấn vào tính năng "Deep Dive Audio Overview" để AI tự động đóng vai 2 người dẫn chương trình (Nam & Nữ) trò chuyện sôi nổi về chủ đề điện.</p>
+            <h4>Trích xuất Dàn ý Infographic</h4>
+            <p>Yêu cầu NotebookLM đóng vai Information Architect, phân tích số liệu kWh, bảng so sánh "Thói quen cũ vs Giải pháp thông minh", gợi ý bảng màu và biểu tượng icon.</p>
           </div>
           <div class="agent-step-item">
             <span class="step-num-badge">3</span>
-            <h4>Lồng âm thanh vào tác phẩm</h4>
-            <p>Tải file âm thanh về và lồng ghép vào video clip hoặc Infographic thuyết trình của bạn để tạo ấn phẩm truyền thông vô cùng độc đáo.</p>
+            <h4>Tạo Audio Podcast Đối thoại 2 MC</h4>
+            <p>Nhấn "Deep Dive Audio Overview" để AI tự động tạo cuộc trò chuyện 2 người dẫn thảo luận sâu sắc về an toàn điện để lồng ghép vào tác phẩm Infographic hoặc Video.</p>
           </div>
         </div>
 
@@ -623,52 +627,54 @@
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           <div class="tips-content">
-            <strong>Tính độc đáo ghi điểm mạnh với BGK:</strong>
-            <p>Rất ít người biết tận dụng tính năng Podcast của NotebookLM. Nếu tác phẩm của bạn có kịch bản âm thanh chuyên sâu từ tài liệu ngành, bạn sẽ nắm chắc điểm sáng tạo cao nhất!</p>
+            <strong>Quy trình tạo Infographic từ NotebookLM:</strong>
+            <p>NotebookLM là "bộ não" phân tích dữ liệu, cấu trúc thông tin và số liệu chính xác -> Sau đó bạn sao chép dàn ý này vào Canva hoặc PowerPoint để chọn template và xuất file ảnh đồ họa Infographic hoàn chỉnh!</p>
           </div>
         </div>
       </div>
 
-      <!-- Tab 4: AI Multimedia & Video -->
+      <!-- Tab 4: Hoàn thiện Tác phẩm -->
       <div class="ai-agent-detail-card" id="guide-multimedia">
         <div class="agent-card-header">
           <div class="agent-identity">
-            <div class="agent-logo-badge logo-multimedia">VID</div>
+            <div class="agent-logo-badge logo-multimedia">FIN</div>
             <div class="agent-name-role">
-              <h3>AI Video, Hình ảnh & Giọng nói</h3>
-              <p>Kling AI, Runway Gen-3, Midjourney, Canva AI & ElevenLabs</p>
+              <h3>Canva AI & Hoàn thiện Tác phẩm</h3>
+              <p>Ráp nối Dàn ý Infographic, Biên tập Video và Xuất file Chuẩn Quy cách KHLT 53</p>
             </div>
           </div>
-          <span style="font-size: 0.85rem; color: var(--color-primary); font-weight: 600;">Hệ sinh thái Đồ họa AI</span>
+          <a href="https://canva.com" target="_blank" rel="noopener" class="agent-link-btn">
+            Mở Canva ↗
+          </a>
         </div>
 
         <div class="agent-steps-grid">
           <div class="agent-step-item">
             <span class="step-num-badge">1</span>
-            <h4>Sinh Video: Kling AI / Runway</h4>
-            <p>Biến các bức ảnh chụp hoặc ảnh do AI tạo thành video chuyển động 3D sinh động (như mưa rơi, công nhân thao tác trên cột điện, flycam kiểm tra lưới điện).</p>
+            <h4>Thiết kế Infographic trên Canva</h4>
+            <p>Dán dàn ý và số liệu từ NotebookLM vào mẫu Infographic 1920x1080 trên Canva, chọn font chữ tiếng Việt chuẩn và chèn logo EVNHCMC.</p>
           </div>
           <div class="agent-step-item">
             <span class="step-num-badge">2</span>
-            <h4>Infographic: Canva AI / Ideogram</h4>
-            <p>Tạo các bảng biểu, mẹo an toàn điện gia đình với kiểu chữ tiếng Việt không bị lỗi font trên Canva và hỗ trợ AI sắp xếp bố cục tự động.</p>
+            <h4>Biên tập Video hoàn chỉnh</h4>
+            <p>Ráp nối các đoạn clip ngắn đã sinh từ Gemini (Google Veo) bằng CapCut hoặc Premiere, lồng thêm nhạc nền sôi động và giọng đọc thuyết minh.</p>
           </div>
           <div class="agent-step-item">
             <span class="step-num-badge">3</span>
-            <h4>Lồng tiếng: ElevenLabs / Vbee</h4>
-            <p>Tạo giọng đọc thuyết minh tiếng Việt chuẩn truyền cảm, ấm áp hoặc phong cách bản tin truyền hình chuyên nghiệp mà không cần ghi âm thủ công.</p>
+            <h4>Kiểm tra Quy cách & Nộp bài</h4>
+            <p>Kiểm tra kích thước (Ảnh/Infographic: PNG/JPG; Video: MP4 Full HD) và mở Cổng trực tuyến nhấn "Nộp tác phẩm" để lấy Mã dự thi EVN-PCVT.</p>
           </div>
         </div>
 
         <div class="agent-pro-tips">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
-<line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           <div class="tips-content">
-            <strong>Quy chuẩn Video Full HD (1920x1080):</strong>
-            <p>Sau khi sinh các đoạn video ngắn 5-10s từ AI, hãy dùng CapCut hoặc Premiere để ráp nối, chèn nhạc nền và xuất đúng định dạng .MP4 Full HD (15s - 120s).</p>
+            <strong>Quy chuẩn nộp tác phẩm theo KHLT số 53:</strong>
+            <p>Video clip thời lượng từ 15s - 120s định dạng .MP4 Full HD; Ảnh và Infographic định dạng .JPG/.PNG độ phân giải tối thiểu 1920x1080; bắt buộc có bản thuyết minh ý tưởng ứng dụng AI.</p>
           </div>
         </div>
       </div>
@@ -692,10 +698,9 @@
       <div class="prompt-filter-bar">
         <div class="prompt-tags-filter">
           <button class="tag-btn active" data-cat="all">Tất cả</button>
-          <button class="tag-btn" data-cat="video">🎬 Kịch bản & Video</button>
-          <button class="tag-btn" data-cat="image">🎨 Ảnh & Nhân vật</button>
-          <button class="tag-btn" data-cat="infographic">📊 Infographic</button>
-          <button class="tag-btn" data-cat="podcast">🎙️ NotebookLM Podcast</button>
+          <button class="tag-btn" data-cat="video">🎬 Video (Gemini)</button>
+          <button class="tag-btn" data-cat="image">🎨 Hình ảnh (ChatGPT & Gemini)</button>
+          <button class="tag-btn" data-cat="infographic">📊 Infographic (NotebookLM)</button>
           <button class="tag-btn" data-cat="thuyetminh">📝 Thuyết minh KHLT 53</button>
         </div>
 
@@ -1024,25 +1029,19 @@
                 <label class="form-label">Công cụ AI đã sử dụng <span class="required">*</span></label>
                 <div class="checkbox-chip-group">
                   <label class="checkbox-chip-label">
-                    <input type="checkbox" value="ChatGPT"> ChatGPT
+                    <input type="checkbox" value="Google Gemini"> ✨ Gemini (Video & Ảnh)
                   </label>
                   <label class="checkbox-chip-label">
-                    <input type="checkbox" value="Gemini"> Gemini
+                    <input type="checkbox" value="ChatGPT"> 🤖 ChatGPT (Ảnh & Kịch bản)
                   </label>
                   <label class="checkbox-chip-label">
-                    <input type="checkbox" value="NotebookLM"> NotebookLM
+                    <input type="checkbox" value="NotebookLM"> 🎙️ NotebookLM (Infographic)
                   </label>
                   <label class="checkbox-chip-label">
-                    <input type="checkbox" value="Midjourney"> Midjourney
+                    <input type="checkbox" value="Canva AI"> 🎨 Canva AI
                   </label>
                   <label class="checkbox-chip-label">
-                    <input type="checkbox" value="Kling AI"> Kling AI
-                  </label>
-                  <label class="checkbox-chip-label">
-                    <input type="checkbox" value="Canva AI"> Canva AI
-                  </label>
-                  <label class="checkbox-chip-label">
-                    <input type="checkbox" value="Runway / HeyGen"> Runway / HeyGen
+                    <input type="checkbox" value="Công cụ khác"> 💡 AI khác
                   </label>
                 </div>
               </div>
