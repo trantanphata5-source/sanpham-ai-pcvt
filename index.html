@@ -1231,6 +1231,11 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               <span>Tải về máy</span>
             </a>
+            <button type="button" class="btn-artwork-action btn-artwork-secondary" id="btn-change-artwork" onclick="triggerUpdateArtwork()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              <span>Thay đổi / Tải ảnh khác</span>
+            </button>
+            <input type="file" id="input-update-artwork" accept="image/*,video/*" style="display: none;" onchange="handleArtworkUpdated(event)">
           </div>
         </div>
 
