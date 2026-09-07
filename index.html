@@ -1067,7 +1067,7 @@
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" y1="3" x2="12" y2="15"></line>
               </svg>
-              3. Tải lên Tác phẩm dự thi & Bản thuyết minh
+              3. Tải lên Tác phẩm dự thi & Bản thuyết minh (Bắt buộc nộp cả 2)
             </h3>
 
             <div class="form-grid-2">
@@ -1083,7 +1083,7 @@
                     </svg>
                   </div>
                   <div class="dropzone-title">Kéo thả file tác phẩm vào đây hoặc Click để chọn file</div>
-                  <div class="dropzone-subtitle">Hỗ trợ JPG, PNG, MP4, MOV, PDF (Tối đa 25MB trực tiếp)</div>
+                  <div class="dropzone-subtitle">Hỗ trợ JPG, PNG, MP4, MOV, PDF (Tối đa 25MB trực tiếp) <span class="required">*</span></div>
                   <input type="file" id="file-tacpham-input" accept="image/*,video/*,application/pdf" style="display: none;">
                 </div>
                 <div class="file-chosen-preview" id="preview-tacpham">
@@ -1094,7 +1094,7 @@
 
               <!-- Upload File Bản Thuyết Minh -->
               <div class="form-group">
-                <label class="form-label">File Bản thuyết minh ý tưởng dự thi (Tùy chọn)</label>
+                <label class="form-label">File Bản thuyết minh ý tưởng dự thi (Theo KHLT 53) <span class="required">*</span></label>
                 <div class="dropzone-container" id="dropzone-thuyetminh">
                   <div class="dropzone-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1102,12 +1102,13 @@
                       <polyline points="14 2 14 8 20 8"></polyline>
                     </svg>
                   </div>
-                  <div class="dropzone-title">Chọn file Thuyết minh (.doc, .docx, .pdf)</div>
-                  <div class="dropzone-subtitle">Dung lượng tối đa 15MB</div>
+                  <div class="dropzone-title">Kéo thả file Thuyết minh hoặc Click để chọn file</div>
+                  <div class="dropzone-subtitle">Hỗ trợ .doc, .docx, .pdf (Tối đa 15MB) <span class="required">*</span></div>
+                  <input type="file" id="file-thuyetminh-input" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" style="display: none;">
                 </div>
                 <div class="file-chosen-preview" id="preview-thuyetminh">
-                  <span id="thuyetminh-filename">Tên file</span>
-                  <button type="button" class="btn-remove-file" id="btn-remove-thuyetminh">Gỡ bỏ</button>
+                  <span>📄 <strong id="thuyetminh-filename">file_thuyet_minh.docx</strong></span>
+                  <button type="button" class="btn-remove-file" id="btn-remove-thuyetminh">Xóa</button>
                 </div>
               </div>
             </div>
@@ -1137,7 +1138,7 @@
               <div class="progress-fill"></div>
             </div>
             <span style="font-size: 0.8rem; color: var(--text-dim);">
-              Hồ sơ được bảo mật và lưu trữ an toàn trên hạ tầng công nghệ số của Ban Tổ chức Cuộc thi AI
+              Hồ sơ dự thi bắt buộc đính kèm File Tác phẩm và File Bản thuyết minh ý tưởng theo đúng Kế hoạch liên tịch số 53
             </span>
           </div>
         </form>

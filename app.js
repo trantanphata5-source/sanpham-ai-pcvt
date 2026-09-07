@@ -566,7 +566,16 @@ function initSubmissionForm() {
     }
 
     if (!uploadedFileTacPham && !linkDriveDuPhong) {
-      showToast('Vui lòng tải lên file tác phẩm HOẶC dán link Google Drive chia sẻ tác phẩm!', 'error');
+      showToast('Vui lòng tải lên File tác phẩm (Ảnh/Video/Infographic) hoặc dán link Google Drive chia sẻ!', 'error');
+      const dzTacPham = document.getElementById('dropzone-tacpham');
+      if (dzTacPham) dzTacPham.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    if (!uploadedFileThuyetMinh) {
+      showToast('Bắt buộc nộp File Bản thuyết minh ý tưởng dự thi (.doc, .docx hoặc .pdf) theo quy định KHLT 53!', 'error');
+      const dzThuyetMinh = document.getElementById('dropzone-thuyetminh');
+      if (dzThuyetMinh) dzThuyetMinh.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
@@ -695,6 +704,11 @@ function initSubmissionForm() {
         hoTen: hoTen,
         note: 'Dữ liệu đã được ghi nhận vào hệ thống nội bộ PC Vũng Tàu.'
       });
+      form.reset();
+      uploadedFileTacPham = null;
+      uploadedFileThuyetMinh = null;
+      document.querySelectorAll('.file-chosen-preview').forEach(el => el.classList.remove('show'));
+      document.querySelectorAll('.checkbox-chip-label').forEach(el => el.classList.remove('selected'));
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
