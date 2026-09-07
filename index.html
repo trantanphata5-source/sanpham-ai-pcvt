@@ -30,13 +30,6 @@
         </a>
 
         <div class="nav-top-actions">
-          <button class="btn-api-config" onclick="openGasConfigModal()" title="Cấu hình Google Apps Script Web App URL">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-            <span>Cấu hình API</span>
-          </button>
           <a href="#submit" class="btn-nav-cta">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -74,6 +67,12 @@
               </a>
             </li>
             <li>
+              <a href="#department-progress" class="nav-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+                <span>Tiến độ & Tác phẩm</span>
+              </a>
+            </li>
+            <li>
               <a href="#ai-guide" class="nav-link">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
                 <span>Cẩm nang AI Agent</span>
@@ -93,17 +92,6 @@
             </li>
           </ul>
         </nav>
-
-        <div class="toolbar-quick-links">
-          <a href="https://drive.google.com/drive/folders/1u2rEZ2IECYFk-YQK2TXW_DAqvhjh7BWR?usp=sharing" target="_blank" rel="noopener" class="toolbar-pill-link" title="Mở Google Drive thư mục bài dự thi">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <span>Google Drive</span>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ/edit?usp=sharing" target="_blank" rel="noopener" class="toolbar-pill-link" title="Mở Google Sheets danh sách nộp bài">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
-            <span>Google Sheets</span>
-          </a>
-        </div>
       </div>
     </div>
   </header>
@@ -204,8 +192,8 @@
               </svg>
             </div>
             <div class="quick-info-text">
-              <strong>Lưu trữ tác phẩm tập trung:</strong>
-              <span>Đồng bộ tự động vào Google Drive & Google Sheet chỉ định</span>
+              <strong>Chỉ tiêu PC Vũng Tàu (KHLT số 53):</strong>
+              <span>Tối thiểu 20 sản phẩm phân bổ cho 13 Phòng/Đội trực thuộc</span>
             </div>
           </div>
 
@@ -231,8 +219,8 @@
               </svg>
             </div>
             <div class="quick-info-text">
-              <strong>Ban Tổ chức hỗ trợ:</strong>
-              <span>Đ/c Phan Hoàng Nhân - Bí thư Đoàn EVNHCMC (0703.198.369)</span>
+              <strong>Đầu mối tiếp nhận PC Vũng Tàu:</strong>
+              <span>Đ/c Vũ Thị Linh Chi - ĐTN (0818.993.811) • Hạn nộp nội bộ: 10/10/2026</span>
             </div>
           </div>
         </div>
@@ -465,6 +453,173 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3B. SECTION: TIẾN ĐỘ CHỈ TIÊU 13 PHÒNG/ĐỘI PCVT & XEM LẠI TÁC PHẨM DỰ THI
+       ======================================================================== -->
+  <section id="department-progress" class="department-progress-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">PC VŨNG TÀU • CHỈ TIÊU KHLT SỐ 53</span>
+        <h2 class="section-title">Tiến Độ Chỉ Tiêu & Triển Lãm Tác Phẩm Dự Thi</h2>
+        <p class="section-subtitle">
+          Theo dõi tiến độ thực hiện chỉ tiêu phân bổ tối thiểu 20 sản phẩm cho 13 Phòng/Đội thuộc Công ty Điện lực Vũng Tàu theo Kế hoạch liên tịch giữa Công đoàn và Đoàn Thanh niên PCVT (Hạn nộp nội bộ: 17h00 ngày 10/10/2026).
+        </p>
+      </div>
+
+      <!-- 4 THẺ TỔNG QUAN KPI TIẾN ĐỘ TOÀN CÔNG TY -->
+      <div class="kpi-overview-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-target-total">20</span>
+            <span class="kpi-label">Chỉ tiêu tối thiểu toàn PCVT</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-submitted-total">0</span>
+            <span class="kpi-label">Tác phẩm đã nộp thành công</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-rate-total">0%</span>
+            <span class="kpi-label">Tiến độ hoàn thành chỉ tiêu</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper icon-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-number" id="kpi-units-completed">0 / 13</span>
+            <span class="kpi-label">Đơn vị đã đạt chỉ tiêu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- THANH CHUYỂN SUB-TAB: TIẾN ĐỘ 13 ĐƠN VỊ <-> TRIỂN LÃM TÁC PHẨM -->
+      <div class="progress-subtabs-nav">
+        <button class="progress-tab-btn active" data-subtab="view-progress-table">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path>
+          </svg>
+          <span>Bảng Thống kê Tiến độ 13 Phòng / Đội</span>
+        </button>
+        <button class="progress-tab-btn" data-subtab="view-gallery">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>Xem lại Tác phẩm Dự thi (<span id="gallery-count-badge">0</span>)</span>
+        </button>
+      </div>
+
+      <!-- SUB-TAB 1: BẢNG THỐNG KÊ TIẾN ĐỘ 13 PHÒNG / ĐỘI -->
+      <div class="subtab-content-panel active" id="view-progress-table">
+        <div class="table-responsive-wrapper">
+          <table class="pcvt-progress-table">
+            <thead>
+              <tr>
+                <th style="width: 50px; text-align: center;">STT</th>
+                <th>Phòng / Đội trực thuộc PC Vũng Tàu</th>
+                <th style="text-align: center; width: 140px;">Chỉ tiêu tối thiểu</th>
+                <th style="text-align: center; width: 110px;">Đã gửi</th>
+                <th style="width: 220px;">Tiến độ đạt</th>
+                <th style="text-align: center; width: 150px;">Trạng thái</th>
+                <th>Định hướng đề tài & Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="pcvt-progress-tbody">
+              <!-- Rendered dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+        <div class="table-legend-footer">
+          <div class="legend-note">
+            <span>📌 <em>Ghi chú:</em> Theo KHLT giữa Công đoàn và Đoàn Thanh niên Công ty Điện lực Vũng Tàu, các Đơn vị nộp bài trực tuyến hoặc gửi qua email Đ/c Vũ Thị Linh Chi (0818.993.811) trước 17h00 ngày 10/10/2026 để tổng hợp dự thi cấp Tổng công ty trước ngày 15/10/2026.</span>
+          </div>
+          <a href="#submit" class="btn-table-cta">
+            <span>Nộp bài cho đơn vị của bạn</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: TRIỂN LÃM & XEM LẠI TÁC PHẨM DỰ THI -->
+      <div class="subtab-content-panel" id="view-gallery">
+        <!-- Gallery Filter & Search Toolbar -->
+        <div class="gallery-filter-toolbar">
+          <div class="gallery-type-chips">
+            <button class="gallery-type-btn active" data-type="all">Tất cả thể loại</button>
+            <button class="gallery-type-btn" data-type="Video">🎬 Video Clip</button>
+            <button class="gallery-type-btn" data-type="Ảnh">🖼️ Ảnh nghệ thuật</button>
+            <button class="gallery-type-btn" data-type="Infographic">📊 Infographic</button>
+          </div>
+
+          <div class="gallery-filter-right">
+            <select id="gallery-dept-filter" class="gallery-dept-select">
+              <option value="all">Tất cả 13 Phòng / Đội</option>
+              <option value="Văn phòng Công ty">Văn phòng Công ty</option>
+              <option value="Phòng Tổ chức và Nhân sự">Phòng Tổ chức và Nhân sự</option>
+              <option value="Phòng Kế hoạch và Vật tư">Phòng Kế hoạch và Vật tư</option>
+              <option value="Phòng Quản lý đầu tư">Phòng Quản lý đầu tư</option>
+              <option value="Phòng Kỹ thuật và An toàn">Phòng Kỹ thuật và An toàn</option>
+              <option value="Phòng Kinh doanh">Phòng Kinh doanh</option>
+              <option value="Phòng Tài chính Kế toán">Phòng Tài chính Kế toán</option>
+              <option value="Đội Vận hành lưới điện">Đội Vận hành lưới điện</option>
+              <option value="Đội Quản lý lưới điện">Đội Quản lý lưới điện</option>
+              <option value="Đội Dịch vụ khách hàng">Đội Dịch vụ khách hàng</option>
+              <option value="Đội Quản lý thu ghi">Đội Quản lý thu ghi</option>
+              <option value="Đội Quản lý hệ thống đo đếm">Đội Quản lý hệ thống đo đếm</option>
+              <option value="Điện lực Đặc khu Côn Đảo">Điện lực Đặc khu Côn Đảo</option>
+            </select>
+
+            <div class="gallery-search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="gallery-search-input" placeholder="Tìm tác phẩm, tác giả...">
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery Cards Grid -->
+        <div class="gallery-cards-grid" id="gallery-cards-container">
+          <!-- Rendered dynamically by app.js -->
         </div>
       </div>
     </div>
@@ -776,8 +931,25 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="field-donvi">Đơn vị công tác <span class="required">*</span></label>
-                <input type="text" id="field-donvi" class="form-input" placeholder="Ví dụ: Công ty Điện lực Vũng Tàu..." required>
+                <label class="form-label" for="field-donvi">Phòng / Đội công tác (thuộc PC Vũng Tàu) <span class="required">*</span></label>
+                <select id="field-donvi" class="form-select" required>
+                  <option value="">-- Chọn Phòng / Đội thuộc PC Vũng Tàu --</option>
+                  <option value="Văn phòng Công ty">1. Văn phòng Công ty (Chỉ tiêu: 02)</option>
+                  <option value="Phòng Tổ chức và Nhân sự">2. Phòng Tổ chức và Nhân sự (Chỉ tiêu: 01)</option>
+                  <option value="Phòng Kế hoạch và Vật tư">3. Phòng Kế hoạch và Vật tư (Chỉ tiêu: 02)</option>
+                  <option value="Phòng Quản lý đầu tư">4. Phòng Quản lý đầu tư (Chỉ tiêu: 02)</option>
+                  <option value="Phòng Kỹ thuật và An toàn">5. Phòng Kỹ thuật và An toàn (Chỉ tiêu: 04)</option>
+                  <option value="Phòng Kinh doanh">6. Phòng Kinh doanh (Chỉ tiêu: 03)</option>
+                  <option value="Phòng Tài chính Kế toán">7. Phòng Tài chính Kế toán (Chỉ tiêu: 01)</option>
+                  <option value="Đội Vận hành lưới điện">8. Đội Vận hành lưới điện (Chỉ tiêu: 01)</option>
+                  <option value="Đội Quản lý lưới điện">9. Đội Quản lý lưới điện (Chỉ tiêu: 01)</option>
+                  <option value="Đội Dịch vụ khách hàng">10. Đội Dịch vụ khách hàng (Chỉ tiêu: 01)</option>
+                  <option value="Đội Quản lý thu ghi">11. Đội Quản lý thu ghi (Chỉ tiêu: 01)</option>
+                  <option value="Đội Quản lý hệ thống đo đếm">12. Đội Quản lý hệ thống đo đếm (Chỉ tiêu: 01)</option>
+                  <option value="Điện lực Đặc khu Côn Đảo">13. Điện lực Đặc khu Côn Đảo (Chỉ tiêu: 01)</option>
+                  <option value="Đơn vị khác">Đơn vị khác ngoài PCVT...</option>
+                </select>
+                <span class="form-hint">Chọn đúng Phòng/Đội để hệ thống tự động tính điểm thi đua và cộng vào chỉ tiêu KHLT 53 của Đơn vị.</span>
               </div>
             </div>
 
@@ -954,7 +1126,7 @@
               <div class="progress-fill"></div>
             </div>
             <span style="font-size: 0.8rem; color: var(--text-dim);">
-              Hồ sơ được bảo mật và lưu trữ an toàn trên hạ tầng Google Sheets & Drive của EVNHCMC
+              Hồ sơ được bảo mật và lưu trữ an toàn trên hạ tầng công nghệ số của Ban Tổ chức Cuộc thi AI
             </span>
           </div>
         </form>
@@ -974,7 +1146,7 @@
       </div>
       <h3 class="modal-title">Nộp Tác Phẩm Thành Công!</h3>
       <p class="modal-desc">
-        Hồ sơ dự thi cho tác phẩm <strong id="modal-entry-title" style="color: #FFFFFF;">[Tên tác phẩm]</strong> của tác giả <strong id="modal-author-name" style="color: var(--color-primary);">[Tác giả]</strong> đã được ghi nhận vào hệ thống.
+        Hồ sơ dự thi cho tác phẩm <strong id="modal-entry-title" style="color: var(--text-main);">[Tên tác phẩm]</strong> của tác giả <strong id="modal-author-name" style="color: var(--color-evn-blue);">[Tác giả]</strong> đã được ghi nhận vào hệ thống.
       </p>
 
       <div class="submission-id-capsule">
@@ -982,16 +1154,66 @@
           <div class="id-label">MÃ DỰ THI CHÍNH THỨC</div>
           <div style="font-size: 0.75rem; color: var(--text-dim);">Dùng để đối soát và chấm giải</div>
         </div>
-        <div class="id-value" id="modal-submission-code">EVN-AI-001</div>
+        <div class="id-value" id="modal-submission-code">EVN-PCVT-001</div>
       </div>
 
       <div style="margin-bottom: 24px; font-size: 0.84rem; color: var(--text-muted); line-height: 1.6;">
-        Tác phẩm đã được lưu trữ an toàn trong thư mục Google Drive của Cuộc thi. Bạn hãy theo dõi thông báo trên Fanpage Đoàn Thanh niên EVNHCMC từ ngày 17/10/2026 để tham gia vòng bình chọn!
+        Tác phẩm đã được chuyển đến Ban Tổ chức để rà soát nội bộ trước ngày 10/10/2026. Bạn có thể xem lại tác phẩm của đơn vị mình tại mục <strong>"Tiến độ & Tác phẩm"</strong> trên trang web!
       </div>
 
       <button type="button" class="modal-btn-close" onclick="closeSuccessModal()">
         Hoàn tất & Đóng
       </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       7B. MODAL POPUP XEM CHI TIẾT TÁC PHẨM
+       ======================================================================== -->
+  <div class="modal-overlay" id="entry-detail-modal">
+    <div class="modal-box modal-detail-box">
+      <button type="button" class="modal-close-icon-btn" onclick="closeEntryDetailModal()" aria-label="Đóng">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="entry-detail-header">
+        <div class="entry-badges-row">
+          <span class="detail-badge-type" id="detail-type-badge">🎬 Video</span>
+          <span class="detail-badge-dept" id="detail-dept-badge">Phòng KT&AT</span>
+          <span class="detail-badge-code" id="detail-code-badge">EVN-PCVT-01</span>
+        </div>
+        <h3 class="detail-entry-title" id="detail-title">Tên tác phẩm dự thi</h3>
+        <div class="detail-author-row">
+          <span>👤 Tác giả/Trưởng nhóm: <strong id="detail-author">...</strong> (MSNV: <span id="detail-msnv">...</span>)</span>
+          <div id="detail-team-members" class="detail-team-sub"></div>
+        </div>
+      </div>
+
+      <div class="entry-detail-body">
+        <div class="detail-section-block">
+          <h4 class="detail-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Ý tưởng & Thông điệp tuyên truyền
+          </h4>
+          <p id="detail-desc" class="detail-text-content">...</p>
+        </div>
+
+        <div class="detail-section-block">
+          <h4 class="detail-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Ứng dụng Trí tuệ Nhân tạo (AI)
+          </h4>
+          <div class="detail-ai-tools-list" id="detail-ai-tools">
+            <!-- Badges tools -->
+          </div>
+          <p id="detail-ai-desc" class="detail-text-content">...</p>
+        </div>
+      </div>
+
+      <div class="modal-detail-footer">
+        <span style="font-size: 0.8rem; color: var(--text-dim);">Hồ sơ được bảo mật và phân quyền theo quy định Ban Tổ chức</span>
+        <button type="button" class="modal-btn-close" onclick="closeEntryDetailModal()">Đóng cửa sổ</button>
+      </div>
     </div>
   </div>
 
@@ -1003,7 +1225,7 @@
        ======================================================================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid footer-grid-4col">
         <div>
           <div class="brand-wrapper" style="margin-bottom: 12px;">
             <img src="logo.png" alt="Logo EVNHCMC" class="brand-logo-img" style="height: 44px; width: auto; background: #ffffff; padding: 4px; border-radius: 8px; border: 1px solid var(--border-subtle);">
@@ -1013,34 +1235,50 @@
             </div>
           </div>
           <p class="footer-col-desc">
-            Cuộc thi "Ứng dụng trí tuệ nhân tạo (AI) trong công tác tuyên truyền an toàn điện và tiết kiệm điện" do Công đoàn và Đoàn Thanh niên Tổng công ty Điện lực TP.HCM phối hợp tổ chức theo Kế hoạch liên tịch số 53.
+            Cuộc thi "Ứng dụng trí tuệ nhân tạo (AI) trong công tác tuyên truyền an toàn điện và tiết kiệm điện" do Công đoàn và Đoàn Thanh niên Tổng công ty Điện lực TP.HCM phối hợp tổ chức theo KHLT số 53 và Kế hoạch phân bổ chỉ tiêu tại Công ty Điện lực Vũng Tàu.
           </p>
         </div>
 
         <div>
           <h4 class="footer-heading">Liên kết Cuộc thi</h4>
           <ul class="footer-links-list">
-            <li><a href="https://drive.google.com/drive/folders/1u2rEZ2IECYFk-YQK2TXW_DAqvhjh7BWR?usp=sharing" target="_blank" rel="noopener">📁 Thư mục Google Drive Tác phẩm</a></li>
-            <li><a href="https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ/edit?usp=sharing" target="_blank" rel="noopener">📊 Google Sheets Danh sách bài nộp</a></li>
-            <li><a href="#rules">📜 Toàn văn Thể lệ & Cơ cấu giải thưởng</a></li>
+            <li><a href="#rules">📜 Toàn văn Thể lệ & Giải thưởng</a></li>
+            <li><a href="#department-progress">📊 Tiến độ chỉ tiêu 13 Phòng/Đội PCVT</a></li>
+            <li><a href="#department-progress">🎨 Triển lãm & Xem lại tác phẩm</a></li>
+            <li><a href="#ai-guide">🤖 Cẩm nang AI Agent thực chiến</a></li>
             <li><a href="#prompts">💡 Thư viện Prompt AI mẫu</a></li>
+            <li><a href="#submit">✍️ Cổng nộp bài dự thi trực tuyến</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-heading">Ban Tổ chức & Hỗ trợ</h4>
+          <h4 class="footer-heading">BTC PC Vũng Tàu (Đầu mối)</h4>
+          <ul class="footer-links-list">
+            <li><span>📍 <strong>Công ty Điện lực Vũng Tàu</strong></span></li>
+            <li><span>👤 <strong>Đ/c Vũ Thị Linh Chi</strong> - Tiếp nhận tác phẩm</span></li>
+            <li><span>📞 Hotline: <strong>0818.993.811</strong></span></li>
+            <li><span>✉️ Email: <strong>ChiVTL@hcmpc.com.vn</strong></span></li>
+            <li><span>⏰ Hạn nộp nội bộ: <strong>Trước 17h00 ngày 10/10/2026</strong></span></li>
+            <li><span>👤 Đ/c Lê Hoài Nam - Bí thư Đoàn PCVT</span></li>
+            <li><span>👤 Đ/c Trần Thanh Hải - Chủ tịch CĐ PCVT</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Ban Tổ chức Cấp TCT</h4>
           <ul class="footer-links-list">
             <li><span>📍 Văn phòng Đoàn Thanh niên EVNHCMC</span></li>
-            <li><span>👤 Đ/c Phan Hoàng Nhân - Bí thư Đoàn</span></li>
+            <li><span>👤 Đ/c Phan Hoàng Nhân - Bí thư Đoàn TCT</span></li>
             <li><span>📞 Hotline: <strong>0703.198.369</strong></span></li>
             <li><span>✉️ Email: <strong>Nhan2PH@hcmpc.com.vn</strong></span></li>
+            <li><span>⏰ Hạn nộp về TCT: <strong>Trước 15/10/2026</strong></span></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 Tổng công ty Điện lực TP. Hồ Chí Minh (EVNHCMC) • Ban Tổ chức Cuộc thi AI</span>
-        <span>Thiết kế tiêu chuẩn UI/UX Pro Max • Tích hợp Google Sheets & Drive</span>
+        <span>© 2026 Công ty Điện lực Vũng Tàu (PCVT) & Tổng công ty Điện lực TP. Hồ Chí Minh (EVNHCMC)</span>
+        <span>Hệ thống bảo mật dữ liệu tập trung • Phát triển phục vụ Cuộc thi AI KHLT 53</span>
       </div>
     </div>
   </footer>

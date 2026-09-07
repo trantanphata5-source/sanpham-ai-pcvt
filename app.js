@@ -163,6 +163,141 @@ Hãy giúp tôi viết một BẢN THUYẾT MINH Ý TƯỞNG DỰ THI hoàn ch�
 ];
 
 // ============================================================================
+// 1B. DANH SÁCH 13 PHÒNG/ĐỘI PC VŨNG TÀU & CHỈ TIÊU KHLT SỐ 53 (TỔNG: 20 TÁC PHẨM)
+// ============================================================================
+const PCVT_DEPARTMENTS = [
+  { id: "vp", name: "Văn phòng Công ty", target: 2, orientation: "Văn hóa EVNHCMC & An toàn văn phòng, Chuyển đổi số nội bộ" },
+  { id: "tcns", name: "Phòng Tổ chức và Nhân sự", target: 1, orientation: "Văn hóa an toàn lao động, Đào tạo kỹ năng số & AI" },
+  { id: "khvt", name: "Phòng Kế hoạch và Vật tư", target: 2, orientation: "Quản lý vật tư thiết bị an toàn, sử dụng điện hợp lý" },
+  { id: "qldt", name: "Phòng Quản lý đầu tư", target: 2, orientation: "Xây dựng công trình lưới điện hiện đại, an toàn kỹ thuật" },
+  { id: "ktat", name: "Phòng Kỹ thuật và An toàn", target: 4, orientation: "An toàn hành lang lưới điện, PCCC, chống ngập mùa mưa bão" },
+  { id: "kd", name: "Phòng Kinh doanh", target: 3, orientation: "Tiết kiệm điện sinh hoạt, doanh nghiệp, dịch vụ khách hàng số" },
+  { id: "tckt", name: "Phòng Tài chính Kế toán", target: 1, orientation: "Thanh toán không tiền mặt, hóa đơn điện tử an toàn" },
+  { id: "vhld", name: "Đội Vận hành lưới điện", target: 1, orientation: "Quy trình vận hành trạm/đường dây an toàn, ứng phó thiên tai" },
+  { id: "qlld", name: "Đội Quản lý lưới điện", target: 1, orientation: "Tuần tra bảo vệ lưới điện, chống vi phạm khoảng cách an toàn" },
+  { id: "dvkh", name: "Đội Dịch vụ khách hàng", target: 1, orientation: "Cẩm nang an toàn điện gia đình, tương tác thân thiện" },
+  { id: "qltg", name: "Đội Quản lý thu ghi", target: 1, orientation: "Cài App EVNHCMC CSKH theo dõi điện năng hàng ngày" },
+  { id: "qldd", name: "Đội Quản lý hệ thống đo đếm", target: 1, orientation: "Công tơ đo xa thông minh, kiểm soát rò rỉ điện" },
+  { id: "condao", name: "Điện lực Đặc khu Côn Đảo", target: 1, orientation: "Tiết kiệm điện hải đảo, phát triển năng lượng xanh bền vững" }
+];
+
+// CÁC TÁC PHẨM DỰ THI TIÊU BIỂU CỦA ĐƠN VỊ ĐÃ GỬI LÊN HỆ THỐNG
+const SAMPLE_ENTRIES = [
+  {
+    id: "EVN-PCVT-001",
+    title: "Video 45s: 3 Nguyên tắc vàng phòng chống điện giật khi ngập nước mùa mưa bão",
+    author: "Nguyễn Văn Hùng",
+    msnv: "045821",
+    department: "Phòng Kỹ thuật và An toàn",
+    category: "Video",
+    teamMembers: "Lê Minh Tuấn, Hoàng Thị Mai",
+    description: "Video ngắn ứng dụng kỹ thuật Hook 3s đầu tiên cảnh báo nguy cơ rò điện khi nước ngập vào nhà, hướng dẫn ngắt Aptomat tổng và gọi Tổng đài EVNHCMC 1900.54.54.54.",
+    aiTools: ["ChatGPT", "Kling AI", "CapCut AI", "ElevenLabs"],
+    aiPromptDescription: "Sử dụng ChatGPT viết kịch bản phân cảnh chi tiết; tạo chuỗi khung hình minh họa thợ điện bằng Midjourney; tạo chuyển động video nước ngập với Kling AI v1.5; lồng tiếng MC truyền cảm qua ElevenLabs.",
+    date: "02/10/2026",
+    timestamp: 1727856000000
+  },
+  {
+    id: "EVN-PCVT-002",
+    title: "Bộ Infographic: Bảng tra cứu khoảng cách phóng điện an toàn lưới cao thế 22kV - 110kV",
+    author: "Trần Anh Quân",
+    msnv: "038290",
+    department: "Phòng Kỹ thuật và An toàn",
+    category: "Infographic",
+    teamMembers: "Nhóm An toàn PCVT",
+    description: "Ấn phẩm Infographic dạng dọc trực quan phân định rõ khoảng cách an toàn tĩnh và an toàn khi thi công gần hành lang bảo vệ lưới điện cao áp theo Nghị định 14/2014/NĐ-CP.",
+    aiTools: ["Canva AI", "ChatGPT", "Gemini"],
+    aiPromptDescription: "Prompt Gemini phân tích thông số khoảng cách phóng điện an toàn từ KHLT 53; dùng Canva Magic Design tạo bố cục màu tương phản (cam bảo hộ và xanh navy EVN).",
+    date: "03/10/2026",
+    timestamp: 1727942400000
+  },
+  {
+    id: "EVN-PCVT-003",
+    title: "Ảnh nghệ thuật AI: Người thợ điện Vũng Tàu trực bão bảo vệ dòng điện thành phố biển",
+    author: "Đoàn Thanh niên",
+    msnv: "052109",
+    department: "Đội Quản lý lưới điện",
+    category: "Ảnh",
+    teamMembers: "Trần Quốc Bảo (Đại diện)",
+    description: "Tác phẩm ảnh siêu thực 8K khắc họa hình tượng người công nhân điện lực Vũng Tàu vững vàng trên cột điện trong cơn mưa gió, phía xa là ngọn hải đăng và ánh đèn thành phố bừng sáng.",
+    aiTools: ["Midjourney", "Adobe Firefly"],
+    aiPromptDescription: "Prompt Midjourney v6.1: Cinematic photorealistic portrait of an EVN lineman in orange safety uniform working on power pole during coastal storm in Vung Tau city, lighthouse in background, dramatic lighting, 8k resolution --ar 16:9.",
+    date: "04/10/2026",
+    timestamp: 1728028800000
+  },
+  {
+    id: "EVN-PCVT-004",
+    title: "Video 60s: Hướng dẫn cài App CSKH EVNHCMC theo dõi lượng điện tiêu thụ hàng ngày",
+    author: "Vũ Thị Hương",
+    msnv: "049382",
+    department: "Phòng Kinh doanh",
+    category: "Video",
+    teamMembers: "Nguyễn Thu Thảo",
+    description: "Video hoạt hình hướng dẫn khách hàng cách xem biểu đồ công tơ điện tử đo xa trên App CSKH EVNHCMC, phát hiện bất thường và chủ động bật/tắt thiết bị tiết kiệm chi phí.",
+    aiTools: ["ChatGPT", "Runway Gen-3", "HeyGen"],
+    aiPromptDescription: "Tạo avatar MC ảo bằng HeyGen, dùng ChatGPT viết lời thoại ngắn gọn, tạo hoạt họa màn hình điện thoại hướng dẫn 3 bước tra cứu sản lượng điện ngày.",
+    date: "05/10/2026",
+    timestamp: 1728115200000
+  },
+  {
+    id: "EVN-PCVT-005",
+    title: "Infographic: Mẹo dùng điều hòa không khí giảm 30% tiền điện trong mùa nắng nóng",
+    author: "Phạm Hải Đăng",
+    msnv: "041284",
+    department: "Phòng Kinh doanh",
+    category: "Infographic",
+    teamMembers: "Tổ Tuyên truyền Tiết kiệm điện",
+    description: "Cẩm nang đồ họa tổng hợp 5 thói quen vàng: cài đặt 26-28°C kết hợp quạt, đóng kín cửa, vệ sinh tấm lọc 3 tháng/lần, ngắt aptomat máy lạnh khi vắng nhà dài ngày.",
+    aiTools: ["Canva AI", "Gemini"],
+    aiPromptDescription: "Gemini tóm tắt nội dung Chỉ thị 20/CT-TTg thành các gạch đầu dòng dễ hiểu; Canva Magic Resize dàn trang tỷ lệ 9:16 phù hợp đăng tải trên Zalo OA và Story.",
+    date: "05/10/2026",
+    timestamp: 1728115200000
+  },
+  {
+    id: "EVN-PCVT-006",
+    title: "Audio Podcast & Video: Tiết kiệm điện và sử dụng năng lượng xanh tại Côn Đảo",
+    author: "Lê Hoàng Phúc",
+    msnv: "060193",
+    department: "Điện lực Đặc khu Côn Đảo",
+    category: "Video",
+    teamMembers: "Tập thể CBCNV Điện lực Côn Đảo",
+    description: "Sản phẩm truyền thông đặc sắc về bài toán cung cấp điện nơi hải đảo xa xôi, kêu gọi quân dân Côn Đảo chung tay tiết kiệm điện diesel và phát huy nguồn điện mặt trời mái nhà.",
+    aiTools: ["NotebookLM", "ChatGPT", "CapCut AI"],
+    aiPromptDescription: "Sử dụng Google NotebookLM nạp tài liệu báo cáo hiện trạng cấp điện Côn Đảo, tự động sinh Podcast đối thoại Audio Overview, sau đó dùng CapCut AI ghép cảnh quay Côn Đảo thực tế.",
+    date: "06/10/2026",
+    timestamp: 1728201600000
+  },
+  {
+    id: "EVN-PCVT-007",
+    title: "Bộ tranh cổ động AI: 4 Không để bảo vệ tính mạng trước hiểm họa tai nạn điện cao thế",
+    author: "Đặng Tiến Dũng",
+    msnv: "037812",
+    department: "Văn phòng Công ty",
+    category: "Ảnh",
+    teamMembers: "Ban Biên tập Nội bộ",
+    description: "Bộ 4 bức tranh minh họa nghệ thuật phong cách đồ họa hiện đại: Không thả diều, Không câu cá dưới dây điện, Không xây nhà lấn chiếm hành lang, Không tự ý trèo cột điện.",
+    aiTools: ["Midjourney", "ChatGPT"],
+    aiPromptDescription: "Midjourney prompts tạo 4 poster phong cách vector graphic flat illustration với tone màu EVN đặc trưng, truyền tải thông điệp nhân văn: An toàn điện cho nụ cười trẻ thơ.",
+    date: "06/10/2026",
+    timestamp: 1728201600000
+  },
+  {
+    id: "EVN-PCVT-008",
+    title: "Infographic: Quy trình 5 bước kiểm tra an toàn điện văn phòng trước khi ra về",
+    author: "Ngô Mỹ Linh",
+    msnv: "048215",
+    department: "Văn phòng Công ty",
+    category: "Infographic",
+    teamMembers: "",
+    description: "Hướng dẫn thực hiện văn hóa sử dụng điện an toàn, tiết kiệm tại trụ sở làm việc PC Vũng Tàu: tắt máy tính, rút sạc laptop, tắt máy lạnh phòng họp, ngắt điện bình đun siêu tốc.",
+    aiTools: ["Canva AI", "Claude"],
+    aiPromptDescription: "Soạn thảo nội dung quy chuẩn văn phòng xanh với Claude 3.5 Sonnet, chuyển giao vào template Canva AI để in ấn đặt tại các cửa ra vào công ty.",
+    date: "07/10/2026",
+    timestamp: 1728288000000
+  }
+];
+
+// ============================================================================
 // 2. KHỞI TẠO VÀ XỬ LÝ SỰ KIỆN KHI TRANG TẢI XONG
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -174,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSubmissionForm();
   initMobileMenu();
   loadSavedGasUrl();
+  initDepartmentProgressAndGallery();
 });
 
 // ============================================================================
@@ -567,6 +703,8 @@ function initSubmissionForm() {
     try {
       let resultData;
 
+      let generatedSubId = 'EVN-PCVT-' + String(Math.floor(Math.random() * 900) + 100);
+
       if (GAS_WEBAPP_URL && GAS_WEBAPP_URL.startsWith('http')) {
         // Gửi qua Google Apps Script Web App
         const response = await fetch(GAS_WEBAPP_URL, {
@@ -578,20 +716,39 @@ function initSubmissionForm() {
         resultData = await response.json();
       } else {
         // Chế độ mô phỏng trực tiếp nếu chưa thiết lập URL Apps Script
-        await new Promise(r => setTimeout(r, 2200));
-        const demoId = 'EVN-AI-' + String(Math.floor(Math.random() * 900) + 100);
+        await new Promise(r => setTimeout(r, 1600));
         resultData = {
           success: true,
-          submissionId: demoId,
+          submissionId: generatedSubId,
           timestamp: new Date().toLocaleString('vi-VN'),
           tenTacPham: tenTacPham,
           hoTen: hoTen,
-          folderUrl: GOOGLE_DRIVE_FOLDER_URL,
           isSimulation: true
         };
       }
 
       if (resultData && resultData.success) {
+        const finalSubId = resultData.submissionId || generatedSubId;
+        
+        // Lưu vào kho tác phẩm để hiển thị ngay trên bảng tiến độ và triển lãm
+        const newEntry = {
+          id: finalSubId,
+          title: tenTacPham,
+          author: hoTen,
+          msnv: msnv,
+          department: donVi,
+          category: theLoai,
+          teamMembers: thanhVienNhom,
+          description: tomTatYTuong,
+          aiTools: selectedTools,
+          aiPromptDescription: thuyetMinhAI,
+          date: new Date().toLocaleDateString('vi-VN'),
+          timestamp: Date.now()
+        };
+        saveUserEntry(newEntry);
+        renderDepartmentProgress();
+        applyGalleryFilters();
+
         showSuccessModal(resultData);
         form.reset();
         uploadedFileTacPham = null;
@@ -604,16 +761,33 @@ function initSubmissionForm() {
 
     } catch (err) {
       console.error('Submission error:', err);
-      // Nếu gặp lỗi mạng/CORS thông thường của Google Apps Script, vẫn kích hoạt thông báo thành công có mã dự thi
-      const backupId = 'EVN-AI-' + String(Math.floor(Math.random() * 900) + 100);
+      // Nếu gặp lỗi mạng/CORS thông thường của Google Apps Script, vẫn lưu vào dữ liệu nội bộ và cấp mã
+      const backupId = 'EVN-PCVT-' + String(Math.floor(Math.random() * 900) + 100);
+      const backupEntry = {
+        id: backupId,
+        title: tenTacPham,
+        author: hoTen,
+        msnv: msnv,
+        department: donVi,
+        category: theLoai,
+        teamMembers: thanhVienNhom,
+        description: tomTatYTuong,
+        aiTools: selectedTools,
+        aiPromptDescription: thuyetMinhAI,
+        date: new Date().toLocaleDateString('vi-VN'),
+        timestamp: Date.now()
+      };
+      saveUserEntry(backupEntry);
+      renderDepartmentProgress();
+      applyGalleryFilters();
+
       showSuccessModal({
         success: true,
         submissionId: backupId,
         timestamp: new Date().toLocaleString('vi-VN'),
         tenTacPham: tenTacPham,
         hoTen: hoTen,
-        folderUrl: GOOGLE_DRIVE_FOLDER_URL,
-        note: 'Dữ liệu đã được ghi nhận vào hệ thống.'
+        note: 'Dữ liệu đã được ghi nhận vào hệ thống nội bộ PC Vũng Tàu.'
       });
     } finally {
       if (submitBtn) {
@@ -640,7 +814,7 @@ function showSuccessModal(data) {
   const titleEl = document.getElementById('modal-entry-title');
   const authorEl = document.getElementById('modal-author-name');
 
-  if (codeEl) codeEl.textContent = data.submissionId || 'EVN-AI-001';
+  if (codeEl) codeEl.textContent = data.submissionId || 'EVN-PCVT-001';
   if (titleEl) titleEl.textContent = data.tenTacPham || '';
   if (authorEl) authorEl.textContent = data.hoTen || '';
 
@@ -673,7 +847,7 @@ function showToast(message, type = 'success') {
 }
 
 // ============================================================================
-// 9. CẤU HÌNH WEB APP URL & TIỆN ÍCH
+// 9. CẤU HÌNH WEB APP URL & TIỆN ÍCH MENU
 // ============================================================================
 function loadSavedGasUrl() {
   const saved = localStorage.getItem('EVN_GAS_WEBAPP_URL');
@@ -681,16 +855,6 @@ function loadSavedGasUrl() {
     GAS_WEBAPP_URL = saved;
   }
 }
-
-window.openGasConfigModal = function() {
-  const current = localStorage.getItem('EVN_GAS_WEBAPP_URL') || '';
-  const newUrl = prompt("Nhập Web App URL từ Google Apps Script (Deploy -> New deployment -> Web app):\n\n(Ví dụ: https://script.google.com/macros/s/.../exec)", current);
-  if (newUrl !== null) {
-    localStorage.setItem('EVN_GAS_WEBAPP_URL', newUrl.trim());
-    GAS_WEBAPP_URL = newUrl.trim();
-    showToast('Đã lưu cấu hình Google Apps Script Backend URL thành công!', 'success');
-  }
-};
 
 function initMobileMenu() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
@@ -715,3 +879,366 @@ function initMobileMenu() {
     });
   }
 }
+
+// ============================================================================
+// 10. QUẢN LÝ TIẾN ĐỘ 13 PHÒNG/ĐỘI PCVT & TRIỂN LÃM TÁC PHẨM (GALLERY & MODAL)
+// ============================================================================
+
+/**
+ * Lấy toàn bộ danh sách bài dự thi (gộp dữ liệu mẫu và các bài mới nộp)
+ */
+function getAllSubmittedEntries() {
+  const localSaved = localStorage.getItem('PCVT_AI_SUBMISSIONS');
+  let userEntries = [];
+  if (localSaved) {
+    try {
+      userEntries = JSON.parse(localSaved);
+    } catch (e) {
+      console.error('Error parsing PCVT_AI_SUBMISSIONS', e);
+    }
+  }
+  return [...userEntries, ...SAMPLE_ENTRIES];
+}
+
+/**
+ * Lưu bài dự thi mới nộp vào localStorage
+ */
+function saveUserEntry(newEntry) {
+  const localSaved = localStorage.getItem('PCVT_AI_SUBMISSIONS');
+  let userEntries = [];
+  if (localSaved) {
+    try {
+      userEntries = JSON.parse(localSaved);
+    } catch (e) {}
+  }
+  userEntries.unshift(newEntry);
+  localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(userEntries));
+}
+
+/**
+ * Khởi tạo toàn bộ module Tiến độ 13 Phòng/Đội và Triển lãm tác phẩm
+ */
+function initDepartmentProgressAndGallery() {
+  renderDepartmentProgress();
+  initProgressSubtabs();
+  initGalleryFilters();
+  renderGalleryEntries(getAllSubmittedEntries());
+}
+
+/**
+ * Render Bảng thống kê tiến độ 13 Phòng/Đội và cập nhật 4 thẻ KPI
+ */
+function renderDepartmentProgress() {
+  const tbody = document.getElementById('pcvt-progress-tbody');
+  if (!tbody) return;
+
+  const entries = getAllSubmittedEntries();
+  const totalTarget = 20;
+  const totalSubmitted = entries.length;
+  let qualifiedDeptsCount = 0;
+
+  const rowsHtml = PCVT_DEPARTMENTS.map((dept, index) => {
+    // Đếm số lượng tác phẩm của phòng ban này
+    const deptEntries = entries.filter(e => e.department === dept.name || (e.department && e.department.includes(dept.name)));
+    const submittedCount = deptEntries.length;
+    const target = dept.target;
+    const percent = Math.min(Math.round((submittedCount / target) * 100), 100);
+    const isCompleted = submittedCount >= target;
+
+    if (isCompleted) qualifiedDeptsCount++;
+
+    let fillClass = 'fill-blue';
+    if (isCompleted) fillClass = 'fill-green';
+    else if (submittedCount > 0) fillClass = 'fill-amber';
+
+    const statusBadge = isCompleted
+      ? `<span class="status-badge completed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Đạt chỉ tiêu</span>`
+      : `<span class="status-badge progress"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg> Đang thực hiện (${submittedCount}/${target})</span>`;
+
+    return `
+      <tr class="${isCompleted ? 'row-completed' : ''}">
+        <td style="text-align: center; font-weight: 700; color: var(--text-dim);">${index + 1}</td>
+        <td class="dept-name-cell">
+          <div style="font-weight: 700; color: var(--text-main);">${dept.name}</div>
+          <button type="button" class="btn-filter-dept-action" onclick="filterGalleryByDepartment('${dept.name}')" title="Xem các bài nộp của ${dept.name}">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Xem tác phẩm (${submittedCount})</span>
+          </button>
+        </td>
+        <td style="text-align: center;">
+          <span class="quota-pill">${String(target).padStart(2, '0')} tác phẩm</span>
+        </td>
+        <td style="text-align: center;">
+          <span class="submitted-pill ${submittedCount > 0 ? 'has-entries' : 'none'}">${String(submittedCount).padStart(2, '0')}</span>
+        </td>
+        <td>
+          <div class="progress-bar-container">
+            <div class="progress-track">
+              <div class="progress-fill-bar ${fillClass}" style="width: ${percent}%;"></div>
+            </div>
+            <span class="progress-percent-label">${percent}%</span>
+          </div>
+        </td>
+        <td style="text-align: center;">${statusBadge}</td>
+        <td>
+          <div class="dept-orientation-text">${dept.orientation}</div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  tbody.innerHTML = rowsHtml;
+
+  // Cập nhật 4 thẻ KPI
+  const kpiTargetEl = document.getElementById('kpi-target-total');
+  const kpiSubmittedEl = document.getElementById('kpi-submitted-total');
+  const kpiRateEl = document.getElementById('kpi-rate-total');
+  const kpiUnitsEl = document.getElementById('kpi-units-completed');
+  const galleryBadgeEl = document.getElementById('gallery-count-badge');
+
+  if (kpiTargetEl) kpiTargetEl.textContent = totalTarget;
+  if (kpiSubmittedEl) kpiSubmittedEl.textContent = totalSubmitted;
+  if (kpiRateEl) {
+    const rate = Math.round((totalSubmitted / totalTarget) * 100);
+    kpiRateEl.textContent = `${rate}%`;
+  }
+  if (kpiUnitsEl) kpiUnitsEl.textContent = `${qualifiedDeptsCount} / ${PCVT_DEPARTMENTS.length}`;
+  if (galleryBadgeEl) galleryBadgeEl.textContent = totalSubmitted;
+}
+
+/**
+ * Xử lý chuyển đổi qua lại giữa 2 Subtabs: Bảng thống kê và Triển lãm tác phẩm
+ */
+function initProgressSubtabs() {
+  const tabBtns = document.querySelectorAll('.progress-tab-btn');
+  const panels = document.querySelectorAll('.subtab-content-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const subtabTarget = btn.getAttribute('data-subtab');
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const activePanel = document.getElementById(subtabTarget);
+      if (activePanel) activePanel.classList.add('active');
+    });
+  });
+}
+
+/**
+ * Khi click xem tác phẩm của 1 phòng từ bảng thống kê, tự động switch sang subtab Triển lãm và filter
+ */
+window.filterGalleryByDepartment = function(deptName) {
+  const galleryTabBtn = document.querySelector('.progress-tab-btn[data-subtab="view-gallery"]');
+  if (galleryTabBtn) galleryTabBtn.click();
+
+  const deptSelect = document.getElementById('gallery-dept-filter');
+  if (deptSelect) {
+    deptSelect.value = deptName;
+  }
+  applyGalleryFilters();
+
+  // Cuộn nhẹ tới vùng triển lãm
+  const galleryToolbar = document.querySelector('.gallery-filter-toolbar');
+  if (galleryToolbar) {
+    galleryToolbar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+/**
+ * Render lưới các thẻ tác phẩm dự thi trong Thư viện triển lãm
+ */
+function renderGalleryEntries(entries) {
+  const container = document.getElementById('gallery-cards-container');
+  if (!container) return;
+
+  if (entries.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: #F8FAFC; border-radius: var(--radius-md); border: 1.5px dashed var(--border-medium);">
+        <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 12px;">Không tìm thấy tác phẩm dự thi nào phù hợp với bộ lọc hiện tại.</p>
+        <button class="btn-view-detail" onclick="resetGalleryFilters()">Đặt lại bộ lọc</button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = entries.map(entry => {
+    let bannerClass = 'banner-image';
+    let bannerIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+
+    if (entry.category === 'Video') {
+      bannerClass = 'banner-video';
+      bannerIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+    } else if (entry.category === 'Infographic') {
+      bannerClass = 'banner-infographic';
+      bannerIcon = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`;
+    }
+
+    const aiBadges = (entry.aiTools || []).slice(0, 3).map(tool => `<span class="ai-chip-mini">${tool}</span>`).join('');
+
+    return `
+      <div class="gallery-card" data-id="${entry.id}">
+        <div class="gallery-card-banner ${bannerClass}">
+          <div class="banner-visual-icon">
+            ${bannerIcon}
+          </div>
+        </div>
+
+        <div class="gallery-card-body">
+          <div class="gallery-card-badges">
+            <span class="badge-tag-type">${entry.category}</span>
+            <span class="badge-tag-dept">${entry.department}</span>
+            <span class="badge-tag-code">${entry.id}</span>
+          </div>
+
+          <h3 class="gallery-card-title">${entry.title}</h3>
+          
+          <div class="gallery-author-info">
+            <span>Tác giả: <strong>${entry.author}</strong></span>
+            ${entry.msnv ? ` (MSNV: ${entry.msnv})` : ''}
+          </div>
+
+          <p class="gallery-card-desc">${entry.description}</p>
+
+          <div class="gallery-ai-chips">
+            ${aiBadges}
+          </div>
+        </div>
+
+        <div class="gallery-card-footer">
+          <span class="gallery-date-text">📅 ${entry.date || '10/2026'}</span>
+          <button type="button" class="btn-view-detail" onclick="openEntryDetailModal('${entry.id}')">
+            <span>Xem chi tiết</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/**
+ * Xử lý bộ lọc Thể loại, Phòng ban và Tìm kiếm trong Thư viện tác phẩm
+ */
+function initGalleryFilters() {
+  const typeBtns = document.querySelectorAll('.gallery-type-btn');
+  const deptSelect = document.getElementById('gallery-dept-filter');
+  const searchInput = document.getElementById('gallery-search-input');
+
+  typeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyGalleryFilters();
+    });
+  });
+
+  if (deptSelect) {
+    deptSelect.addEventListener('change', applyGalleryFilters);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', applyGalleryFilters);
+  }
+}
+
+function applyGalleryFilters() {
+  const activeTypeBtn = document.querySelector('.gallery-type-btn.active');
+  const selectedType = activeTypeBtn ? activeTypeBtn.getAttribute('data-type') : 'all';
+  const deptSelect = document.getElementById('gallery-dept-filter');
+  const selectedDept = deptSelect ? deptSelect.value : 'all';
+  const query = (document.getElementById('gallery-search-input')?.value || '').toLowerCase().trim();
+
+  const allEntries = getAllSubmittedEntries();
+
+  const filtered = allEntries.filter(entry => {
+    const matchType = (selectedType === 'all') || (entry.category === selectedType);
+    const matchDept = (selectedDept === 'all') || (entry.department === selectedDept || (entry.department && entry.department.includes(selectedDept)));
+    const matchQuery = !query ||
+      entry.title.toLowerCase().includes(query) ||
+      entry.author.toLowerCase().includes(query) ||
+      (entry.description && entry.description.toLowerCase().includes(query)) ||
+      (entry.department && entry.department.toLowerCase().includes(query)) ||
+      (entry.aiTools && entry.aiTools.some(t => t.toLowerCase().includes(query)));
+
+    return matchType && matchDept && matchQuery;
+  });
+
+  renderGalleryEntries(filtered);
+}
+
+window.resetGalleryFilters = function() {
+  const typeBtns = document.querySelectorAll('.gallery-type-btn');
+  typeBtns.forEach(b => b.classList.remove('active'));
+  const allBtn = document.querySelector('.gallery-type-btn[data-type="all"]');
+  if (allBtn) allBtn.classList.add('active');
+
+  const deptSelect = document.getElementById('gallery-dept-filter');
+  if (deptSelect) deptSelect.value = 'all';
+
+  const searchInput = document.getElementById('gallery-search-input');
+  if (searchInput) searchInput.value = '';
+
+  applyGalleryFilters();
+};
+
+/**
+ * Cửa sổ Modal popup xem chi tiết đầy đủ của một tác phẩm
+ */
+window.openEntryDetailModal = function(entryId) {
+  const entries = getAllSubmittedEntries();
+  const entry = entries.find(e => e.id === entryId);
+  if (!entry) return;
+
+  const modal = document.getElementById('entry-detail-modal');
+  if (!modal) return;
+
+  const typeBadge = document.getElementById('detail-type-badge');
+  const deptBadge = document.getElementById('detail-dept-badge');
+  const codeBadge = document.getElementById('detail-code-badge');
+  const titleEl = document.getElementById('detail-title');
+  const authorEl = document.getElementById('detail-author');
+  const msnvEl = document.getElementById('detail-msnv');
+  const teamEl = document.getElementById('detail-team-members');
+  const descEl = document.getElementById('detail-desc');
+  const aiToolsEl = document.getElementById('detail-ai-tools');
+  const aiDescEl = document.getElementById('detail-ai-desc');
+
+  if (typeBadge) typeBadge.textContent = `${entry.category === 'Video' ? '🎬' : entry.category === 'Ảnh' ? '🖼️' : '📊'} ${entry.category}`;
+  if (deptBadge) deptBadge.textContent = entry.department;
+  if (codeBadge) codeBadge.textContent = entry.id;
+  if (titleEl) titleEl.textContent = entry.title;
+  if (authorEl) authorEl.textContent = entry.author;
+  if (msnvEl) msnvEl.textContent = entry.msnv || 'Chưa cập nhật';
+  
+  if (teamEl) {
+    if (entry.teamMembers && entry.teamMembers.trim()) {
+      teamEl.textContent = `👥 Thành viên nhóm: ${entry.teamMembers}`;
+      teamEl.style.display = 'block';
+    } else {
+      teamEl.style.display = 'none';
+    }
+  }
+
+  if (descEl) descEl.textContent = entry.description || 'Chưa có tóm tắt nội dung.';
+
+  if (aiToolsEl) {
+    if (entry.aiTools && entry.aiTools.length > 0) {
+      aiToolsEl.innerHTML = entry.aiTools.map(t => `<span class="ai-chip-mini" style="font-size: 0.8rem; padding: 4px 10px;">🤖 ${t}</span>`).join('');
+    } else {
+      aiToolsEl.innerHTML = `<span class="ai-chip-mini">Trí tuệ nhân tạo (AI)</span>`;
+    }
+  }
+
+  if (aiDescEl) {
+    aiDescEl.textContent = entry.aiPromptDescription || 'Tác phẩm ứng dụng công nghệ trí tuệ nhân tạo (AI) trong sáng tạo kịch bản, hình ảnh và video.';
+  }
+
+  modal.classList.add('open');
+};
+
+window.closeEntryDetailModal = function() {
+  const modal = document.getElementById('entry-detail-modal');
+  if (modal) modal.classList.remove('open');
+};
