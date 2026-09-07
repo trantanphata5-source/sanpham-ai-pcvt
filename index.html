@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuộc thi Ứng dụng AI trong Tuyên truyền An toàn & Tiết kiệm điện - EVNHCMC 2026</title>
+  <meta name="description" content="Cổng nộp tác phẩm và cẩm nang Prompt AI cho Cuộc thi Ứng dụng Trí tuệ nhân tạo (AI) trong công tác tuyên truyền an toàn điện, tiết kiệm điện - Đoàn Thanh niên & Công đoàn EVNHCMC.">
+  <meta name="theme-color" content="#004B8D">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. NAVIGATION BAR (2-TIER HEADER: TÊN CHƯƠNG TRÌNH & THANH CÔNG CỤ NÚT CHỨC NĂNG)
+       ======================================================================== -->
+  <header class="navbar">
+    <!-- DÒNG 1: TÊN CHƯƠNG TRÌNH, ĐƠN VỊ TỔ CHỨC & LOGO CHÍNH THỨC -->
+    <div class="nav-top-bar">
+      <div class="container nav-top-container">
+        <a href="#hero" class="brand-wrapper">
+          <img src="logo.png" alt="Logo EVNHCMC" class="brand-logo-img">
+          <div class="brand-text">
+            <span class="brand-org">TỔNG CÔNG TY ĐIỆN LỰC TP. HỒ CHÍ MINH • CÔNG ĐOÀN - ĐOÀN THANH NIÊN</span>
+            <span class="brand-title">CUỘC THI ỨNG DỤNG TRÍ TUỆ NHÂN TẠO (AI) NĂM 2026</span>
+            <span class="brand-subtitle">Tuyên truyền An toàn điện và Tiết kiệm điện (Kế hoạch liên tịch số 53)</span>
+          </div>
+        </a>
+
+        <div class="nav-top-actions">
+          <button class="btn-api-config" onclick="openGasConfigModal()" title="Cấu hình Google Apps Script Web App URL">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Cấu hình API</span>
+          </button>
+          <a href="#submit" class="btn-nav-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>Nộp tác phẩm</span>
+          </a>
+          <button class="btn-mobile-toggle" id="mobile-menu-toggle" aria-label="Mở menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÒNG 2: THANH CÔNG CỤ CÁC NÚT CHỨC NĂNG NẰM DƯỚI DÒNG TÊN CHƯƠNG TRÌNH -->
+    <div class="nav-toolbar-bar">
+      <div class="container nav-toolbar-container">
+        <nav class="toolbar-nav">
+          <ul class="nav-menu">
+            <li>
+              <a href="#hero" class="nav-link active">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Trang chủ</span>
+              </a>
+            </li>
+            <li>
+              <a href="#rules" class="nav-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                <span>Thể lệ & Giải thưởng</span>
+              </a>
+            </li>
+            <li>
+              <a href="#ai-guide" class="nav-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+                <span>Cẩm nang AI Agent</span>
+              </a>
+            </li>
+            <li>
+              <a href="#prompts" class="nav-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>Kho Prompt mẫu</span>
+              </a>
+            </li>
+            <li>
+              <a href="#submit" class="nav-link nav-link-highlight">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                <span>Nộp bài trực tuyến</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="toolbar-quick-links">
+          <a href="https://drive.google.com/drive/folders/1u2rEZ2IECYFk-YQK2TXW_DAqvhjh7BWR?usp=sharing" target="_blank" rel="noopener" class="toolbar-pill-link" title="Mở Google Drive thư mục bài dự thi">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <span>Google Drive</span>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ/edit?usp=sharing" target="_blank" rel="noopener" class="toolbar-pill-link" title="Mở Google Sheets danh sách nộp bài">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            <span>Google Sheets</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. HERO SECTION
+       ======================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content-left">
+        <div class="hero-badge-capsule">
+          <span class="pulse-dot"></span>
+          <span>KHLT SỐ 53 • CÔNG ĐOÀN & ĐOÀN THANH NIÊN EVNHCMC</span>
+        </div>
+
+        <h1 class="hero-title">
+          Cuộc thi Sáng tạo<br>
+          <span class="title-gradient-ai">Ứng dụng Trí tuệ Nhân tạo</span>
+          <span class="title-subtext-clean">Tuyên truyền An toàn & Tiết kiệm điện</span>
+        </h1>
+
+        <p class="hero-description">
+          Phát huy tinh thần đổi mới sáng tạo và kỹ năng công nghệ số của cán bộ, công nhân viên và đoàn viên thanh niên EVNHCMC. Sử dụng các công cụ AI (ChatGPT, Gemini, NotebookLM, Kling, Canva...) tạo nên những ấn phẩm truyền thông ấn tượng, lan tỏa sâu rộng trong cộng đồng.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#submit" class="btn-hero-primary">
+            <span>Nộp tác phẩm ngay</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="#prompts" class="btn-hero-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>Khám phá Prompt mẫu</span>
+          </a>
+        </div>
+
+        <div class="hero-meta-stats">
+          <div class="stat-item">
+            <span class="stat-value highlight-amber">28.000.000đ</span>
+            <span class="stat-label">Tổng giải thưởng</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value highlight-green">03 Thể loại</span>
+            <span class="stat-label">Ảnh, Video, Infographic</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">15/10/2026</span>
+            <span class="stat-label">Hạn chót nộp bài</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Countdown & Quick Info Card -->
+      <div class="hero-card-countdown">
+        <div class="countdown-header">
+          <span class="countdown-label">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Thời gian nhận bài còn lại
+          </span>
+          <span class="countdown-badge-time">Đang nhận bài</span>
+        </div>
+
+        <div class="countdown-timer-boxes">
+          <div class="time-box">
+            <div class="time-number" id="cd-days">00</div>
+            <div class="time-text">Ngày</div>
+          </div>
+          <div class="time-box">
+            <div class="time-number" id="cd-hours">00</div>
+            <div class="time-text">Giờ</div>
+          </div>
+          <div class="time-box">
+            <div class="time-number" id="cd-minutes">00</div>
+            <div class="time-text">Phút</div>
+          </div>
+          <div class="time-box">
+            <div class="time-number" id="cd-seconds">00</div>
+            <div class="time-text">Giây</div>
+          </div>
+        </div>
+
+        <div class="contest-quick-info-list">
+          <div class="quick-info-row">
+            <div class="quick-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div class="quick-info-text">
+              <strong>Lưu trữ tác phẩm tập trung:</strong>
+              <span>Đồng bộ tự động vào Google Drive & Google Sheet chỉ định</span>
+            </div>
+          </div>
+
+          <div class="quick-info-row">
+            <div class="quick-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="quick-info-text">
+              <strong>Đối tượng tham gia:</strong>
+              <span>Đoàn viên thanh niên, người lao động EVNHCMC (Cá nhân hoặc nhóm ≤ 05 người)</span>
+            </div>
+          </div>
+
+          <div class="quick-info-row">
+            <div class="quick-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="quick-info-text">
+              <strong>Ban Tổ chức hỗ trợ:</strong>
+              <span>Đ/c Phan Hoàng Nhân - Bí thư Đoàn EVNHCMC (0703.198.369)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. SECTION: THỂ LỆ & CƠ CẤU GIẢI THƯỞNG (RULES & SCORING)
+       ======================================================================== -->
+  <section id="rules">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">QUY CHUẨN & GIẢI THƯỞNG</span>
+        <h2 class="section-title">Thể lệ Cuộc thi theo KHLT số 53</h2>
+        <p class="section-subtitle">
+          Tác phẩm dự thi cần tuân thủ nghiêm ngặt các quy định về định dạng kỹ thuật, yêu cầu bản quyền và bắt buộc ứng dụng AI trong quy trình sản xuất.
+        </p>
+      </div>
+
+      <!-- 3 Cột Quy cách Tác phẩm -->
+      <div class="rules-grid">
+        <div class="rule-card">
+          <div class="rule-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="23 7 16 12 23 17 23 7"></polygon>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+            </svg>
+          </div>
+          <h3 class="rule-card-title">Thể loại: Video Clip</h3>
+          <ul class="rule-card-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Định dạng:</strong> File .MP4 chuẩn Full HD (1920x1080).</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Tỷ lệ khung hình:</strong> 16:9 (ngang) hoặc 9:16 (dọc Reels/TikTok).</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Thời lượng:</strong> Tối thiểu 15 giây, tối đa 120 giây.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Âm thanh, hình ảnh rõ nét, có lời bình thuyết minh truyền cảm.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
+          <h3 class="rule-card-title">Thể loại: Ảnh & Infographic</h3>
+          <ul class="rule-card-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Định dạng:</strong> File .JPG hoặc .PNG chất lượng cao.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Độ phân giải:</strong> Tối thiểu 1920x1080 pixel (hoặc 1080x1920).</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Bố cục trực quan, thông điệp ngắn gọn, dễ hiểu cho người dân.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Thể hiện chuẩn nhận diện logo, màu sắc thương hiệu EVN.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+              <path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path>
+              <path d="M12 12L2.5 7.5"></path>
+            </svg>
+          </div>
+          <h3 class="rule-card-title">Yêu cầu Bắt buộc về AI</h3>
+          <ul class="rule-card-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Ứng dụng AI ít nhất 1 khâu:</strong> Kịch bản, nhân vật, video, giọng nói, phân tích dữ liệu...</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Thuyết minh rõ ràng:</strong> Mô tả công cụ đã dùng và quy trình ứng dụng trong bài nộp.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Tác phẩm mới, chưa từng công bố, không vi phạm pháp luật và bản quyền.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Có thể gửi đính kèm file thuyết minh (.doc/.pdf) theo mẫu.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bảng Cơ cấu giải thưởng & Thang điểm -->
+      <div class="prizes-scoring-wrapper">
+        <!-- Bảng Giải thưởng -->
+        <div class="panel-container">
+          <div class="panel-header">
+            <h3 class="panel-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-amber)" stroke-width="2">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+              Cơ cấu Giải thưởng
+            </h3>
+            <span class="prize-total-badge">Tổng 28.000.000 VNĐ</span>
+          </div>
+
+          <div class="prize-list">
+            <div class="prize-row">
+              <div class="prize-rank">
+                <span class="rank-badge rank-gold">01</span>
+                <div>
+                  <div class="prize-name">01 Giải Nhất</div>
+                  <span style="font-size: 0.78rem; color: var(--text-dim);">Giấy khen + Tiền thưởng</span>
+                </div>
+              </div>
+              <div class="prize-amount">5.000.000 VNĐ</div>
+            </div>
+
+            <div class="prize-row">
+              <div class="prize-rank">
+                <span class="rank-badge rank-silver">02</span>
+                <div>
+                  <div class="prize-name">02 Giải Nhì</div>
+                  <span style="font-size: 0.78rem; color: var(--text-dim);">3.000.000đ / giải</span>
+                </div>
+              </div>
+              <div class="prize-amount">6.000.000 VNĐ</div>
+            </div>
+
+            <div class="prize-row">
+              <div class="prize-rank">
+                <span class="rank-badge rank-bronze">03</span>
+                <div>
+                  <div class="prize-name">03 Giải Ba</div>
+                  <span style="font-size: 0.78rem; color: var(--text-dim);">2.000.000đ / giải</span>
+                </div>
+              </div>
+              <div class="prize-amount">6.000.000 VNĐ</div>
+            </div>
+
+            <div class="prize-row">
+              <div class="prize-rank">
+                <span class="rank-badge rank-cons">10</span>
+                <div>
+                  <div class="prize-name">10 Giải Khuyến khích</div>
+                  <span style="font-size: 0.78rem; color: var(--text-dim);">1.000.000đ / giải</span>
+                </div>
+              </div>
+              <div class="prize-amount">10.000.000 VNĐ</div>
+            </div>
+
+            <div class="prize-row">
+              <div class="prize-rank">
+                <span class="rank-badge rank-cons">★</span>
+                <div>
+                  <div class="prize-name">02 Giải Bình chọn</div>
+                  <span style="font-size: 0.78rem; color: var(--text-dim);">Bình chọn trên Fanpage Đoàn EVNHCMC</span>
+                </div>
+              </div>
+              <div class="prize-amount">1.000.000 VNĐ</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thang điểm chấm thi -->
+        <div class="panel-container">
+          <div class="panel-header">
+            <h3 class="panel-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <polyline points="9 15 12 18 20 10"></polyline>
+              </svg>
+              Tiêu chí Chấm thi (Thang điểm 100)
+            </h3>
+            <span style="font-size: 0.82rem; color: var(--color-primary); font-weight: 600;">BGK Chuyên môn</span>
+          </div>
+
+          <div class="criteria-list">
+            <div class="criteria-card">
+              <div class="criteria-title-row">
+                <span class="criteria-name">I. Nội dung & Thẩm mỹ</span>
+                <span class="criteria-points">45 Điểm</span>
+              </div>
+              <div class="criteria-sublist">
+                • Thông điệp mới, ấn tượng, sáng tạo (15đ)<br>
+                • Hình thức, tính thẩm mỹ cao (15đ)<br>
+                • Thể hiện nhận diện thương hiệu EVN (10đ)<br>
+                • Chất lượng kỹ thuật hình ảnh/âm thanh (5đ)
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-title-row">
+                <span class="criteria-name">II. Mức độ Ứng dụng AI</span>
+                <span class="criteria-points">40 Điểm</span>
+              </div>
+              <div class="criteria-sublist">
+                • Ứng dụng khâu ý tưởng, kịch bản (15đ)<br>
+                • Ứng dụng sản xuất (vẽ ảnh, đồ họa, dựng video) (15đ)<br>
+                • Ứng dụng hậu kỳ, caption, lồng tiếng (10đ)
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-title-row">
+                <span class="criteria-name">III. Tính Ứng dụng Thực tiễn</span>
+                <span class="criteria-points">15 Điểm</span>
+              </div>
+              <div class="criteria-sublist">
+                • Khả năng lan tỏa trong thực tế truyền thông của EVNHCMC (Mạng xã hội, màn hình giao dịch, trường học...).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. SECTION: CẨM NANG HƯỚNG DẪN SỬ DỤNG AI AGENT (AI MASTER HUB)
+       ======================================================================== -->
+  <section id="ai-guide">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">AI MASTER HUB</span>
+        <h2 class="section-title">Cẩm nang Ứng dụng AI Agent Thực chiến</h2>
+        <p class="section-subtitle">
+          Hướng dẫn từng bước cách sử dụng các AI Agent hàng đầu (ChatGPT, Gemini, NotebookLM, Kling, Midjourney) để sáng tạo tác phẩm dự thi đạt điểm tối đa từ Ban Giám khảo.
+        </p>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="ai-tools-tabs">
+        <button class="ai-tab-btn active" data-target="guide-chatgpt">
+          <span>🤖 ChatGPT</span>
+        </button>
+        <button class="ai-tab-btn" data-target="guide-gemini">
+          <span>✨ Google Gemini</span>
+        </button>
+        <button class="ai-tab-btn" data-target="guide-notebooklm">
+          <span>🎙️ NotebookLM</span>
+        </button>
+        <button class="ai-tab-btn" data-target="guide-multimedia">
+          <span>🎬 AI Video & Thiết kế</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: ChatGPT -->
+      <div class="ai-agent-detail-card active" id="guide-chatgpt">
+        <div class="agent-card-header">
+          <div class="agent-identity">
+            <div class="agent-logo-badge logo-chatgpt">GPT</div>
+            <div class="agent-name-role">
+              <h3>ChatGPT (OpenAI)</h3>
+              <p>Chuyên gia Lên Ý tưởng, Viết Kịch bản phân cảnh 3 màn & Sáng tạo Slogan</p>
+            </div>
+          </div>
+          <a href="https://chatgpt.com" target="_blank" rel="noopener" class="agent-link-btn">
+            Mở ChatGPT ↗
+          </a>
+        </div>
+
+        <div class="agent-steps-grid">
+          <div class="agent-step-item">
+            <span class="step-num-badge">1</span>
+            <h4>Định hình vai trò (Persona)</h4>
+            <p>Yêu cầu ChatGPT đóng vai: "Chuyên gia truyền thông an toàn điện lực của EVNHCMC" để câu trả lời bám sát thực tế ngành điện.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">2</span>
+            <h4>Phân cảnh kịch bản chi tiết</h4>
+            <p>Chia video thành các phân đoạn 0-3s (Hook), 4-15s (Vấn đề), 16-35s (Giải pháp tiết kiệm điện) và 36-45s (Kêu gọi hành động).</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">3</span>
+            <h4>Tạo Prompt phụ trợ</h4>
+            <p>Nhờ ChatGPT viết luôn các câu lệnh mô tả hình ảnh bằng tiếng Anh chi tiết để bạn nạp vào Midjourney hoặc Kling AI.</p>
+          </div>
+        </div>
+
+        <div class="agent-pro-tips">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="tips-content">
+            <strong>Mẹo đạt điểm cao tiêu chí AI (15 điểm Kịch bản):</strong>
+            <p>Hãy lưu lại toàn bộ chuỗi hội thoại (prompt + kết quả) với ChatGPT và đưa vào mục thuyết minh: bạn đã tinh chỉnh câu lệnh mấy lần, AI đã giúp tối ưu thông điệp an toàn ra sao.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Gemini -->
+      <div class="ai-agent-detail-card" id="guide-gemini">
+        <div class="agent-card-header">
+          <div class="agent-identity">
+            <div class="agent-logo-badge logo-gemini">GEM</div>
+            <div class="agent-name-role">
+              <h3>Google Gemini (Google)</h3>
+              <p>Tra cứu Chính sách EVN, Tạo Ảnh Imagen 3 chân thực & Viết Thuyết minh KHLT 53</p>
+            </div>
+          </div>
+          <a href="https://gemini.google.com" target="_blank" rel="noopener" class="agent-link-btn">
+            Mở Gemini ↗
+          </a>
+        </div>
+
+        <div class="agent-steps-grid">
+          <div class="agent-step-item">
+            <span class="step-num-badge">1</span>
+            <h4>Tra cứu thông tin chính xác</h4>
+            <p>Gemini kết nối Google Search trực tiếp, giúp bạn cập nhật các thông tư mới nhất về an toàn hành lang điện và chỉ thị tiết kiệm điện quốc gia.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">2</span>
+            <h4>Sinh ảnh với Imagen 3</h4>
+            <p>Gemini hỗ trợ tạo ảnh trực tiếp ngay trong khung chat với độ phân giải cao, hiểu rõ ngữ cảnh văn hóa Việt Nam và nhận diện áo cam thợ điện.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">3</span>
+            <h4>Biên tập bản thuyết minh</h4>
+            <p>Dán dữ liệu thô vào Gemini và yêu cầu biên tập lại thành bản thuyết minh ý tưởng chuẩn theo đúng 6 tiêu mục của Điều 5 KHLT 53.</p>
+          </div>
+        </div>
+
+        <div class="agent-pro-tips">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="tips-content">
+            <strong>Mẹo tạo ảnh thợ điện EVN trên Gemini:</strong>
+            <p>Ghi rõ trong prompt: "Công nhân điện lực Việt Nam, trang phục bảo hộ màu cam đặc trưng, găng tay cách điện, mũ bảo hộ có logo, đang làm việc khẩn trương an toàn".</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: NotebookLM -->
+      <div class="ai-agent-detail-card" id="guide-notebooklm">
+        <div class="agent-card-header">
+          <div class="agent-identity">
+            <div class="agent-logo-badge logo-notebooklm">NLM</div>
+            <div class="agent-name-role">
+              <h3>NotebookLM (Google)</h3>
+              <p>Nạp Tài liệu Ngành Điện Không Ảo Giác & Tự động tạo Audio Podcast Đối thoại 2 MC</p>
+            </div>
+          </div>
+          <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="agent-link-btn">
+            Mở NotebookLM ↗
+          </a>
+        </div>
+
+        <div class="agent-steps-grid">
+          <div class="agent-step-item">
+            <span class="step-num-badge">1</span>
+            <h4>Nạp tài liệu nguồn (Grounding)</h4>
+            <p>Tải lên file KHLT 53, Sổ tay An toàn điện và Cẩm nang Tiết kiệm điện EVNHCMC. NotebookLM sẽ chỉ trả lời dựa trên tài liệu này, chuẩn xác 100%.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">2</span>
+            <h4>Tạo Audio Overview (Podcast)</h4>
+            <p>Nhấn vào tính năng "Deep Dive Audio Overview" để AI tự động đóng vai 2 người dẫn chương trình (Nam & Nữ) trò chuyện sôi nổi về chủ đề điện.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">3</span>
+            <h4>Lồng âm thanh vào tác phẩm</h4>
+            <p>Tải file âm thanh về và lồng ghép vào video clip hoặc Infographic thuyết trình của bạn để tạo ấn phẩm truyền thông vô cùng độc đáo.</p>
+          </div>
+        </div>
+
+        <div class="agent-pro-tips">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="tips-content">
+            <strong>Tính độc đáo ghi điểm mạnh với BGK:</strong>
+            <p>Rất ít người biết tận dụng tính năng Podcast của NotebookLM. Nếu tác phẩm của bạn có kịch bản âm thanh chuyên sâu từ tài liệu ngành, bạn sẽ nắm chắc điểm sáng tạo cao nhất!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: AI Multimedia & Video -->
+      <div class="ai-agent-detail-card" id="guide-multimedia">
+        <div class="agent-card-header">
+          <div class="agent-identity">
+            <div class="agent-logo-badge logo-multimedia">VID</div>
+            <div class="agent-name-role">
+              <h3>AI Video, Hình ảnh & Giọng nói</h3>
+              <p>Kling AI, Runway Gen-3, Midjourney, Canva AI & ElevenLabs</p>
+            </div>
+          </div>
+          <span style="font-size: 0.85rem; color: var(--color-primary); font-weight: 600;">Hệ sinh thái Đồ họa AI</span>
+        </div>
+
+        <div class="agent-steps-grid">
+          <div class="agent-step-item">
+            <span class="step-num-badge">1</span>
+            <h4>Sinh Video: Kling AI / Runway</h4>
+            <p>Biến các bức ảnh chụp hoặc ảnh do AI tạo thành video chuyển động 3D sinh động (như mưa rơi, công nhân thao tác trên cột điện, flycam kiểm tra lưới điện).</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">2</span>
+            <h4>Infographic: Canva AI / Ideogram</h4>
+            <p>Tạo các bảng biểu, mẹo an toàn điện gia đình với kiểu chữ tiếng Việt không bị lỗi font trên Canva và hỗ trợ AI sắp xếp bố cục tự động.</p>
+          </div>
+          <div class="agent-step-item">
+            <span class="step-num-badge">3</span>
+            <h4>Lồng tiếng: ElevenLabs / Vbee</h4>
+            <p>Tạo giọng đọc thuyết minh tiếng Việt chuẩn truyền cảm, ấm áp hoặc phong cách bản tin truyền hình chuyên nghiệp mà không cần ghi âm thủ công.</p>
+          </div>
+        </div>
+
+        <div class="agent-pro-tips">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div class="tips-content">
+            <strong>Quy chuẩn Video Full HD (1920x1080):</strong>
+            <p>Sau khi sinh các đoạn video ngắn 5-10s từ AI, hãy dùng CapCut hoặc Premiere để ráp nối, chèn nhạc nền và xuất đúng định dạng .MP4 Full HD (15s - 120s).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. SECTION: THƯ VIỆN PROMPT MẪU (PROMPT LIBRARY VỚI 1-CLICK COPY)
+       ======================================================================== -->
+  <section id="prompts">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">KHO PROMPT THỰC CHIẾN</span>
+        <h2 class="section-title">Thư viện Prompt Mẫu 1-Click Copy</h2>
+        <p class="section-subtitle">
+          Các mẫu câu lệnh đã được thử nghiệm và tối ưu chuyên sâu cho ngành điện lực. Bạn chỉ cần nhấn "Sao chép Prompt" và tùy biến các thông số trong ngoặc vuông `[ ]`.
+        </p>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="prompt-filter-bar">
+        <div class="prompt-tags-filter">
+          <button class="tag-btn active" data-cat="all">Tất cả</button>
+          <button class="tag-btn" data-cat="video">🎬 Kịch bản & Video</button>
+          <button class="tag-btn" data-cat="image">🎨 Ảnh & Nhân vật</button>
+          <button class="tag-btn" data-cat="infographic">📊 Infographic</button>
+          <button class="tag-btn" data-cat="podcast">🎙️ NotebookLM Podcast</button>
+          <button class="tag-btn" data-cat="thuyetminh">📝 Thuyết minh KHLT 53</button>
+        </div>
+
+        <div class="prompt-search-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="prompt-search-input" placeholder="Tìm kiếm prompt (video, ảnh, mẹo...)...">
+        </div>
+      </div>
+
+      <!-- Prompt Cards Grid (Rendered dynamically by app.js) -->
+      <div class="prompt-cards-grid" id="prompt-cards-container">
+        <!-- Javascript will inject prompt cards here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. SECTION: FORM NỘP TÁC PHẨM TRỰC TUYẾN (SUBMISSION PORTAL)
+       ======================================================================== -->
+  <section id="submit">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">CỔNG TIẾP NHẬN HỒ SƠ</span>
+        <h2 class="section-title">Nộp Tác phẩm Dự thi Trực tuyến</h2>
+        <p class="section-subtitle">
+          Tất cả thông tin và file tác phẩm sẽ được lưu tự động vào Google Sheets và Google Drive của Ban Tổ chức. Hồ sơ được cấp Mã dự thi duy nhất để theo dõi kết quả.
+        </p>
+      </div>
+
+      <div class="submission-wrapper">
+        <!-- Form Step Indicators -->
+        <div class="form-step-indicators">
+          <div class="step-item completed">
+            <div class="step-bubble">1</div>
+            <span class="step-label">Tác giả / Nhóm</span>
+          </div>
+          <div class="step-item active">
+            <div class="step-bubble">2</div>
+            <span class="step-label">Thông tin tác phẩm</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bubble">3</div>
+            <span class="step-label">Đính kèm & Nộp</span>
+          </div>
+        </div>
+
+        <form id="contest-submission-form">
+          <!-- PHẦN 1: THÔNG TIN TÁC GIẢ -->
+          <div class="form-section-group">
+            <h3 class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              1. Thông tin Tác giả / Nhóm tác giả (Theo KHLT 53)
+            </h3>
+
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label class="form-label" for="field-hoten">Họ và tên Tác giả / Trưởng nhóm <span class="required">*</span></label>
+                <input type="text" id="field-hoten" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="field-msnv">Mã số nhân viên (MSNV) <span class="required">*</span></label>
+                <input type="text" id="field-msnv" class="form-input" placeholder="Ví dụ: 012345" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="field-donvi">Đơn vị công tác <span class="required">*</span></label>
+                <input type="text" id="field-donvi" class="form-input" placeholder="Ví dụ: Công ty Điện lực Vũng Tàu..." required>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="field-sdt">Số điện thoại liên hệ <span class="required">*</span></label>
+                <input type="tel" id="field-sdt" class="form-input" placeholder="Ví dụ: 0909xxxxxx" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="field-email">Email liên hệ <span class="required">*</span></label>
+                <input type="email" id="field-email" class="form-input" placeholder="Ví dụ: nva@evnhcmc.vn" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-thanhvien">Thành viên nhóm (nếu là nhóm dự thi, tối đa 05 người)</label>
+              <input type="text" id="field-thanhvien" class="form-input" placeholder="Ghi rõ Họ tên - MSNV các thành viên khác trong nhóm (ngăn cách bằng dấu phẩy)">
+              <span class="form-hint">Lưu ý: Cá nhân hoặc nhóm không quá 05 thành viên đang công tác tại Tổng công ty.</span>
+            </div>
+          </div>
+
+          <!-- PHẦN 2: THÔNG TIN TÁC PHẨM & ỨNG DỤNG AI -->
+          <div class="form-section-group">
+            <h3 class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              2. Chi tiết Tác phẩm & Ứng dụng AI
+            </h3>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="field-tentacpham">Tên sản phẩm dự thi <span class="required">*</span></label>
+                <input type="text" id="field-tentacpham" class="form-input" placeholder="Ví dụ: Giữ trọn an toàn - Sống trọn niềm vui" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Loại hình tác phẩm <span class="required">*</span></label>
+                <div class="radio-chip-group">
+                  <label class="radio-chip-label selected">
+                    <input type="radio" name="theLoai" value="Ảnh" checked>
+                    <span>🖼️ Ảnh nghệ thuật / Poster</span>
+                  </label>
+                  <label class="radio-chip-label">
+                    <input type="radio" name="theLoai" value="Video">
+                    <span>🎬 Video Clip (15s - 120s)</span>
+                  </label>
+                  <label class="radio-chip-label">
+                    <input type="radio" name="theLoai" value="Infographic">
+                    <span>📊 Infographic trực quan</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-tomtatynghia">Tóm tắt ý tưởng chính & Thông điệp cốt lõi <span class="required">*</span></label>
+              <textarea id="field-tomtatynghia" class="form-textarea" placeholder="Mô tả ngắn gọn thông điệp an toàn điện hoặc tiết kiệm điện mà tác phẩm muốn truyền tải đến khách hàng và người dân..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Các công cụ / Nền tảng AI đã ứng dụng (chọn các mục áp dụng)</label>
+              <div class="checkbox-chip-group">
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="ChatGPT"> ChatGPT
+                </label>
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="Google Gemini"> Gemini
+                </label>
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="NotebookLM"> NotebookLM
+                </label>
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="Midjourney"> Midjourney
+                </label>
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="Canva AI"> Canva AI
+                </label>
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="Kling / Runway"> Kling / Runway
+                </label>
+                <label class="checkbox-chip-label">
+                  <input type="checkbox" value="ElevenLabs / Giọng đọc AI"> ElevenLabs / Vbee
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-thuyetminhai">Mô tả chi tiết việc ứng dụng AI trong tác phẩm <span class="required">*</span></label>
+              <textarea id="field-thuyetminhai" class="form-textarea" placeholder="Nêu rõ công cụ AI nào đã được sử dụng ở từng khâu: Ví dụ: Dùng ChatGPT viết kịch bản, dùng Midjourney tạo hình ảnh nhân vật thợ điện, dùng Kling AI tạo chuyển động, v.v..." required></textarea>
+              <span class="form-hint">Yêu cầu bắt buộc của Ban Giám khảo để chấm 40 điểm tiêu chí AI.</span>
+            </div>
+          </div>
+
+          <!-- PHẦN 3: TẢI LÊN FILE & ĐƯỜNG LINK LƯU TRỮ -->
+          <div class="form-section-group" style="border-bottom: none;">
+            <h3 class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              3. Tệp Tác phẩm & Bản Thuyết minh
+            </h3>
+
+            <div class="form-grid-2">
+              <!-- Dropzone 1: Tác phẩm -->
+              <div class="form-group">
+                <label class="form-label">Tải file Tác phẩm trực tiếp (Tối đa 25MB)</label>
+                <div class="dropzone-container" id="dropzone-tacpham">
+                  <input type="file" id="file-tacpham-input" accept="image/*,video/mp4" style="display: none;">
+                  <div class="dropzone-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                  <div class="dropzone-title">Nhấn để chọn hoặc kéo thả file vào đây</div>
+                  <div class="dropzone-subtitle">Hỗ trợ ảnh JPG/PNG hoặc video MP4 (&lt; 25MB)</div>
+                </div>
+                <div class="file-chosen-preview" id="preview-tacpham">
+                  <span id="tacpham-filename">Tên file</span>
+                  <button type="button" class="btn-remove-file" id="btn-remove-tacpham">Gỡ bỏ</button>
+                </div>
+              </div>
+
+              <!-- Dropzone 2: Thuyết minh -->
+              <div class="form-group">
+                <label class="form-label">Tải file Bản thuyết minh ý tưởng (nếu có)</label>
+                <div class="dropzone-container" id="dropzone-thuyetminh">
+                  <input type="file" id="file-thuyetminh-input" accept=".doc,.docx,.pdf" style="display: none;">
+                  <div class="dropzone-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                  </div>
+                  <div class="dropzone-title">Chọn file Thuyết minh (.doc, .docx, .pdf)</div>
+                  <div class="dropzone-subtitle">Dung lượng tối đa 15MB</div>
+                </div>
+                <div class="file-chosen-preview" id="preview-thuyetminh">
+                  <span id="thuyetminh-filename">Tên file</span>
+                  <button type="button" class="btn-remove-file" id="btn-remove-thuyetminh">Gỡ bỏ</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trường link Google Drive dự phòng cho Video lớn > 25MB -->
+            <div class="form-group" style="margin-top: 14px;">
+              <label class="form-label" for="field-linkdrive">
+                Đường link Google Drive / OneDrive dự phòng (Bắt buộc nếu Video > 25MB)
+              </label>
+              <input type="url" id="field-linkdrive" class="form-input" placeholder="https://drive.google.com/file/d/.../view?usp=sharing">
+              <span class="form-hint">
+                ⚠️ Theo quy định KHLT 53: Với các file video chất lượng cao có dung lượng lớn trên 25MB, tác giả tải lên Google Drive cá nhân và dán đường link chia sẻ vào ô này (Đảm bảo đã bật quyền "Bất kỳ ai có liên kết đều có thể xem").
+              </span>
+            </div>
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="form-submit-actions">
+            <button type="submit" class="btn-submit-main" id="btn-submit-form">
+              <span>Gửi bài dự thi chính thức</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+            <div class="submit-progress-bar" id="submit-progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <span style="font-size: 0.8rem; color: var(--text-dim);">
+              Hồ sơ được bảo mật và lưu trữ an toàn trên hạ tầng Google Sheets & Drive của EVNHCMC
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. POPUP MODAL XÁC NHẬN NỘP BÀI THÀNH CÔNG
+       ======================================================================== -->
+  <div class="modal-overlay" id="success-modal">
+    <div class="modal-box">
+      <div class="modal-success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3 class="modal-title">Nộp Tác Phẩm Thành Công!</h3>
+      <p class="modal-desc">
+        Hồ sơ dự thi cho tác phẩm <strong id="modal-entry-title" style="color: #FFFFFF;">[Tên tác phẩm]</strong> của tác giả <strong id="modal-author-name" style="color: var(--color-primary);">[Tác giả]</strong> đã được ghi nhận vào hệ thống.
+      </p>
+
+      <div class="submission-id-capsule">
+        <div style="text-align: left;">
+          <div class="id-label">MÃ DỰ THI CHÍNH THỨC</div>
+          <div style="font-size: 0.75rem; color: var(--text-dim);">Dùng để đối soát và chấm giải</div>
+        </div>
+        <div class="id-value" id="modal-submission-code">EVN-AI-001</div>
+      </div>
+
+      <div style="margin-bottom: 24px; font-size: 0.84rem; color: var(--text-muted); line-height: 1.6;">
+        Tác phẩm đã được lưu trữ an toàn trong thư mục Google Drive của Cuộc thi. Bạn hãy theo dõi thông báo trên Fanpage Đoàn Thanh niên EVNHCMC từ ngày 17/10/2026 để tham gia vòng bình chọn!
+      </div>
+
+      <button type="button" class="modal-btn-close" onclick="closeSuccessModal()">
+        Hoàn tất & Đóng
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Message Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ========================================================================
+       8. FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-wrapper" style="margin-bottom: 12px;">
+            <img src="logo.png" alt="Logo EVNHCMC" class="brand-logo-img" style="height: 44px; width: auto; background: #ffffff; padding: 4px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <div class="brand-text">
+              <span class="brand-title" style="font-size: 1.05rem;">EVNHCMC • AI 2026</span>
+              <span class="brand-subtitle" style="font-size: 0.72rem;">An toàn điện & Tiết kiệm điện</span>
+            </div>
+          </div>
+          <p class="footer-col-desc">
+            Cuộc thi "Ứng dụng trí tuệ nhân tạo (AI) trong công tác tuyên truyền an toàn điện và tiết kiệm điện" do Công đoàn và Đoàn Thanh niên Tổng công ty Điện lực TP.HCM phối hợp tổ chức theo Kế hoạch liên tịch số 53.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Liên kết Cuộc thi</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://drive.google.com/drive/folders/1u2rEZ2IECYFk-YQK2TXW_DAqvhjh7BWR?usp=sharing" target="_blank" rel="noopener">📁 Thư mục Google Drive Tác phẩm</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ/edit?usp=sharing" target="_blank" rel="noopener">📊 Google Sheets Danh sách bài nộp</a></li>
+            <li><a href="#rules">📜 Toàn văn Thể lệ & Cơ cấu giải thưởng</a></li>
+            <li><a href="#prompts">💡 Thư viện Prompt AI mẫu</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Ban Tổ chức & Hỗ trợ</h4>
+          <ul class="footer-links-list">
+            <li><span>📍 Văn phòng Đoàn Thanh niên EVNHCMC</span></li>
+            <li><span>👤 Đ/c Phan Hoàng Nhân - Bí thư Đoàn</span></li>
+            <li><span>📞 Hotline: <strong>0703.198.369</strong></span></li>
+            <li><span>✉️ Email: <strong>Nhan2PH@hcmpc.com.vn</strong></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Tổng công ty Điện lực TP. Hồ Chí Minh (EVNHCMC) • Ban Tổ chức Cuộc thi AI</span>
+        <span>Thiết kế tiêu chuẩn UI/UX Pro Max • Tích hợp Google Sheets & Drive</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
