@@ -267,8 +267,8 @@ function initCountdownTimer() {
 
     const daysEl = document.getElementById('cd-days');
     const hoursEl = document.getElementById('cd-hours');
-    const minutesEl = document.getElementById('cd-minutes');
-    const secondsEl = document.getElementById('cd-seconds');
+    const minutesEl = document.getElementById('cd-minutes') || document.getElementById('cd-mins');
+    const secondsEl = document.getElementById('cd-seconds') || document.getElementById('cd-secs');
 
     if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 

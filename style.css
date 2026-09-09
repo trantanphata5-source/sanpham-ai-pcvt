@@ -627,14 +627,16 @@ input, textarea, select {
   font-weight: 700;
 }
 
-.countdown-timer-boxes {
+.countdown-timer-boxes,
+.countdown-timer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-bottom: 24px;
 }
 
-.time-box {
+.time-box,
+.countdown-unit {
   background: var(--bg-card-alt);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -642,24 +644,33 @@ input, textarea, select {
   text-align: center;
 }
 
-.time-number {
+.time-number,
+.unit-num {
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 800;
   color: var(--color-evn-blue);
   line-height: 1;
   margin-bottom: 4px;
+  display: block;
 }
 
-.time-text {
+.time-text,
+.unit-label {
   font-size: 0.72rem;
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 700;
   letter-spacing: 0.04em;
+  display: block;
 }
 
-.contest-quick-info-list {
+.countdown-sep {
+  display: none !important;
+}
+
+.contest-quick-info-list,
+.hero-quick-info {
   display: flex;
   flex-direction: column;
   gap: 14px;
