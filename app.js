@@ -892,93 +892,284 @@ function resolveArtworkUrl(entry) {
   return null;
 }
 
+// Cấu hình kết nối cơ sở dữ liệu Google Sheet chính thức
+const GOOGLE_SHEET_DATABASE_ID = '1qu5hKfIh-0eD85olPyBcg7IC-IqQ7Z9ZBtR2qBAOkjQ';
+const GOOGLE_SHEET_TAB_NAME = 'BaiDuThi';
+
+// Bộ nhớ cache RAM các bài thi đã đồng bộ
+let pcvtSubmissionsCache = null;
+
 /**
- * Lấy toàn bộ danh sách bài dự thi (chỉ lấy tác phẩm thực tế nộp qua Cổng trực tuyến)
+ * Trích xuất ID tệp Google Drive từ đường dẫn URL bất kỳ
+ */
+function extractGoogleDriveFileId(rawUrl) {
+  if (!rawUrl) return null;
+  const m1 = rawUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (m1) return m1[1];
+  const m2 = rawUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m2) return m2[1];
+  return null;
+}
+
+/**
+ * Lấy toàn bộ danh sách bài dự thi (Ưu tiên cache RAM -> localStorage -> mảng rỗng)
  */
 function getAllSubmittedEntries() {
+  if (Array.isArray(pcvtSubmissionsCache) && pcvtSubmissionsCache.length > 0) {
+    return pcvtSubmissionsCache;
+  }
+
   const localSaved = localStorage.getItem('PCVT_AI_SUBMISSIONS');
-  let userEntries = [];
   if (localSaved) {
     try {
-      userEntries = JSON.parse(localSaved);
-      // Loại bỏ các bài mẫu demo cũ nếu có lưu trước đây trong localStorage
-      userEntries = userEntries.filter(e => e.id && !e.id.startsWith('EVN-PCVT-00'));
+      const parsed = JSON.parse(localSaved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        // Loại bỏ hoàn toàn các mã mẫu cũ dạng EVN-PCVT- để đồng bộ chuẩn xác với mã EVN-AI- từ Google Sheet
+        pcvtSubmissionsCache = parsed.filter(e => e.id && !e.id.startsWith('EVN-PCVT-'));
+        return pcvtSubmissionsCache;
+      }
     } catch (e) {
       console.error('Error parsing PCVT_AI_SUBMISSIONS', e);
     }
   }
 
-  // Nếu trình duyệt mới chưa có bài dự thi, tự động nạp tác phẩm dự thi chính thức của đơn vị
-  if (userEntries.length === 0) {
-    userEntries = [
-      {
-        id: 'EVN-PCVT-01',
-        title: 'Thành phố xanh – Sử dụng điện an toàn, tiết kiệm hôm nay, kiến tạo tương lai',
-        author: 'Trần Tấn Phát',
-        msnv: 'PCVT-0142',
-        department: 'Phòng Kỹ thuật và An toàn',
-        category: 'Ảnh',
-        teamMembers: '',
-        description: 'Tác phẩm "Thành phố xanh – Sử dụng điện an toàn, tiết kiệm hôm nay, kiến tạo tương lai" khắc họa hình ảnh một đô thị hiện đại, xanh và thông minh, lấy cảm hứng từ Thành phố Hồ Chí Minh. Thông qua hệ thống điện mặt trời, lưới điện thông minh, phương tiện giao thông điện và không gian xanh, tác phẩm truyền tải thông điệp về vai trò của điện năng trong xây dựng cuộc sống văn minh, bền vững.',
-        aiTools: ['ChatGPT'],
-        aiPromptDescription: 'Ứng dụng mô hình AI tạo sinh để kết xuất không gian đô thị năng lượng thông minh 2026',
-        date: '07/09/2026',
-        fileName: 'Thành phố xanh – Sử dụng điện an toàn, tiết kiệm hôm nay, kiến tạo tương lai.png',
-        fileType: 'image/png',
-        fileDataUrl: 'tac_pham_chinh_thuc.png',
-        tacPhamDriveUrl: 'https://drive.google.com/file/d/1SywO04tn0jVVEDh0mID1CqkcHlnDPYmR/view?usp=drivesdk',
-        fileThuyetMinhName: 'Ban_thuyet_minh_KHLT53.docx',
-        thuyetMinhDataUrl: ''
-      }
-    ];
-    try {
-      localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(userEntries));
-    } catch (e) {}
-  }
-
-  // Cập nhật và liên kết đúng Link Tác phẩm Cột N Drive + Tệp hình ảnh chính thức
-  let hasUpdated = false;
-  userEntries.forEach(entry => {
-    if (entry.title && entry.title.includes('Thành phố xanh')) {
-      if (!entry.tacPhamDriveUrl || entry.tacPhamDriveUrl.length < 5) {
-        entry.tacPhamDriveUrl = 'https://drive.google.com/file/d/1SywO04tn0jVVEDh0mID1CqkcHlnDPYmR/view?usp=drivesdk';
-        hasUpdated = true;
-      }
-      if (!entry.fileDataUrl || entry.fileDataUrl === 'thanh_pho_xanh.jpg') {
-        entry.fileDataUrl = 'tac_pham_chinh_thuc.png';
-        hasUpdated = true;
-      }
-    } else if (!entry.fileDataUrl) {
-      const fallbackUrl = resolveArtworkUrl(entry);
-      if (fallbackUrl) {
-        entry.fileDataUrl = fallbackUrl;
-        hasUpdated = true;
-      }
-    }
-  });
-  if (hasUpdated) {
-    try {
-      localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(userEntries));
-    } catch (e) {}
-  }
-
-  return userEntries;
+  return [];
 }
 
 /**
- * Lưu bài dự thi mới nộp vào localStorage
+ * Lưu bài dự thi mới nộp vào localStorage và bộ nhớ cache
  */
 function saveUserEntry(newEntry) {
-  const localSaved = localStorage.getItem('PCVT_AI_SUBMISSIONS');
-  let userEntries = [];
-  if (localSaved) {
-    try {
-      userEntries = JSON.parse(localSaved);
-    } catch (e) {}
+  const currentEntries = getAllSubmittedEntries();
+  const existingIdx = currentEntries.findIndex(e => e.id === newEntry.id);
+  if (existingIdx >= 0) {
+    currentEntries[existingIdx] = newEntry;
+  } else {
+    currentEntries.unshift(newEntry);
   }
-  userEntries.unshift(newEntry);
-  localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(userEntries));
+  pcvtSubmissionsCache = currentEntries;
+  try {
+    localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(currentEntries));
+  } catch (e) {}
 }
+
+/**
+ * Chuyển đổi các hàng dữ liệu từ Google Visualization API sang định dạng bài thi
+ */
+function parseGoogleSheetRows(rows) {
+  if (!Array.isArray(rows)) return [];
+  const entries = [];
+
+  rows.forEach(row => {
+    const c = row.c;
+    if (!c || !Array.isArray(c)) return;
+
+    // Cột A: Mã dự thi (Bắt buộc phải có giá trị và bắt đầu bằng EVN)
+    const idVal = c[0]?.v ? String(c[0].v).trim() : '';
+    if (!idVal || !idVal.startsWith('EVN')) return;
+
+    const dateVal = c[1]?.f || (c[1]?.v ? String(c[1].v) : '');
+    const titleVal = c[2]?.v ? String(c[2].v).trim() : '';
+    const categoryVal = c[3]?.v ? String(c[3].v).trim() : 'Ảnh';
+    const authorVal = c[4]?.v ? String(c[4].v).trim() : '';
+    const msnvVal = c[5]?.f || (c[5]?.v != null ? String(c[5].v).trim() : '');
+    const deptVal = c[6]?.v ? String(c[6].v).trim() : '';
+    const phoneVal = c[7]?.f || (c[7]?.v != null ? String(c[7].v).trim() : '');
+    const emailVal = c[8]?.v ? String(c[8].v).trim() : '';
+    const teamVal = c[9]?.v ? String(c[9].v).trim() : '';
+    const descVal = c[10]?.v ? String(c[10].v).trim() : '';
+    const aiDescVal = c[11]?.v ? String(c[11].v).trim() : '';
+    const rawTools = c[12]?.v ? String(c[12].v).trim() : '';
+    const aiTools = rawTools ? rawTools.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean) : ['ChatGPT'];
+    const tacPhamUrl = c[13]?.v ? String(c[13].v).trim() : '';
+    const thuyetMinhUrl = c[14]?.v ? String(c[14].v).trim() : '';
+    const linkDuPhong = c[15]?.v ? String(c[15].v).trim() : '';
+    const folderUrl = c[16]?.v ? String(c[16].v).trim() : '';
+    const statusVal = c[17]?.v ? String(c[17].v).trim() : 'Đã tiếp nhận hợp lệ';
+
+    entries.push({
+      id: idVal,
+      date: dateVal,
+      title: titleVal,
+      category: categoryVal,
+      author: authorVal,
+      msnv: msnvVal,
+      department: deptVal,
+      phone: phoneVal,
+      email: emailVal,
+      teamMembers: teamVal,
+      description: descVal,
+      aiPromptDescription: aiDescVal,
+      aiTools: aiTools,
+      tacPhamDriveUrl: tacPhamUrl,
+      thuyetMinhDriveUrl: thuyetMinhUrl,
+      linkDriveDuPhong: linkDuPhong,
+      folderUrl: folderUrl,
+      status: statusVal,
+      fileName: titleVal,
+      fileType: (categoryVal === 'Video') ? 'video/mp4' : 'image/jpeg',
+      fileDataUrl: (idVal === 'EVN-AI-001' || tacPhamUrl.includes('1SywO04tn0jVVEDh0mID1CqkcHlnDPYmR')) ? 'tac_pham_chinh_thuc.png' : ''
+    });
+  });
+
+  return entries;
+}
+
+/**
+ * Tải danh sách bài thi trực tiếp từ cơ sở dữ liệu Google Sheet
+ * Sử dụng cơ chế kép Fetch + JSONP callback để chống chặn CORS 100% trên mọi trình duyệt/thiết bị
+ */
+function fetchEntriesFromGoogleSheet() {
+  return new Promise((resolve) => {
+    const timestamp = Date.now();
+    const gvizUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_DATABASE_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(GOOGLE_SHEET_TAB_NAME)}&t=${timestamp}`;
+
+    // Phương thức 1: Gọi fetch() trực tiếp
+    fetch(gvizUrl)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      })
+      .then(text => {
+        const start = text.indexOf('{');
+        const end = text.lastIndexOf('}');
+        if (start !== -1 && end !== -1) {
+          const jsonStr = text.substring(start, end + 1);
+          const data = JSON.parse(jsonStr);
+          const rows = data?.table?.rows || [];
+          const entries = parseGoogleSheetRows(rows);
+          if (entries.length > 0) {
+            resolve(entries);
+            return;
+          }
+        }
+        fallbackJsonp(resolve);
+      })
+      .catch(err => {
+        console.warn('Direct fetch Google Sheet failed, trying JSONP fallback:', err);
+        fallbackJsonp(resolve);
+      });
+
+    // Phương thức 2: Dự phòng JSONP (Không bị CORS chặn trên mọi thiết bị và hệ điều hành)
+    function fallbackJsonp(callbackResolve) {
+      const callbackName = 'onPcvtSheetLoaded_' + Math.random().toString(36).substring(2, 9);
+      const script = document.createElement('script');
+      let isDone = false;
+
+      const timer = setTimeout(() => {
+        if (!isDone) {
+          isDone = true;
+          delete window[callbackName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+          callbackResolve([]);
+        }
+      }, 7000);
+
+      window[callbackName] = function(jsonObj) {
+        if (isDone) return;
+        isDone = true;
+        clearTimeout(timer);
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        try {
+          const rows = jsonObj?.table?.rows || [];
+          const entries = parseGoogleSheetRows(rows);
+          callbackResolve(entries);
+        } catch (e) {
+          console.error('Error parsing JSONP gviz:', e);
+          callbackResolve([]);
+        }
+      };
+
+      script.src = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_DATABASE_ID}/gviz/tq?tqx=responseHandler:${callbackName}&sheet=${encodeURIComponent(GOOGLE_SHEET_TAB_NAME)}&t=${timestamp}`;
+      script.onerror = function() {
+        if (!isDone) {
+          isDone = true;
+          clearTimeout(timer);
+          delete window[callbackName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+          callbackResolve([]);
+        }
+      };
+      document.head.appendChild(script);
+    }
+  });
+}
+
+/**
+ * Đồng bộ các bài dự thi đã lưu trên Google Sheet về Thư viện triển lãm và Bảng tiến độ
+ */
+async function syncSubmittedEntriesFromCloud(showToastFeedback = false) {
+  const syncBtn = document.getElementById('btn-sync-sheet-action');
+  const syncText = document.getElementById('sync-sheet-status-text');
+
+  if (syncBtn) syncBtn.classList.add('loading');
+  if (syncText) syncText.textContent = 'Đang đồng bộ...';
+
+  try {
+    let sheetEntries = await fetchEntriesFromGoogleSheet();
+
+    // Nếu lấy thành công dữ liệu từ Google Sheet
+    if (Array.isArray(sheetEntries) && sheetEntries.length > 0) {
+      // Giữ lại bài thi nộp cục bộ nếu có bài vừa nộp chưa kịp ghi vào Sheet
+      const localEntries = getAllSubmittedEntries();
+      const sheetIds = new Set(sheetEntries.map(e => e.id));
+      
+      localEntries.forEach(loc => {
+        if (loc.id && !sheetIds.has(loc.id) && !loc.id.startsWith('EVN-PCVT-')) {
+          sheetEntries.unshift(loc);
+        }
+      });
+
+      pcvtSubmissionsCache = sheetEntries;
+      try {
+        localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(sheetEntries));
+      } catch (e) {}
+
+      renderDepartmentProgress();
+      applyGalleryFilters();
+
+      if (showToastFeedback) {
+        showToast(`Đã đồng bộ thành công ${sheetEntries.length} bài dự thi từ Google Sheet!`, 'success');
+      }
+    } else {
+      // Thử dự phòng qua GAS Web App nếu có cấu hình
+      if (GAS_WEBAPP_URL && GAS_WEBAPP_URL.startsWith('http')) {
+        try {
+          const response = await fetch(`${GAS_WEBAPP_URL}?action=getEntries`);
+          const data = await response.json();
+          if (data && data.status === 'success' && Array.isArray(data.entries) && data.entries.length > 0) {
+            pcvtSubmissionsCache = data.entries;
+            localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(data.entries));
+            renderDepartmentProgress();
+            applyGalleryFilters();
+            if (showToastFeedback) {
+              showToast(`Đã đồng bộ thành công ${data.entries.length} bài thi từ máy chủ!`, 'success');
+            }
+          }
+        } catch (gasErr) {}
+      }
+      if (showToastFeedback && (!pcvtSubmissionsCache || pcvtSubmissionsCache.length === 0)) {
+        showToast('Không thể kết nối cơ sở dữ liệu. Vui lòng kiểm tra kết nối mạng!', 'warning');
+      }
+    }
+  } catch (err) {
+    console.warn('Lỗi khi đồng bộ Google Sheet:', err);
+    if (showToastFeedback) {
+      showToast('Lỗi khi kết nối Google Sheet: ' + (err.message || ''), 'error');
+    }
+  } finally {
+    if (syncBtn) syncBtn.classList.remove('loading');
+    if (syncText) syncText.textContent = 'Đồng bộ dữ liệu';
+  }
+}
+
+/**
+ * Hàm toàn cục gọi khi người dùng bấm nút làm mới đồng bộ
+ */
+window.refreshSubmissionsFromCloud = function(manualClick = true) {
+  syncSubmittedEntriesFromCloud(manualClick);
+};
 
 /**
  * Khởi tạo toàn bộ module Tiến độ 13 Phòng/Đội và Triển lãm tác phẩm
@@ -988,39 +1179,13 @@ function initDepartmentProgressAndGallery() {
   initProgressSubtabs();
   initGalleryFilters();
   renderGalleryEntries(getAllSubmittedEntries());
-  syncSubmittedEntriesFromCloud();
-}
+  // Kích hoạt đồng bộ tức thời từ Google Sheet ngay khi mở trang
+  syncSubmittedEntriesFromCloud(false);
 
-/**
- * Đồng bộ các bài dự thi đã lưu trên Google Sheet về Thư viện triển lãm
- */
-async function syncSubmittedEntriesFromCloud() {
-  if (!GAS_WEBAPP_URL || !GAS_WEBAPP_URL.startsWith('http')) return;
-  try {
-    const response = await fetch(`${GAS_WEBAPP_URL}?action=getEntries`);
-    const data = await response.json();
-    if (data && data.status === 'success' && Array.isArray(data.entries)) {
-      const localEntries = getAllSubmittedEntries();
-      const localMap = new Map(localEntries.map(e => [e.id, e]));
-
-      data.entries.forEach(cloudEntry => {
-        if (localMap.has(cloudEntry.id)) {
-          const local = localMap.get(cloudEntry.id);
-          local.tacPhamDriveUrl = cloudEntry.tacPhamDriveUrl || local.tacPhamDriveUrl;
-          local.thuyetMinhDriveUrl = cloudEntry.thuyetMinhDriveUrl || local.thuyetMinhDriveUrl;
-          local.folderUrl = cloudEntry.folderUrl || local.folderUrl;
-        } else {
-          localEntries.push(cloudEntry);
-        }
-      });
-
-      localStorage.setItem('PCVT_AI_SUBMISSIONS', JSON.stringify(localEntries));
-      renderDepartmentProgress();
-      applyGalleryFilters();
-    }
-  } catch (err) {
-    console.log('Syncing cloud entries skipped:', err);
-  }
+  // Tự động kiểm tra đồng bộ ngầm định kỳ mỗi 60 giây
+  setInterval(() => {
+    syncSubmittedEntriesFromCloud(false);
+  }, 60000);
 }
 
 /**
@@ -1171,8 +1336,13 @@ window.showDepartmentEntries = function(deptName) {
       listContainer.innerHTML = deptEntries.map((entry) => {
         const visualUrl = resolveArtworkUrl(entry);
         const isVideo = entry.category === 'Video';
+        const driveId = extractGoogleDriveFileId(entry.tacPhamDriveUrl || entry.linkDriveDuPhong);
+        const fallbackUrl = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w400` : 'tac_pham_chinh_thuc.png';
         const thumbHtml = visualUrl
-          ? `<img src="${visualUrl}" alt="${entry.title}" class="dept-thumb-img">`
+          ? `<img src="${visualUrl}" 
+                  onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='${fallbackUrl}';}else{this.src='tac_pham_chinh_thuc.png';}" 
+                  alt="${entry.title}" 
+                  class="dept-thumb-img">`
           : `<div class="dept-thumb-icon">${isVideo ? '🎬' : '🖼️'}</div>`;
 
         return `
@@ -1306,7 +1476,13 @@ function renderGalleryEntries(entries) {
 
     const visualSrc = resolveArtworkUrl(entry);
     if (visualSrc && (entry.fileType?.startsWith('image/') || entry.category === 'Ảnh' || entry.category === 'Infographic' || !entry.fileType)) {
-      bannerContent = `<img src="${visualSrc}" alt="${entry.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">`;
+      const driveId = extractGoogleDriveFileId(entry.tacPhamDriveUrl || entry.linkDriveDuPhong);
+      const fallbackUrl = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w800` : 'tac_pham_chinh_thuc.png';
+      bannerContent = `<img src="${visualSrc}" 
+                            onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='${fallbackUrl}';}else{this.src='tac_pham_chinh_thuc.png';}" 
+                            alt="${entry.title}" 
+                            loading="lazy" 
+                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">`;
     }
 
     const aiBadges = (entry.aiTools || []).slice(0, 3).map(tool => `<span class="ai-chip-mini">${tool}</span>`).join('');
@@ -1735,6 +1911,8 @@ window.switchMainTab = function(tabName) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     history.replaceState(null, '', '#progress');
+    // Tự động kiểm tra và đồng bộ bài thi mới nhất từ Google Sheet khi vào tab
+    syncSubmittedEntriesFromCloud(false);
   } else {
     if (progressView) progressView.classList.remove('active');
     if (homeView) {
